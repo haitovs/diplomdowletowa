@@ -45,8 +45,11 @@ export default function Footer() {
           <p className="opacity-90 mt-3 text-sm">@dowletowatextiles</p>
         </div>
       </div>
-      <div className="max-w-6xl mx-auto px-6 mt-8 pt-8 border-t border-white/20 text-center opacity-80 text-sm">
+      <div className="max-w-6xl mx-auto px-6 mt-8 pt-8 border-t border-white/20 flex items-center justify-between opacity-80 text-sm">
         <p>&copy; {currentYear} Dowletowa Textiles Cooperative &bull; Celebrating {yearsActive} years of weaving excellence</p>
+        <Link href="/admin/login" className="text-white/50 hover:text-turkmen-gold transition text-xs">
+          Admin Panel
+        </Link>
       </div>
     </footer>
   );
