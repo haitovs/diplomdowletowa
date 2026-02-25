@@ -14,7 +14,7 @@ RUN npx prisma generate
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV DATABASE_URL="file:./dev.db"
+ENV DATABASE_URL="file:/app/prisma/dev.db"
 ENV NEXTAUTH_SECRET="build-time-placeholder"
 ENV NEXTAUTH_URL="http://localhost:4082"
 RUN npm run build
@@ -29,6 +29,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=4082
+ENV DATABASE_URL="file:/app/prisma/dev.db"
 
 # Copy standalone output
 COPY --from=builder /app/.next/standalone ./
