@@ -1,5 +1,5 @@
 # ── Stage 1: Install & Build ─────────────────────────────
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 RUN apk add --no-cache openssl
 
@@ -20,7 +20,7 @@ ENV NEXTAUTH_URL="http://localhost:4082"
 RUN npm run build
 
 # ── Stage 2: Production Runtime ─────────────────────────
-FROM node:18-alpine
+FROM node:20-alpine
 
 RUN apk add --no-cache openssl
 
