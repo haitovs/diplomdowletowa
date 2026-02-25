@@ -1,8 +1,9 @@
 // This is your Prisma schema file for Dowletowa Textiles E-Commerce Platform
 
 generator client {
-  provider = "prisma-client-js"
-  log      = ["error", "warn"]
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+  log           = ["error", "warn"]
 }
 
 datasource db {
