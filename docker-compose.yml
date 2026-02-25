@@ -8,6 +8,6 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=4082
-      - DATABASE_URL=file:./prisma/dev.db
+      - DATABASE_URL=file:./dev.db
       - NEXTAUTH_SECRET=dowletowa-textiles-secret-key-2025
       - NEXTAUTH_URL=http://localhost:4082
