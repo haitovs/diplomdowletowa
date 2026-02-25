@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Serif } from "next/font/google";
 import "./globals.css";
+import { LanguageProvider } from "@/components/LanguageProvider";
 
 const notoSerif = Noto_Serif({
   subsets: ["latin"],
@@ -27,8 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${notoSerif.variable} ${inter.variable}`}>
       <body className="antialiased">
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );
 }
+

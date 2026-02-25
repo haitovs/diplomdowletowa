@@ -66,6 +66,20 @@ async function main() {
       specialty: "Hand-spun camelhair, felted shyrdak panels",
       description: "Working with nomadic families to preserve wool and camelhair traditions."
     },
+    {
+      name: "Lebap Embroidery Guild",
+      slug: "lebap-guild",
+      origin: "Türkmenabat",
+      specialty: "Traditional Turkmen embroidery, suzani panels, and decorative textiles",
+      description: "A women-led guild preserving the intricate chain-stitch and couching techniques of eastern Turkmenistan."
+    },
+    {
+      name: "Mary Keteni Workshop",
+      slug: "mary-keteni",
+      origin: "Mary",
+      specialty: "Keteni silk weaving, bridal fabrics, and ceremonial textiles",
+      description: "A family workshop producing luminous keteni silk using techniques passed down for five generations."
+    },
   ];
 
   for (const store of stores) {
@@ -81,6 +95,8 @@ async function main() {
   const dowletowa = await prisma.store.findUnique({ where: { slug: "dowletowa" } });
   const ahalSilk = await prisma.store.findUnique({ where: { slug: "ahal-silk" } });
   const karakum = await prisma.store.findUnique({ where: { slug: "karakum" } });
+  const lebapGuild = await prisma.store.findUnique({ where: { slug: "lebap-guild" } });
+  const maryKeteni = await prisma.store.findUnique({ where: { slug: "mary-keteni" } });
   const carpetCat = categories[0];
   const silkCat = categories[1];
   const kilimCat = categories[2];
@@ -112,6 +128,16 @@ async function main() {
     { name: "Bukhara Runner", slug: "bukhara-runner", price: 480, unit: "m²", fiber: "Wool", technique: "Tight knot", badge: "Classic", stock: 5, delivery: "Ships in 5 days", storeId: dowletowa!.id, categoryId: carpetCat.id },
     { name: "Caspian Blue Shawl", slug: "caspian-shawl", price: 140, unit: "piece", fiber: "Fine wool", technique: "Loose weave", badge: "Winter", stock: 10, delivery: "Ready to ship", storeId: karakum!.id, categoryId: accessoriesCat.id },
     { name: "Desert Sunset Keteni", slug: "sunset-keteni", price: 110, unit: "meter", fiber: "Raw silk", technique: "Loom woven", badge: "Fabric", stock: 50, delivery: "Ready to ship", storeId: ahalSilk!.id, categoryId: silkCat.id },
+
+    // Products for Lebap Embroidery Guild
+    { name: "Suzani Wall Panel", slug: "suzani-panel", price: 680, unit: "piece", fiber: "Cotton base, silk thread", technique: "Chain-stitch embroidery", badge: "Gallery", stock: 3, delivery: "Ships in 10 days", storeId: lebapGuild!.id, categoryId: kilimCat.id, isFeatured: true },
+    { name: "Embroidered Prayer Rug", slug: "prayer-rug-embroidered", price: 450, unit: "piece", fiber: "Wool with silk embroidery", technique: "Hand-embroidered border", badge: "Sacred", stock: 4, delivery: "Ships in 7 days", storeId: lebapGuild!.id, categoryId: carpetCat.id },
+    { name: "Lebap Telpek Band", slug: "telpek-band", price: 85, unit: "piece", fiber: "Cotton & metallic thread", technique: "Couching embroidery", badge: "Accessory", stock: 20, delivery: "Ready to ship", storeId: lebapGuild!.id, categoryId: accessoriesCat.id },
+
+    // Products for Mary Keteni Workshop
+    { name: "Crimson Bridal Keteni", slug: "crimson-keteni", price: 920, unit: "piece", fiber: "Finest mulberry silk", technique: "Traditional loom, natural dye", badge: "Bridal", stock: 2, delivery: "Made to order", storeId: maryKeteni!.id, categoryId: silkCat.id, isFeatured: true },
+    { name: "Mary Festival Scarf", slug: "mary-festival-scarf", price: 175, unit: "piece", fiber: "Silk chiffon", technique: "Hand-dyed ikat", badge: "Festival", stock: 15, delivery: "Ready to ship", storeId: maryKeteni!.id, categoryId: accessoriesCat.id },
+    { name: "Oasis Silk Table Runner", slug: "oasis-silk-runner", price: 340, unit: "piece", fiber: "Two-ply silk", technique: "Jacquard weaving", badge: "Home", stock: 7, delivery: "Ships in 5 days", storeId: maryKeteni!.id, categoryId: silkCat.id },
   ];
 
   for (const product of products) {
@@ -159,6 +185,16 @@ async function main() {
     { productSlug: "bukhara-runner", path: "/images/products/product-bukhara-runner-1.jpg", alt: "Bukhara Runner", isPrimary: true },
     { productSlug: "caspian-shawl", path: "/images/products/product-caspian-shawl-1.jpg", alt: "Caspian Blue Shawl", isPrimary: true },
     { productSlug: "sunset-keteni", path: "/images/products/product-sunset-keteni-1.jpg", alt: "Desert Sunset Keteni", isPrimary: true },
+
+    // Lebap Embroidery Guild
+    { productSlug: "suzani-panel", path: "/images/products/product-suzani-panel-1.jpg", alt: "Suzani Wall Panel", isPrimary: true },
+    { productSlug: "prayer-rug-embroidered", path: "/images/products/product-prayer-rug-embroidered-1.jpg", alt: "Embroidered Prayer Rug", isPrimary: true },
+    { productSlug: "telpek-band", path: "/images/products/product-telpek-band-1.jpg", alt: "Lebap Telpek Band", isPrimary: true },
+
+    // Mary Keteni Workshop
+    { productSlug: "crimson-keteni", path: "/images/products/product-crimson-keteni-1.jpg", alt: "Crimson Bridal Keteni", isPrimary: true },
+    { productSlug: "mary-festival-scarf", path: "/images/products/product-mary-festival-scarf-1.jpg", alt: "Mary Festival Scarf", isPrimary: true },
+    { productSlug: "oasis-silk-runner", path: "/images/products/product-oasis-silk-runner-1.jpg", alt: "Oasis Silk Table Runner", isPrimary: true },
   ];
 
   for (const img of productImages) {
