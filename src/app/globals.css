@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Turkmen-inspired palette matching v1 */
+  --turkmen-green: #005f2f;
+  --turkmen-red: #9d1c1f;
+  --turkmen-gold: #cda349;
+  --desert-sand: #f3e9d2;
+  --text-dark: #1f1f1f;
+  --text-muted: #4b4b4b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Noto Serif', 'Georgia', serif;
+  color: var(--text-dark);
+  background: var(--desert-sand);
+  line-height: 1.6;
+}
+
+/* Custom component classes */
+@layer components {
+  .btn {
+    @apply px-5 py-2.5 rounded-md font-semibold tracking-wide uppercase border-2 border-transparent transition-all duration-300 inline-flex items-center gap-1.5;
+  }
+
+  .btn-primary {
+    @apply bg-[#cda349] text-[#1f1f1f] hover:bg-[#b8923e] hover:shadow-md;
+  }
+
+  .btn-secondary {
+    @apply border-white/80 text-white hover:bg-white/10;
+  }
+
+  .btn-outline {
+    @apply border-gray-300 text-gray-700 bg-white hover:bg-gray-50;
+  }
+
+  .btn-ghost {
+    @apply border-[#005f2f] text-[#005f2f] bg-transparent hover:bg-[#005f2f]/10;
+  }
+
+  .card {
+    @apply bg-white/90 rounded-2xl p-6 shadow-lg border border-[#005f2f]/10 transition-all duration-300;
+  }
+
+  .card:hover {
+    @apply -translate-y-1.5 shadow-xl;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 border border-[#005f2f]/20 rounded-lg bg-white focus:ring-2 focus:ring-[#005f2f] focus:border-transparent outline-none transition;
+  }
+
+  .product-card {
+    @apply bg-white border border-[#005f2f]/10 rounded-xl overflow-hidden shadow-lg transition-all duration-300;
+  }
+
+  .product-card:hover {
+    @apply -translate-y-1 shadow-xl;
+  }
+
+  .highlight-card {
+    @apply bg-white/90 rounded-xl p-6 shadow-lg border border-[#005f2f]/10 transition-all duration-300;
+  }
+
+  .highlight-card:hover {
+    @apply -translate-y-1.5 shadow-xl;
+  }
+
+  .pill {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#005f2f]/10 text-[#005f2f] font-semibold text-sm;
+  }
+
+  .pill-accent {
+    @apply bg-[#cda349]/20 text-[#1f1f1f];
+  }
+}
+
+/* Header gradient - matching v1 */
+.header-gradient {
+  background: linear-gradient(135deg, rgba(0, 95, 47, 0.96) 0%, rgba(0, 61, 30, 0.94) 100%);
+}
+
+/* Hero gradient */
+.hero-gradient {
+  background: linear-gradient(140deg, rgba(0, 95, 47, 0.88) 0%, rgba(0, 95, 47, 0.65) 45%, rgba(205, 163, 73, 0.9) 100%);
+}
+
+/* Admin sidebar gradient */
+.admin-sidebar-gradient {
+  background: linear-gradient(180deg, #005f2f 0%, #003d1e 100%);
+}
+
+/* Gold accent underline animation */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 3px;
+  background: var(--turkmen-gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--desert-sand);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--turkmen-gold);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b8923e;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Prevent card lift on forms and checkout */
+.card-static {
+  @apply bg-white/90 rounded-2xl p-6 shadow-lg border border-[#005f2f]/10;
+}
+
+/* Mobile menu */
+.mobile-menu-enter {
+  animation: slideDown 0.2s ease-out forwards;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,13 @@
+services:
+  app:
+    build: .
+    container_name: dowletowa-v2
+    ports:
+      - "4082:4082"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=4082
+      - DATABASE_URL=file:./prisma/dev.db
+      - NEXTAUTH_SECRET=dowletowa-textiles-secret-key-2025
+      - NEXTAUTH_URL=http://localhost:4082

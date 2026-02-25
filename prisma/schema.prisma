@@ -1,0 +1,159 @@
+// This is your Prisma schema file for Dowletowa Textiles E-Commerce Platform
+
+generator client {
+  provider = "prisma-client-js"
+  log      = ["error", "warn"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Admin users (admin-only authentication)
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String    // Hashed with bcryptjs
+  name          String?
+  role          Role      @default(ADMIN)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  stores        Store[]   // Stores created by this admin
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+}
+
+// Partner companies/stores
+model Store {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  origin      String    // City or region
+  specialty   String
+  description String?
+  logo        String?   // Local image path
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdBy   User      @relation(fields: [createdById], references: [id])
+  createdById String
+  products    Product[]
+}
+
+// Product categories
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  createdAt   DateTime  @default(now())
+  products    Product[]
+}
+
+// Products (textiles, carpets, etc.)
+model Product {
+  id          String         @id @default(cuid())
+  name        String
+  slug        String         @unique
+  description String
+  price       Float
+  unit        String         @default("piece") // piece, m², panel
+  fiber       String         // Material composition
+  technique   String         // Weaving technique
+  dimensions  String?        // Optional size description
+  badge       String?        // Featured, New, Bestseller, etc.
+  stock       Int            @default(0)
+  delivery    String?        // Shipping info
+  images      ProductImage[]
+  isActive    Boolean        @default(true)
+  isFeatured  Boolean        @default(false)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  store       Store          @relation(fields: [storeId], references: [id])
+  storeId     String
+  category    Category       @relation(fields: [categoryId], references: [id])
+  categoryId  String
+  orderItems  OrderItem[]
+  compareItems CompareItem[]
+  cartItems   CartItem[]
+}
+
+// Multiple images per product
+model ProductImage {
+  id        String   @id @default(cuid())
+  path      String   // Local path: /uploads/products/xxx.jpg
+  alt       String?
+  isPrimary Boolean  @default(false)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+}
+
+// Shopping cart (session-based)
+model Cart {
+  id        String     @id @default(cuid())
+  sessionId String     @unique
+  items     CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model CartItem {
+  id        String  @id @default(cuid())
+  quantity  Int     @default(1)
+  cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  cartId    String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+
+  @@unique([cartId, productId])
+}
+
+// Orders (simulated payment)
+model Order {
+  id            String      @id @default(cuid())
+  orderNumber   String      @unique
+  status        OrderStatus @default(PENDING)
+  total         Float
+  customerName  String
+  customerEmail String
+  customerPhone String?
+  address       String?
+  notes         String?
+  items         OrderItem[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  quantity  Int
+  price     Float // Price at time of order
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId   String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+// Compare functionality (session-based)
+model CompareItem {
+  id        String   @id @default(cuid())
+  sessionId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+  createdAt DateTime @default(now())
+
+  @@unique([sessionId, productId])
+}
