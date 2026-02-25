@@ -10,7 +10,7 @@ export default function Footer() {
         <div>
           <h4 className="text-lg font-bold mb-4 text-turkmen-gold flex items-center gap-2">
             <span className="text-turkmen-gold">◆</span>
-            Dowletowa Textiles
+            Heritage Textiles
           </h4>
           <p className="opacity-90 text-sm leading-relaxed">
             Harmonizing Turkmen heritage with contemporary artistry through ethical craftsmanship.
@@ -40,13 +40,13 @@ export default function Footer() {
           <h4 className="text-lg font-bold mb-4 text-turkmen-gold">Connect</h4>
           <p className="opacity-90 text-sm">
             +993 (12) 45 67 89<br />
-            hello@dowletowa-textiles.tm
+            hello@heritage-textiles.tm
           </p>
-          <p className="opacity-90 mt-3 text-sm">@dowletowatextiles</p>
+          <p className="opacity-90 mt-3 text-sm">@heritagetextiles</p>
         </div>
       </div>
       <div className="max-w-6xl mx-auto px-6 mt-8 pt-8 border-t border-white/20 flex items-center justify-between opacity-80 text-sm">
-        <p>&copy; {currentYear} Dowletowa Textiles Cooperative &bull; Celebrating {yearsActive} years of weaving excellence</p>
+        <p>&copy; {currentYear} Heritage Textiles Cooperative &bull; Celebrating {yearsActive} years of weaving excellence</p>
         <Link href="/admin/login" className="text-white/50 hover:text-turkmen-gold transition text-xs">
           Admin Panel
         </Link>

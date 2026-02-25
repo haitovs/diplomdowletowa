@@ -22,7 +22,7 @@ export default function HeritagePage() {
           <div>
             <h2 className="text-3xl font-bold text-turkmen-green mb-4">Intangible Heritage Stewardship</h2>
             <p className="mb-4">
-              Dowletowa Textiles partners with the National Commission for UNESCO to document weaving practices recognized as Intangible Cultural Heritage of Humanity. We record oral histories in Turkmen and translate them into English, Russian, and Japanese.
+              Heritage Textiles partners with the National Commission for UNESCO to document weaving practices recognized as Intangible Cultural Heritage of Humanity. We record oral histories in Turkmen and translate them into English, Russian, and Japanese.
             </p>
             <p>
               We curate traveling exhibitions that pair historic textiles with augmented reality experiences, enabling visitors to visualize the weaving process step-by-step. Digital archives store high-resolution imagery, dye analysis, and interviews with makers.

@@ -40,7 +40,7 @@ export default function Header({ cartCount }: HeaderProps) {
           {/* Logo */}
           <Link href="/" className="text-xl font-semibold tracking-wide flex items-center gap-2 flex-shrink-0 hover:text-turkmen-gold transition">
             <span className="text-turkmen-gold text-2xl">◆</span>
-            Dowletowa Textiles
+            Heritage Textiles
           </Link>
 
           {/* Center Navigation - Desktop */}

@@ -39,7 +39,7 @@ export default function AdminLoginPage() {
             <span className="text-4xl text-turkmen-gold">◆</span>
           </div>
           <h1 className="text-3xl font-bold text-turkmen-green">Admin Login</h1>
-          <p className="text-gray-600 mt-2">Dowletowa Textiles Management</p>
+          <p className="text-gray-600 mt-2">Heritage Textiles Management</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -59,7 +59,7 @@ export default function AdminLoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none transition"
-              placeholder="admin@dowletowa.tm"
+              placeholder="admin@heritage-textiles.tm"
               required
             />
           </div>
@@ -89,7 +89,7 @@ export default function AdminLoginPage() {
         </form>
 
         <p className="text-center text-sm text-gray-500 mt-6">
-          Dowletowa Textiles &bull; Admin Portal
+          Heritage Textiles &bull; Admin Portal
         </p>
       </div>
     </div>

@@ -29,7 +29,7 @@ export default function AdminSidebar({ user }: AdminSidebarProps) {
         <Link href="/admin" className="flex items-center gap-3">
           <span className="text-3xl text-turkmen-gold">◆</span>
           <div>
-            <h2 className="text-lg font-bold">Dowletowa</h2>
+            <h2 className="text-lg font-bold">Heritage</h2>
             <p className="text-xs text-white/60">Admin Panel</p>
           </div>
         </Link>

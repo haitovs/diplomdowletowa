@@ -57,7 +57,7 @@ export default async function Home() {
               Woven With <span className="text-turkmen-gold">Soul</span>
             </h1>
             <p className="text-xl max-w-xl mb-10 opacity-90 leading-relaxed font-light">
-              Dowletowa Textiles celebrates the living heritage of Turkmenistan&apos;s master weavers.
+              Heritage Textiles celebrates the living heritage of Turkmenistan&apos;s master weavers.
               Discover carpets, silks, and art that embody the spirit of the desert.
             </p>
             <div className="flex gap-4">
@@ -178,7 +178,7 @@ export default async function Home() {
                   )}
                 </div>
                 <div className="p-4">
-                  <Link href={`/store/${product.store?.slug || 'dowletowa'}`} className="text-xs text-turkmen-gold font-bold uppercase mb-1 block">
+                  <Link href={`/store/${product.store?.slug || 'heritage'}`} className="text-xs text-turkmen-gold font-bold uppercase mb-1 block">
                     {product.store?.name}
                   </Link>
                   <Link href={`/shop/${product.slug}`}>

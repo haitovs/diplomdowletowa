@@ -11,7 +11,7 @@ export default function ArtisansPage() {
         <div className="max-w-6xl mx-auto">
           <h1 className="text-5xl font-bold uppercase tracking-wide mb-4">Meet the Hands Behind the Heritage</h1>
           <p className="text-lg opacity-95 max-w-2xl">
-            Dowletowa Textiles thrives thanks to the devotion of Turkmen women and men who spin, dye, weave, felt, and embroider with unmatched skill.
+            Heritage Textiles thrives thanks to the devotion of Turkmen women and men who spin, dye, weave, felt, and embroider with unmatched skill.
           </p>
         </div>
       </section>
@@ -49,7 +49,7 @@ export default function ArtisansPage() {
             Our apprenticeship program follows the Turkmen principle of "usta-şägirt"—a bond between master and learner grounded in respect. Each apprentice rotates through fiber preparation, natural dyeing, loom setup, and finishing ceremonies.
           </p>
           <p className="mb-4">
-            Dowletowa Textiles provides scholarships for rural youth, accommodation in Ashgabat&apos;s artisan quarters, and health programs that ensure ergonomic weaving practices.
+            Heritage Textiles provides scholarships for rural youth, accommodation in Ashgabat&apos;s artisan quarters, and health programs that ensure ergonomic weaving practices.
           </p>
           <p>
             Monthly mentorship circles pair apprentices with alumni working abroad, opening pathways for cross-cultural dialogue while reinforcing commitment to Turkmen aesthetics.

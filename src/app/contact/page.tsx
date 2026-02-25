@@ -30,7 +30,7 @@ export default function ContactPage() {
       {/* Hero */}
       <section className="hero-gradient text-white py-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-5xl font-bold uppercase tracking-wide mb-4">Visit the Dowletowa Atelier</h1>
+          <h1 className="text-5xl font-bold uppercase tracking-wide mb-4">Visit the Heritage Atelier</h1>
           <p className="text-lg opacity-95 max-w-2xl">
             Plan your journey to our Ashgabat showroom, schedule a design consultation, or inquire about collections. Our hospitality is rooted in Turkmen warmth—çay is always ready.
           </p>
@@ -47,7 +47,7 @@ export default function ContactPage() {
               <p className="mb-2"><strong>Open:</strong> Monday – Saturday, 09:00 – 18:00 TMT</p>
               <p className="mb-2"><strong>Closed:</strong> Sundays & national holidays</p>
               <p className="mb-2"><strong>Phone:</strong> +993 (12) 45 67 89</p>
-              <p><strong>Email:</strong> hello@dowletowa-textiles.tm</p>
+              <p><strong>Email:</strong> hello@heritage-textiles.tm</p>
             </div>
 
             <div className="card">

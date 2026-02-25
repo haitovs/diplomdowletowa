@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!product) return { title: "Product Not Found" };
   
   return {
-    title: `${product.name} | Dowletowa Textiles`,
+    title: `${product.name} | Heritage Textiles`,
     description: product.description.substring(0, 160),
   };
 }

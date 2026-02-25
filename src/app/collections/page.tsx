@@ -25,7 +25,7 @@ export default function CollectionsPage() {
               The story of our Tekke Crimson Carpets begins in the 17th century when Tekke tribes settled near the Murgab River.  Matriarch weavers guarded octagonal göl motifs that symbolized protection, prosperity, and unity.
             </p>
             <p className="mb-4">
-              Today, Dowletowa Textiles preserves these historic motifs while integrating contemporary scale and palette. Our current Tekke collection features hand-spun wool dyed in gradually layered crimson, saffron, and sage.
+              Today, Heritage Textiles preserves these historic motifs while integrating contemporary scale and palette. Our current Tekke collection features hand-spun wool dyed in gradually layered crimson, saffron, and sage.
             </p>
             <p>
               Exclusive ceremonial commissions weave turquoise guard bands and gilded cloud borders that reference Tekke legends about guardianship and safe passage.

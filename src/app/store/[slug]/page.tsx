@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!store) return { title: "Artisan Not Found" };
   
   return {
-    title: `${store.name} | Dowletowa Textiles`,
+    title: `${store.name} | Heritage Textiles`,
     description: store.description?.substring(0, 160) || `Handcrafted textiles from ${store.name}`,
   };
 }
@@ -75,7 +75,7 @@ export default async function StoreDetailPage({ params }: { params: Promise<{ sl
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-               <a href={`mailto:hello@dowletowa.tm?subject=Inquiry for ${store.name}`} className="btn btn-secondary py-2 px-6 text-sm">
+               <a href={`mailto:hello@heritage-textiles.tm?subject=Inquiry for ${store.name}`} className="btn btn-secondary py-2 px-6 text-sm">
                 Contact Artisan
                </a>
                <div className="px-4 py-2 border border-white/20 rounded-lg text-sm bg-white/5">

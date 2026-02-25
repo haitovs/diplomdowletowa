@@ -27,7 +27,7 @@ export default async function AdminDashboard() {
     <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-turkmen-green">Dashboard</h1>
-        <p className="text-gray-600">Welcome to Dowletowa Textiles Admin Panel</p>
+        <p className="text-gray-600">Welcome to Heritage Textiles Admin Panel</p>
       </div>
 
       {/* Stats Grid */}

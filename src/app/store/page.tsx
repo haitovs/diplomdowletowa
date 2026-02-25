@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Artisan Partners | Dowletowa Textiles",
+  title: "Artisan Partners | Heritage Textiles",
   description: "Meet the cooperatives and families weaving our heritage.",
 };
 

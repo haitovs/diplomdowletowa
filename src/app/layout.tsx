@@ -15,7 +15,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Dowletowa Textiles | Turkmen Heritage Woven in Silk and Wool",
+  title: "Heritage Textiles | Turkmen Heritage Woven in Silk and Wool",
   description: "Discover authentic Turkmen carpets, keteni silks, and handcrafted textiles from master weavers. Shop our curated collection of heritage textiles.",
 };
 
