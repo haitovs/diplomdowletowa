@@ -1,7 +1,12 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { getLocaleFromCookie, t } from "@/lib/i18n";
+import { cookies } from "next/headers";
 
-export default function HeritagePage() {
+export default async function HeritagePage() {
+  const cookieStore = await cookies();
+  const locale = getLocaleFromCookie(cookieStore.get("locale")?.value);
+
   return (
     <div className="min-h-screen bg-desert-sand">
       <Header />
@@ -9,80 +14,93 @@ export default function HeritagePage() {
       {/* Hero */}
       <section className="hero-gradient text-white py-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-5xl font-bold uppercase tracking-wide mb-4">Safeguarding Cultural Heritage</h1>
+          <h1 className="text-5xl font-bold uppercase tracking-wide mb-4">{t("heritage.hero_title", locale)}</h1>
           <p className="text-lg opacity-95 max-w-2xl">
-            Turkmen textiles embody collective memory—songs, prayers, and symbols woven into daily life. We protect this intangible heritage through education, documentation, and global dialogue.
+            {t("heritage.hero_desc", locale)}
           </p>
         </div>
       </section>
 
       <main className="max-w-6xl mx-auto px-6 py-12 space-y-16">
-        {/* UNESCO Partnership */}
+        {/* UNESCO Recognition */}
         <section className="grid md:grid-cols-2 gap-12 items-start">
           <div>
-            <h2 className="text-3xl font-bold text-turkmen-green mb-4">Intangible Heritage Stewardship</h2>
+            <h2 className="text-3xl font-bold text-turkmen-green mb-4">{t("heritage.unesco_title", locale)}</h2>
             <p className="mb-4">
-              Heritage Textiles partners with the National Commission for UNESCO to document weaving practices recognized as Intangible Cultural Heritage of Humanity. We record oral histories in Turkmen and translate them into English, Russian, and Japanese.
+              {t("heritage.unesco_p1", locale)}
             </p>
             <p>
-              We curate traveling exhibitions that pair historic textiles with augmented reality experiences, enabling visitors to visualize the weaving process step-by-step. Digital archives store high-resolution imagery, dye analysis, and interviews with makers.
+              {t("heritage.unesco_p2", locale)}
             </p>
           </div>
           <div className="bg-white rounded-xl p-6 border-2 border-turkmen-gold shadow-soft">
-            <img src="/images/products/product-camel-bag-1.jpg" alt="UNESCO Heritage Documentation" className="w-full h-full object-cover rounded-lg" />
+            <img src="/images/products/product-camel-bag-1.jpg" alt="Turkmen Carpet Heritage" className="w-full h-full object-cover rounded-lg" />
           </div>
         </section>
 
-        {/* Economic Empowerment */}
+        {/* Modern Textile Industry */}
         <section className="grid md:grid-cols-2 gap-12 items-start">
           <div className="bg-white rounded-xl p-6 border-2 border-turkmen-gold shadow-soft">
-            <img src="/images/products/product-khorjun-bag-1.jpg" alt="Economic Empowerment" className="w-full h-full object-cover rounded-lg" />
+            <img src="/images/products/product-khorjun-bag-1.jpg" alt="Turkmen Textile Industry" className="w-full h-full object-cover rounded-lg" />
           </div>
           <div>
-            <h2 className="text-3xl font-bold text-turkmen-green mb-4">Economic Empowerment</h2>
+            <h2 className="text-3xl font-bold text-turkmen-green mb-4">{t("heritage.industry_title", locale)}</h2>
             <p className="mb-4">
-              Heritage preservation is intertwined with economic vitality. Our cooperative guarantees transparent pricing for artisans, providing financial literacy workshops and microgrants that fund loom maintenance, dye gardens, and apprenticeships.
+              {t("heritage.industry_p1", locale)}
             </p>
             <p>
-              Through memoranda with cultural ministries and trade partners, we coordinate export routes that honor ethical sourcing and cultural attribution. Every international sale contributes to a heritage fund supporting libraries and healthcare.
+              {t("heritage.industry_p2", locale)}
             </p>
           </div>
         </section>
 
-        {/* Education Programs */}
+        {/* Education & Preservation */}
         <section className="bg-white/50 rounded-2xl p-8 border border-turkmen-green/10">
-          <h2 className="text-3xl font-bold text-turkmen-green mb-4">Education Programs</h2>
+          <h2 className="text-3xl font-bold text-turkmen-green mb-4">{t("heritage.education_title", locale)}</h2>
           <p className="mb-4">
-            Our Heritage School for Youth invites students aged 12–19 to engage with weaving, felting, and embroidery. Curriculum modules integrate history, ecology, and entrepreneurship: pupils trace the Silk Road, map dye plant habitats, and create business plans.
-          </p>
-          <p className="mb-4">
-            We collaborate with universities in Ashgabat and Mary to offer credit-bearing courses in textile conservation, curatorial practice, and cultural diplomacy. Scholarships prioritize rural candidates and young women seeking creative careers.
+            {t("heritage.education_p1", locale)}
           </p>
           <p>
-            Weekend mentorships connect students with elders who share lullabies, proverbs, and weaving rituals around communal hearths.
+            {t("heritage.education_p2", locale)}
           </p>
+        </section>
+
+        {/* Silk Road Legacy */}
+        <section className="grid md:grid-cols-2 gap-12 items-start">
+          <div>
+            <h2 className="text-3xl font-bold text-turkmen-green mb-4">{t("heritage.silkroad_title", locale)}</h2>
+            <p className="mb-4">
+              {t("heritage.silkroad_p1", locale)}
+            </p>
+            <p>
+              {t("heritage.silkroad_p2", locale)}
+            </p>
+          </div>
+          <div className="bg-white rounded-xl p-6 border-2 border-turkmen-gold shadow-soft">
+            <img src="/images/products/product-sunset-keteni-1.jpg" alt="Keteni Silk" className="w-full h-full object-cover rounded-lg" />
+          </div>
         </section>
 
         {/* Sustainable Future */}
         <section>
-          <h2 className="text-3xl font-bold text-turkmen-green mb-8">Sustainable Future</h2>
+          <h2 className="text-3xl font-bold text-turkmen-green mb-8">{t("heritage.sustainable_title", locale)}</h2>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="card">
-              <h3 className="text-lg font-bold text-turkmen-green mb-3">Eco Dye Garden</h3>
+              <h3 className="text-lg font-bold text-turkmen-green mb-3">{t("heritage.eco_dye_title", locale)}</h3>
               <p>
-                Ashgabat&apos;s dye garden cultivates madder, indigo, and safflower with organic composting and drip irrigation.
+                {t("heritage.eco_dye_desc", locale)}
               </p>
             </div>
             <div className="card">
-              <h3 className="text-lg font-bold text-turkmen-green mb-3">Weaver Health</h3>
+              <h3 className="text-lg font-bold text-turkmen-green mb-3">{t("heritage.turkmen_cotton_title", locale)}</h3>
               <p>
-                Ergonomic loom design and wellness clinics support the long-term health of artisans across provinces.
+                {t("heritage.turkmen_cotton_desc", locale)}
               </p>
             </div>
             <div className="card">
-              <h3 className="text-lg font-bold text-turkmen-green mb-3">Community Reinvestment</h3>
+              <h3 className="text-lg font-bold text-turkmen-green mb-3">{t("heritage.community_title", locale)}</h3>
               <p>
-                Portions of every sale fund school libraries, cultural festivals, and emergency relief for weaving families.
+                {t("heritage.community_desc", locale)}
               </p>
             </div>
           </div>

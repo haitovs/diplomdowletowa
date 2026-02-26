@@ -1,9 +1,14 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { getLocaleFromCookie, t } from "@/lib/i18n";
 import Link from "next/link";
+import { cookies } from "next/headers";
 import { clearCompare, getCompare, removeFromCompare } from "./actions";
 
 export default async function ComparePage() {
+  const cookieStore = await cookies();
+  const locale = getLocaleFromCookie(cookieStore.get("locale")?.value);
+
   const items = await getCompare();
   const products = items.map(item => item.product);
 
@@ -14,19 +19,19 @@ export default async function ComparePage() {
       {/* Hero */}
       <section className="hero-gradient text-white py-10 px-6">
         <div className="max-w-6xl mx-auto">
-          <p className="text-sm uppercase tracking-wide text-turkmen-gold mb-2">Price & Material Check</p>
-          <h1 className="text-4xl font-bold uppercase tracking-wide mb-4">Compare Saved Textiles</h1>
+          <p className="text-sm uppercase tracking-wide text-turkmen-gold mb-2">{t("compare.price_check", locale)}</p>
+          <h1 className="text-4xl font-bold uppercase tracking-wide mb-4">{t("compare.title", locale)}</h1>
           <p className="opacity-90 max-w-3xl mb-6">
-            Items you marked on the shopping page appear here. Keep up to three products, remove any you no longer want, and return to the shop to add more.
+            {t("compare.description", locale)}
           </p>
           <div className="flex gap-4">
             <Link href="/shop" className="btn btn-primary">
-              Back to Shopping
+              {t("compare.back_to_shop", locale)}
             </Link>
             {products.length > 0 && (
               <form action={clearCompare}>
                 <button type="submit" className="btn btn-secondary">
-                  Clear List
+                  {t("compare.clear_list", locale)}
                 </button>
               </form>
             )}
@@ -37,17 +42,17 @@ export default async function ComparePage() {
       <div className="max-w-6xl mx-auto px-6 py-8">
         <div className="card mb-8">
           <div className="mb-6">
-            <p className="text-sm uppercase tracking-wide text-turkmen-green font-bold">Up to 3 Items</p>
-            <h2 className="text-2xl font-bold text-turkmen-green">Side-by-side Overview</h2>
-            <p className="text-gray-600 mt-2">We highlight the best price automatically. Details stay minimal so you can make quick choices.</p>
+            <p className="text-sm uppercase tracking-wide text-turkmen-green font-bold">{t("compare.up_to_3", locale)}</p>
+            <h2 className="text-2xl font-bold text-turkmen-green">{t("compare.side_by_side", locale)}</h2>
+            <p className="text-gray-600 mt-2">{t("compare.side_by_side_desc", locale)}</p>
           </div>
 
           {/* Product Cards */}
           {products.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-500 mb-4">No items saved. Go back to the shop and press "Compare".</p>
+              <p className="text-gray-500 mb-4">{t("compare.no_items", locale)}</p>
               <Link href="/shop" className="btn btn-primary">
-                Start Shopping
+                {t("compare.start_shopping", locale)}
               </Link>
             </div>
           ) : (
@@ -71,7 +76,7 @@ export default async function ComparePage() {
                             await removeFromCompare(item.id);
                           }}>
                             <button type="submit" className="text-red-500 text-sm hover:underline">
-                              Remove
+                              {t("compare.remove", locale)}
                             </button>
                           </form>
                         </div>
@@ -86,10 +91,10 @@ export default async function ComparePage() {
                 <table className="w-full">
                   <thead className="bg-turkmen-gold/20">
                     <tr>
-                      <th className="px-4 py-3 text-left font-bold text-turkmen-green">Product</th>
-                      <th className="px-4 py-3 text-left font-bold text-turkmen-green">Price</th>
-                      <th className="px-4 py-3 text-left font-bold text-turkmen-green">Fiber</th>
-                      <th className="px-4 py-3 text-left font-bold text-turkmen-green">Technique</th>
+                      <th className="px-4 py-3 text-left font-bold text-turkmen-green">{t("compare.col_product", locale)}</th>
+                      <th className="px-4 py-3 text-left font-bold text-turkmen-green">{t("compare.col_price", locale)}</th>
+                      <th className="px-4 py-3 text-left font-bold text-turkmen-green">{t("product.fiber", locale)}</th>
+                      <th className="px-4 py-3 text-left font-bold text-turkmen-green">{t("product.technique", locale)}</th>
                     </tr>
                   </thead>
                   <tbody>

@@ -1,7 +1,9 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { prisma } from "@/lib/prisma";
+import { getLocaleFromCookie, t } from "@/lib/i18n";
 import Image from "next/image";
+import { cookies } from "next/headers";
 import { addToCompare } from "../compare/actions";
 import { addToCart } from "./actions";
 
@@ -10,6 +12,9 @@ export default async function ShopPage({
 }: {
   searchParams: Promise<{ category?: string; store?: string; search?: string; sort?: string }>;
 }) {
+  const cookieStore = await cookies();
+  const locale = getLocaleFromCookie(cookieStore.get("locale")?.value);
+
   const params = await searchParams;
   const { category, store, search, sort } = params;
 
@@ -54,8 +59,8 @@ export default async function ShopPage({
       {/* Hero */}
       <section className="hero-gradient text-white py-10 px-6">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-4xl font-bold uppercase tracking-wide mb-2">Shop Turkmen Textiles</h1>
-          <p className="opacity-90">Browse curated carpets, kilims, and silks from master weavers</p>
+          <h1 className="text-4xl font-bold uppercase tracking-wide mb-2">{t("shop.title", locale)}</h1>
+          <p className="opacity-90">{t("shop.subtitle", locale)}</p>
         </div>
       </section>
 
@@ -64,9 +69,9 @@ export default async function ShopPage({
         <div className="card mb-8">
           <form className="flex flex-wrap gap-4 items-end">
             <label className="flex flex-col gap-1.5 font-semibold text-turkmen-green text-sm">
-              Category
+              {t("shop.filter_category", locale)}
               <select name="category" defaultValue={category || ""} className="input-field py-2">
-                <option value="">All Categories</option>
+                <option value="">{t("shop.all_categories", locale)}</option>
                 {categories.map((cat) => (
                   <option key={cat.id} value={cat.slug}>{cat.name}</option>
                 ))}
@@ -74,9 +79,9 @@ export default async function ShopPage({
             </label>
 
             <label className="flex flex-col gap-1.5 font-semibold text-turkmen-green text-sm">
-              Store
+              {t("shop.filter_store", locale)}
               <select name="store" defaultValue={store || ""} className="input-field py-2">
-                <option value="">All Stores</option>
+                <option value="">{t("shop.all_stores", locale)}</option>
                 {stores.map((s) => (
                   <option key={s.id} value={s.slug}>{s.name}</option>
                 ))}
@@ -84,28 +89,28 @@ export default async function ShopPage({
             </label>
 
             <label className="flex flex-col gap-1.5 font-semibold text-turkmen-green text-sm">
-              Sort By
+              {t("shop.sort_by", locale)}
               <select name="sort" defaultValue={sort || ""} className="input-field py-2">
-                <option value="">Featured</option>
-                <option value="price-asc">Price: Low to High</option>
-                <option value="price-desc">Price: High to Low</option>
-                <option value="name">Name</option>
+                <option value="">{t("shop.sort_featured", locale)}</option>
+                <option value="price-asc">{t("shop.sort_price_asc", locale)}</option>
+                <option value="price-desc">{t("shop.sort_price_desc", locale)}</option>
+                <option value="name">{t("shop.sort_name", locale)}</option>
               </select>
             </label>
 
             <label className="flex flex-col gap-1.5 font-semibold text-turkmen-green text-sm flex-1 min-w-[200px]">
-              Search
+              {t("common.search", locale)}
               <input
                 type="search"
                 name="search"
                 defaultValue={search || ""}
-                placeholder="Search textiles..."
+                placeholder={t("shop.search_placeholder", locale)}
                 className="input-field py-2"
               />
             </label>
 
             <button type="submit" className="btn btn-primary h-[42px]">
-              Filter
+              {t("shop.filter_btn", locale)}
             </button>
           </form>
         </div>
@@ -155,7 +160,7 @@ export default async function ShopPage({
                       await addToCart(product.id);
                     }} className="flex-1">
                       <button type="submit" className="btn btn-primary text-sm py-2 px-3 w-full">
-                        Add to Cart
+                        {t("product.add_to_cart", locale)}
                       </button>
                     </form>
                     <form action={async () => {
@@ -163,7 +168,7 @@ export default async function ShopPage({
                       await addToCompare(product.id);
                     }}>
                       <button type="submit" className="btn btn-ghost text-sm py-2 px-3">
-                        Compare
+                        {t("product.compare", locale)}
                       </button>
                     </form>
                   </div>
@@ -175,8 +180,8 @@ export default async function ShopPage({
 
         {products.length === 0 && (
           <div className="text-center py-16">
-            <p className="text-xl text-gray-500 mb-2">No products found</p>
-            <p className="text-gray-400">Try adjusting your filters or search</p>
+            <p className="text-xl text-gray-500 mb-2">{t("shop.no_products", locale)}</p>
+            <p className="text-gray-400">{t("shop.adjust_filters", locale)}</p>
           </div>
         )}
       </div>

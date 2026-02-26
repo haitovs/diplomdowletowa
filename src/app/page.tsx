@@ -1,12 +1,17 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { prisma } from "@/lib/prisma";
+import { getLocaleFromCookie, t } from "@/lib/i18n";
 import Image from "next/image";
 import Link from "next/link";
+import { cookies } from "next/headers";
 import { addToCart } from "./shop/actions";
 import { addToCompare } from "./compare/actions";
 
 export default async function Home() {
+  const cookieStore = await cookies();
+  const locale = getLocaleFromCookie(cookieStore.get("locale")?.value);
+
   const [featuredProducts, latestArrivals] = await Promise.all([
     prisma.product.findMany({
       where: { isFeatured: true, isActive: true },
@@ -51,21 +56,20 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto flex items-center gap-12 relative z-10">
           <div className="flex-1 max-w-2xl animate-fade-in">
             <span className="inline-block py-1 px-3 rounded-full bg-turkmen-gold/20 text-turkmen-gold border border-turkmen-gold/30 text-sm font-semibold tracking-wider mb-6 backdrop-blur-sm">
-              SINCE 1924
+              {t("hero.since", locale)}
             </span>
             <h1 className="text-6xl font-bold uppercase tracking-tight leading-none mb-6 font-serif">
-              Woven With <span className="text-turkmen-gold">Soul</span>
+              {t("hero.title_1", locale)} <span className="text-turkmen-gold">{t("hero.title_2", locale)}</span>
             </h1>
             <p className="text-xl max-w-xl mb-10 opacity-90 leading-relaxed font-light">
-              Heritage Textiles celebrates the living heritage of Turkmenistan&apos;s master weavers.
-              Discover carpets, silks, and art that embody the spirit of the desert.
+              {t("hero.subtitle", locale)}
             </p>
             <div className="flex gap-4">
               <Link href="/shop" className="btn btn-primary text-lg px-8 py-4 shadow-xl shadow-turkmen-green/20">
-                Start Shopping
+                {t("hero.shop_now", locale)}
               </Link>
-              <Link href="/shop?category=silks" className="btn btn-secondary text-lg px-8 py-4 bg-white/10 border-white/20 text-white hover:bg-white hover:text-turkmen-green backdrop-blur-md">
-                View Collection
+              <Link href="/collections" className="btn btn-secondary text-lg px-8 py-4 bg-white/10 border-white/20 text-white hover:bg-white hover:text-turkmen-green backdrop-blur-md">
+                {t("hero.view_collection", locale)}
               </Link>
             </div>
           </div>
@@ -76,10 +80,10 @@ export default async function Home() {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-turkmen-green mb-4 font-serif">Curated Masterpieces</h2>
+            <h2 className="text-4xl font-bold text-turkmen-green mb-4 font-serif">{t("home.featured", locale)}</h2>
             <div className="h-1 w-24 bg-turkmen-gold mx-auto"></div>
             <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-              Hand-selected for their exceptional craftsmanship and rarity. These pieces represent the pinnacle of our cooperative&apos;s work.
+              {t("home.featured_desc", locale)}
             </p>
           </div>
 
@@ -114,7 +118,7 @@ export default async function Home() {
                       await addToCart(product.id);
                     }}>
                       <button className="w-full btn bg-white text-turkmen-green hover:bg-turkmen-green hover:text-white border-none shadow-lg py-3 font-semibold">
-                        Add to Cart
+                        {t("home.add_to_cart", locale)}
                       </button>
                     </form>
                   </div>
@@ -145,11 +149,11 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-end mb-12">
             <div>
-              <h2 className="text-3xl font-bold text-turkmen-green mb-2 font-serif">Latest Arrivals</h2>
-              <p className="text-gray-600">Fresh from the looms of Mary and Ashgabat.</p>
+              <h2 className="text-3xl font-bold text-turkmen-green mb-2 font-serif">{t("home.latest", locale)}</h2>
+              <p className="text-gray-600">{t("home.latest_subtitle", locale)}</p>
             </div>
             <Link href="/shop" className="text-turkmen-gold hover:text-turkmen-green font-semibold flex items-center gap-2 group transition-colors">
-              View All
+              {t("common.view_all", locale)}
               <span className="group-hover:translate-x-1 transition-transform">→</span>
             </Link>
           </div>
@@ -190,8 +194,8 @@ export default async function Home() {
                       "use server";
                       await addToCompare(product.id);
                     }}>
-                      <button className="text-gray-400 hover:text-turkmen-green p-1 transition-colors" title="Compare">
-                        <span className="sr-only">Compare</span>
+                      <button className="text-gray-400 hover:text-turkmen-green p-1 transition-colors" title={t("product.compare", locale)}>
+                        <span className="sr-only">{t("product.compare", locale)}</span>
                         ➕
                       </button>
                     </form>
@@ -208,23 +212,23 @@ export default async function Home() {
         <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-center">
           <article className="p-8 bg-white/50 rounded-2xl border border-turkmen-gold/20 hover:bg-white transition-colors">
             <span className="text-4xl mb-4 block">🕌</span>
-            <h3 className="text-xl font-bold text-turkmen-green mb-3">Authentic Origins</h3>
+            <h3 className="text-xl font-bold text-turkmen-green mb-3">{t("home.highlight_origins_title", locale)}</h3>
             <p className="text-gray-600 leading-relaxed">
-              Each textile originates from villages renowned for their unique guls and knotting traditions.
+              {t("home.highlight_origins_desc", locale)}
             </p>
           </article>
           <article className="p-8 bg-white/50 rounded-2xl border border-turkmen-gold/20 hover:bg-white transition-colors">
             <span className="text-4xl mb-4 block">🐪</span>
-            <h3 className="text-xl font-bold text-turkmen-green mb-3">Sustainable Fibers</h3>
+            <h3 className="text-xl font-bold text-turkmen-green mb-3">{t("home.highlight_fibers_title", locale)}</h3>
             <p className="text-gray-600 leading-relaxed">
-              Hand-spun wool, camelhair, and mulberry silk dyed with natural pigments.
+              {t("home.highlight_fibers_desc", locale)}
             </p>
           </article>
           <article className="p-8 bg-white/50 rounded-2xl border border-turkmen-gold/20 hover:bg-white transition-colors">
             <span className="text-4xl mb-4 block">🤝</span>
-            <h3 className="text-xl font-bold text-turkmen-green mb-3">Living Heritage</h3>
+            <h3 className="text-xl font-bold text-turkmen-green mb-3">{t("home.highlight_heritage_title", locale)}</h3>
             <p className="text-gray-600 leading-relaxed">
-              Investing in apprenticeships that ensure timeless crafts adapt to modern tastes.
+              {t("home.highlight_heritage_desc", locale)}
             </p>
           </article>
         </div>

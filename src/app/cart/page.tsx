@@ -1,10 +1,15 @@
 import { checkout, getCart, removeFromCart, updateCartItem } from "@/app/shop/actions";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { getLocaleFromCookie, t } from "@/lib/i18n";
 import Image from "next/image";
 import Link from "next/link";
+import { cookies } from "next/headers";
 
 export default async function CartPage() {
+  const cookieStore = await cookies();
+  const locale = getLocaleFromCookie(cookieStore.get("locale")?.value);
+
   const cart = await getCart();
   const items = cart?.items || [];
   const total = items.reduce(
@@ -19,10 +24,10 @@ export default async function CartPage() {
       {/* Hero Section */}
       <section className="hero-gradient text-white py-10 px-6">
         <div className="max-w-6xl mx-auto">
-          <p className="text-sm uppercase tracking-wide text-turkmen-gold mb-2">Your Selection</p>
-          <h1 className="text-4xl font-bold uppercase tracking-wide mb-2">Shopping Cart</h1>
+          <p className="text-sm uppercase tracking-wide text-turkmen-gold mb-2">{t("cart.your_selection", locale)}</p>
+          <h1 className="text-4xl font-bold uppercase tracking-wide mb-2">{t("cart.shopping_cart", locale)}</h1>
           <p className="opacity-90 max-w-2xl">
-            Review your handpicked textiles before completing your order
+            {t("cart.review_text", locale)}
           </p>
         </div>
       </section>
@@ -31,10 +36,10 @@ export default async function CartPage() {
         {items.length === 0 ? (
           <div className="card text-center py-16">
             <div className="text-6xl mb-4">🧺</div>
-            <p className="text-xl text-gray-600 mb-2 font-bold">Your cart is empty</p>
-            <p className="text-gray-500 mb-6">Discover our curated collection of Turkmen textiles</p>
+            <p className="text-xl text-gray-600 mb-2 font-bold">{t("cart.empty", locale)}</p>
+            <p className="text-gray-500 mb-6">{t("cart.discover_text", locale)}</p>
             <Link href="/shop" className="btn btn-primary inline-block">
-              Browse Collection
+              {t("cart.browse_collection", locale)}
             </Link>
           </div>
         ) : (
@@ -77,7 +82,7 @@ export default async function CartPage() {
 
                         <div className="flex items-center justify-between mt-3">
                           <div className="flex items-center gap-3">
-                            <span className="text-sm text-gray-500">Qty:</span>
+                            <span className="text-sm text-gray-500">{t("cart.qty", locale)}</span>
                             <form className="flex items-center gap-2">
                               <button
                                 formAction={async () => {
@@ -122,7 +127,7 @@ export default async function CartPage() {
                         <button
                           type="submit"
                           className="text-red-500 hover:text-red-700 transition-colors p-2"
-                          title="Remove from cart"
+                          title={t("cart.remove", locale)}
                         >
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -140,22 +145,22 @@ export default async function CartPage() {
               <div className="sticky top-24">
                 <div className="card-static">
                   <div className="border-b border-turkmen-green/10 pb-4 mb-6">
-                    <h2 className="text-2xl font-bold text-turkmen-green">Order Summary</h2>
+                    <h2 className="text-2xl font-bold text-turkmen-green">{t("cart.order_summary", locale)}</h2>
                   </div>
 
                   {/* Order Details */}
                   <div className="space-y-3 mb-6">
                     <div className="flex justify-between text-gray-600">
-                      <span>Items ({items.length})</span>
+                      <span>{t("cart.items_count", locale)} ({items.length})</span>
                       <span className="font-semibold">${total.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between text-gray-600">
-                      <span>Shipping</span>
-                      <span className="text-turkmen-green font-semibold">Calculated at checkout</span>
+                      <span>{t("cart.shipping", locale)}</span>
+                      <span className="text-turkmen-green font-semibold">{t("cart.shipping_calc", locale)}</span>
                     </div>
                     <div className="border-t border-turkmen-green/10 pt-3 mt-3">
                       <div className="flex justify-between items-center">
-                        <span className="text-lg font-bold text-gray-900">Total</span>
+                        <span className="text-lg font-bold text-gray-900">{t("cart.total", locale)}</span>
                         <span className="text-3xl font-bold text-turkmen-green">${total.toFixed(2)}</span>
                       </div>
                     </div>
@@ -165,62 +170,62 @@ export default async function CartPage() {
                   <form action={checkout} className="space-y-4">
                     <div>
                       <label className="block text-sm font-semibold text-turkmen-green mb-2">
-                        Full Name *
+                        {t("cart.full_name", locale)} *
                       </label>
                       <input
                         type="text"
                         name="customerName"
                         required
-                        placeholder="Enter your full name"
+                        placeholder={t("cart.name_placeholder", locale)}
                         className="input-field"
                       />
                     </div>
 
                     <div>
                       <label className="block text-sm font-semibold text-turkmen-green mb-2">
-                        Email Address *
+                        {t("cart.email", locale)} *
                       </label>
                       <input
                         type="email"
                         name="customerEmail"
                         required
-                        placeholder="your@email.com"
+                        placeholder={t("cart.email_placeholder", locale)}
                         className="input-field"
                       />
                     </div>
 
                     <div>
                       <label className="block text-sm font-semibold text-turkmen-green mb-2">
-                        Phone Number
+                        {t("cart.phone", locale)}
                       </label>
                       <input
                         type="tel"
                         name="customerPhone"
-                        placeholder="+993 XX XXX XXX"
+                        placeholder={t("cart.phone_placeholder", locale)}
                         className="input-field"
                       />
                     </div>
 
                     <div>
                       <label className="block text-sm font-semibold text-turkmen-green mb-2">
-                        Delivery Address
+                        {t("cart.address", locale)}
                       </label>
                       <textarea
                         name="address"
                         rows={3}
-                        placeholder="Street address, city, region..."
+                        placeholder={t("cart.address_placeholder", locale)}
                         className="input-field resize-none"
                       />
                     </div>
 
                     <div>
                       <label className="block text-sm font-semibold text-turkmen-green mb-2">
-                        Special Instructions
+                        {t("cart.special_instructions", locale)}
                       </label>
                       <textarea
                         name="notes"
                         rows={2}
-                        placeholder="Any special requests or notes..."
+                        placeholder={t("cart.notes_placeholder", locale)}
                         className="input-field resize-none"
                       />
                     </div>
@@ -229,11 +234,11 @@ export default async function CartPage() {
                       type="submit"
                       className="btn btn-primary w-full py-4 text-base mt-6"
                     >
-                      Complete Order
+                      {t("cart.complete_order", locale)}
                     </button>
 
                     <p className="text-xs text-center text-gray-500 mt-3">
-                      🔒 This is a demonstration. No payment will be processed.
+                      {t("cart.demo_notice", locale)}
                     </p>
                   </form>
                 </div>

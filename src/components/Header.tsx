@@ -30,7 +30,7 @@ export default function Header({ cartCount }: HeaderProps) {
       {/* Top Bar */}
       <div className="bg-black/20 text-center py-2 text-sm border-b border-white/20 px-4">
         <span className="before:content-['✦'] before:text-turkmen-gold before:mr-2 inline-block">
-          Türkmen topragynyň ýüreginden dokalan nusgalyk ýörelgeler
+          {t("header.top_banner")}
         </span>
         <span className="mx-4 hidden md:inline">&bull;</span>
         <span className="hidden md:inline">{t("hero.since")} &middot; Ashgabat, Turkmenistan</span>

@@ -3,8 +3,10 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { useState } from "react";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export default function ContactPage() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,7 +17,6 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
@@ -30,9 +31,9 @@ export default function ContactPage() {
       {/* Hero */}
       <section className="hero-gradient text-white py-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-5xl font-bold uppercase tracking-wide mb-4">Visit the Heritage Atelier</h1>
+          <h1 className="text-5xl font-bold uppercase tracking-wide mb-4">{t("contact.hero_title")}</h1>
           <p className="text-lg opacity-95 max-w-2xl">
-            Plan your journey to our Ashgabat showroom, schedule a design consultation, or inquire about collections. Our hospitality is rooted in Turkmen warmth—çay is always ready.
+            {t("contact.hero_desc")}
           </p>
         </div>
       </section>
@@ -42,43 +43,43 @@ export default function ContactPage() {
           {/* Contact Information */}
           <div className="space-y-8">
             <div className="card">
-              <h2 className="text-2xl font-bold text-turkmen-green mb-4">Showroom Hours</h2>
-              <p className="mb-2"><strong>Address:</strong> 40 Garaşsyzlyk şaýoly, Ashgabat 744000, Turkmenistan</p>
-              <p className="mb-2"><strong>Open:</strong> Monday – Saturday, 09:00 – 18:00 TMT</p>
-              <p className="mb-2"><strong>Closed:</strong> Sundays & national holidays</p>
-              <p className="mb-2"><strong>Phone:</strong> +993 (12) 45 67 89</p>
-              <p><strong>Email:</strong> hello@heritage-textiles.tm</p>
+              <h2 className="text-2xl font-bold text-turkmen-green mb-4">{t("contact.showroom_title")}</h2>
+              <p className="mb-2"><strong>{t("contact.address_label")}</strong> 40 Garaşsyzlyk şaýoly, Ashgabat 744000, Turkmenistan</p>
+              <p className="mb-2"><strong>{t("contact.open_label")}</strong> {t("contact.open_hours")}</p>
+              <p className="mb-2"><strong>{t("contact.closed_label")}</strong> {t("contact.closed_days")}</p>
+              <p className="mb-2"><strong>{t("contact.phone_label")}</strong> +993 (12) 45 67 89</p>
+              <p><strong>{t("contact.email_label")}</strong> hello@heritage-textiles.tm</p>
             </div>
 
             <div className="card">
-              <h2 className="text-2xl font-bold text-turkmen-green mb-4">International Clients</h2>
+              <h2 className="text-2xl font-bold text-turkmen-green mb-4">{t("contact.international_title")}</h2>
               <p>
-                We offer video consultations for collectors, designers, and curators abroad. Textile samples can be shipped worldwide with certification of origin, conservation guidelines, and digital catalogues.
+                {t("contact.international_desc")}
               </p>
             </div>
 
             <div className="card">
-              <h2 className="text-2xl font-bold text-turkmen-green mb-4">Cultural Immersion</h2>
+              <h2 className="text-2xl font-bold text-turkmen-green mb-4">{t("contact.wholesale_title")}</h2>
               <p>
-                Our hospitality coordinators tailor itineraries around weaving demonstrations, dye workshops, and archival tours. Private salons can be reserved for unveiling ceremonies, press briefings, or diplomatic delegations.
+                {t("contact.wholesale_desc")}
               </p>
             </div>
           </div>
 
           {/* Contact Form */}
           <div className="card">
-            <h2 className="text-2xl font-bold text-turkmen-green mb-4">Arrange a Visit</h2>
-            
+            <h2 className="text-2xl font-bold text-turkmen-green mb-4">{t("contact.arrange_title")}</h2>
+
             {submitted ? (
               <div className="bg-turkmen-green/10 border border-turkmen-green p-6 rounded-lg text-center">
-                <h3 className="text-xl font-bold text-turkmen-green mb-2">Thank you!</h3>
-                <p>Your message has been received. We&apos;ll be in touch soon.</p>
+                <h3 className="text-xl font-bold text-turkmen-green mb-2">{t("contact.thank_you")}</h3>
+                <p>{t("contact.thank_you_msg")}</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label htmlFor="name" className="block text-turkmen-green font-semibold mb-2">
-                    Full Name
+                    {t("contact.name_label")}
                   </label>
                   <input
                     type="text"
@@ -86,14 +87,14 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
-                    placeholder="Your name"
+                    placeholder={t("contact.name_placeholder")}
                     className="input-field"
                   />
                 </div>
 
                 <div>
                   <label htmlFor="email" className="block text-turkmen-green font-semibold mb-2">
-                    Email Address
+                    {t("contact.email_field_label")}
                   </label>
                   <input
                     type="email"
@@ -108,7 +109,7 @@ export default function ContactPage() {
 
                 <div>
                   <label htmlFor="interest" className="block text-turkmen-green font-semibold mb-2">
-                    Primary Interest
+                    {t("contact.interest_label")}
                   </label>
                   <select
                     id="interest"
@@ -117,18 +118,18 @@ export default function ContactPage() {
                     required
                     className="input-field"
                   >
-                    <option value="">Select an option</option>
-                    <option value="collection">Private Collection Acquisition</option>
-                    <option value="design">Interior/Design Consultation</option>
-                    <option value="museum">Museum Loan or Exhibition</option>
-                    <option value="education">Educational Visit</option>
-                    <option value="press">Press & Media</option>
+                    <option value="">{t("contact.select_option")}</option>
+                    <option value="collection">{t("contact.option_collection")}</option>
+                    <option value="design">{t("contact.option_design")}</option>
+                    <option value="museum">{t("contact.option_museum")}</option>
+                    <option value="education">{t("contact.option_education")}</option>
+                    <option value="press">{t("contact.option_press")}</option>
                   </select>
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-turkmen-green font-semibold mb-2">
-                    Message
+                    {t("contact.message_label")}
                   </label>
                   <textarea
                     id="message"
@@ -136,13 +137,13 @@ export default function ContactPage() {
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     required
                     rows={5}
-                    placeholder="Tell us about your project or inquiry"
+                    placeholder={t("contact.message_placeholder")}
                     className="input-field"
                   />
                 </div>
 
                 <button type="submit" className="btn btn-primary w-full">
-                  Submit Request
+                  {t("contact.submit")}
                 </button>
               </form>
             )}
