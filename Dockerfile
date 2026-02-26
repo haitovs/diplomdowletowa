@@ -30,6 +30,8 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=4082
 ENV DATABASE_URL="file:/app/prisma/dev.db"
+ENV NEXTAUTH_SECRET="dowletowa-demo-secret-not-for-production"
+ENV NEXTAUTH_URL="http://localhost:4082"
 
 # Copy standalone output
 COPY --from=builder /app/.next/standalone ./

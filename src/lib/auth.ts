@@ -3,8 +3,14 @@ import bcrypt from "bcryptjs";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+const DEMO_FALLBACK_SECRET = "dowletowa-demo-secret-not-for-production";
+const AUTH_SECRET =
+  process.env.NEXTAUTH_SECRET ||
+  process.env.AUTH_SECRET ||
+  DEMO_FALLBACK_SECRET;
+
 export const authOptions: NextAuthOptions = {
-  secret: process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET,
+  secret: AUTH_SECRET,
   providers: [
     CredentialsProvider({
       name: "credentials",
