@@ -236,6 +236,31 @@ const translations: TranslationDict = {
     tk: "Süzgüçleriňizi ýa-da gözlegi üýtgedip görüň",
     ru: "Попробуйте изменить фильтры или поисковый запрос",
   },
+  "shop.prev": {
+    en: "Prev",
+    tk: "Yza",
+    ru: "Назад",
+  },
+  "shop.next": {
+    en: "Next",
+    tk: "Öňe",
+    ru: "Вперёд",
+  },
+  "shop.showing": {
+    en: "Showing",
+    tk: "Görkezilýär",
+    ru: "Показано",
+  },
+  "shop.of": {
+    en: "of",
+    tk: "/",
+    ru: "из",
+  },
+  "shop.products_count": {
+    en: "products",
+    tk: "haryt",
+    ru: "товаров",
+  },
 
   // ─── Product ────────────────────────────
   "product.add_to_cart": {

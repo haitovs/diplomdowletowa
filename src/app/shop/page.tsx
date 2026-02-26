@@ -3,20 +3,24 @@ import Header from "@/components/Header";
 import { prisma } from "@/lib/prisma";
 import { getLocaleFromCookie, t } from "@/lib/i18n";
 import Image from "next/image";
+import Link from "next/link";
 import { cookies } from "next/headers";
 import { addToCompare } from "../compare/actions";
 import { addToCart } from "./actions";
 
+const PRODUCTS_PER_PAGE = 12;
+
 export default async function ShopPage({
   searchParams,
 }: {
-  searchParams: Promise<{ category?: string; store?: string; search?: string; sort?: string }>;
+  searchParams: Promise<{ category?: string; store?: string; search?: string; sort?: string; page?: string }>;
 }) {
   const cookieStore = await cookies();
   const locale = getLocaleFromCookie(cookieStore.get("locale")?.value);
 
   const params = await searchParams;
   const { category, store, search, sort } = params;
+  const currentPage = Math.max(1, parseInt(params.page || "1", 10) || 1);
 
   // Build query
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -38,19 +42,36 @@ export default async function ShopPage({
   if (sort === "price-desc") orderBy = { price: "desc" };
   if (sort === "name") orderBy = { name: "asc" };
 
-  const [products, categories, stores] = await Promise.all([
+  const [products, totalCount, categories, stores] = await Promise.all([
     prisma.product.findMany({
       where,
       orderBy,
+      skip: (currentPage - 1) * PRODUCTS_PER_PAGE,
+      take: PRODUCTS_PER_PAGE,
       include: {
         store: { select: { name: true, slug: true } },
         category: { select: { name: true, slug: true } },
         images: { where: { isPrimary: true }, take: 1 },
       },
     }),
+    prisma.product.count({ where }),
     prisma.category.findMany({ orderBy: { name: "asc" } }),
     prisma.store.findMany({ where: { isActive: true }, orderBy: { name: "asc" } }),
   ]);
+
+  const totalPages = Math.ceil(totalCount / PRODUCTS_PER_PAGE);
+
+  // Build URL preserving current filters
+  function pageUrl(page: number) {
+    const p = new URLSearchParams();
+    if (category) p.set("category", category);
+    if (store) p.set("store", store);
+    if (search) p.set("search", search);
+    if (sort) p.set("sort", sort);
+    if (page > 1) p.set("page", String(page));
+    const qs = p.toString();
+    return `/shop${qs ? `?${qs}` : ""}`;
+  }
 
   return (
     <div className="min-h-screen bg-desert-sand">
@@ -183,6 +204,61 @@ export default async function ShopPage({
             <p className="text-xl text-gray-500 mb-2">{t("shop.no_products", locale)}</p>
             <p className="text-gray-400">{t("shop.adjust_filters", locale)}</p>
           </div>
+        )}
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-center gap-2 mt-10 pt-8 border-t border-turkmen-gold/20">
+            {/* Previous */}
+            {currentPage > 1 ? (
+              <Link
+                href={pageUrl(currentPage - 1)}
+                className="px-4 py-2 rounded-lg border border-turkmen-gold/30 text-turkmen-green hover:bg-turkmen-green hover:text-white transition text-sm font-medium"
+              >
+                &larr; {t("shop.prev", locale)}
+              </Link>
+            ) : (
+              <span className="px-4 py-2 rounded-lg border border-gray-200 text-gray-300 text-sm font-medium cursor-not-allowed">
+                &larr; {t("shop.prev", locale)}
+              </span>
+            )}
+
+            {/* Page Numbers */}
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <Link
+                key={page}
+                href={pageUrl(page)}
+                className={`w-10 h-10 flex items-center justify-center rounded-lg text-sm font-bold transition ${
+                  page === currentPage
+                    ? "bg-turkmen-green text-white shadow-md"
+                    : "border border-turkmen-gold/30 text-turkmen-green hover:bg-turkmen-green/10"
+                }`}
+              >
+                {page}
+              </Link>
+            ))}
+
+            {/* Next */}
+            {currentPage < totalPages ? (
+              <Link
+                href={pageUrl(currentPage + 1)}
+                className="px-4 py-2 rounded-lg border border-turkmen-gold/30 text-turkmen-green hover:bg-turkmen-green hover:text-white transition text-sm font-medium"
+              >
+                {t("shop.next", locale)} &rarr;
+              </Link>
+            ) : (
+              <span className="px-4 py-2 rounded-lg border border-gray-200 text-gray-300 text-sm font-medium cursor-not-allowed">
+                {t("shop.next", locale)} &rarr;
+              </span>
+            )}
+          </div>
+        )}
+
+        {/* Results count */}
+        {totalCount > 0 && (
+          <p className="text-center text-sm text-gray-500 mt-4">
+            {t("shop.showing", locale)} {(currentPage - 1) * PRODUCTS_PER_PAGE + 1}–{Math.min(currentPage * PRODUCTS_PER_PAGE, totalCount)} {t("shop.of", locale)} {totalCount} {t("shop.products_count", locale)}
+          </p>
         )}
       </div>
 
