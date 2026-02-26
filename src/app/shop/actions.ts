@@ -5,6 +5,14 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+function shouldUseSecureCookies() {
+  if (process.env.COOKIE_SECURE === "true") return true;
+  if (process.env.COOKIE_SECURE === "false") return false;
+
+  const publicUrl = process.env.NEXTAUTH_URL || process.env.AUTH_URL || "";
+  return process.env.NODE_ENV === "production" && publicUrl.startsWith("https://");
+}
+
 // Generate session ID
 async function getOrCreateSessionId() {
   const cookieStore = await cookies();
@@ -14,8 +22,9 @@ async function getOrCreateSessionId() {
     sessionId = crypto.randomUUID();
     cookieStore.set("cart_session", sessionId, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: shouldUseSecureCookies(),
       sameSite: "lax",
+      path: "/",
       maxAge: 60 * 60 * 24 * 30, // 30 days
     });
   }
@@ -48,6 +57,7 @@ export async function addToCart(productId: string) {
 
   revalidatePath("/cart");
   revalidatePath("/shop");
+  revalidatePath("/");
 }
 
 export async function updateCartItem(itemId: string, quantity: number) {

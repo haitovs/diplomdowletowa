@@ -4,6 +4,14 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
+function shouldUseSecureCookies() {
+  if (process.env.COOKIE_SECURE === "true") return true;
+  if (process.env.COOKIE_SECURE === "false") return false;
+
+  const publicUrl = process.env.NEXTAUTH_URL || process.env.AUTH_URL || "";
+  return process.env.NODE_ENV === "production" && publicUrl.startsWith("https://");
+}
+
 // Generate session ID
 async function getOrCreateSessionId() {
   const cookieStore = await cookies();
@@ -13,8 +21,9 @@ async function getOrCreateSessionId() {
     sessionId = crypto.randomUUID();
     cookieStore.set("compare_session", sessionId, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: shouldUseSecureCookies(),
       sameSite: "lax",
+      path: "/",
       maxAge: 60 * 60 * 24 * 30, // 30 days
     });
   }

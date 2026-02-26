@@ -11,3 +11,4 @@ services:
       - DATABASE_URL=file:./dev.db
       - NEXTAUTH_SECRET=dowletowa-textiles-secret-key-2025
       - NEXTAUTH_URL=http://localhost:4082
+      - COOKIE_SECURE=false
