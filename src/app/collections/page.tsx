@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { type Locale, getLocaleFromCookie, t } from "@/lib/i18n";
+import Image from "next/image";
 import { cookies } from "next/headers";
 
 const collectionsExtendedCopy: Record<
@@ -312,14 +313,14 @@ export default async function CollectionsPage() {
             </p>
           </div>
           <div className="bg-white rounded-xl p-6 border-2 border-turkmen-gold shadow-soft">
-            <img src="/images/products/product-camel-trapping-1.jpg" alt="Tekke Carpets" className="w-full h-full object-cover rounded-lg" />
+            <Image src="/images/products/product-camel-trapping-1.jpg" alt="Tekke Carpets" width={600} height={400} className="w-full h-auto object-cover rounded-lg" />
           </div>
         </section>
 
         {/* Yomut Carpets & Kilims */}
         <section className="grid md:grid-cols-2 gap-12 items-start">
           <div className="bg-white rounded-xl p-6 border-2 border-turkmen-gold shadow-soft">
-            <img src="/images/products/product-yomut-gol-carpet-1.jpg" alt="Yomut Carpets" className="w-full h-full object-cover rounded-lg" />
+            <Image src="/images/products/product-yomut-gol-carpet-1.jpg" alt="Yomut Carpets" width={600} height={400} className="w-full h-auto object-cover rounded-lg" />
           </div>
           <div>
             <h2 className="text-3xl font-bold text-turkmen-green mb-4">{t("collections.yomut_title", locale)}</h2>
@@ -344,14 +345,14 @@ export default async function CollectionsPage() {
             </p>
           </div>
           <div className="bg-white rounded-xl p-6 border-2 border-turkmen-gold shadow-soft">
-            <img src="/images/products/product-keteni-robe-1.jpg" alt="Keteni Silk" className="w-full h-full object-cover rounded-lg" />
+            <Image src="/images/products/product-keteni-robe-1.jpg" alt="Keteni Silk" width={600} height={400} className="w-full h-auto object-cover rounded-lg" />
           </div>
         </section>
 
         {/* Industrial Textiles */}
         <section className="grid md:grid-cols-2 gap-12 items-start">
           <div className="bg-white rounded-xl p-6 border-2 border-turkmen-gold shadow-soft">
-            <img src="/images/products/product-ersari-elephant-rug-1.jpg" alt="Industrial Textiles" className="w-full h-full object-cover rounded-lg" />
+            <Image src="/images/products/product-ersari-elephant-rug-1.jpg" alt="Industrial Textiles" width={600} height={400} className="w-full h-auto object-cover rounded-lg" />
           </div>
           <div>
             <h2 className="text-3xl font-bold text-turkmen-green mb-4">{t("collections.industrial_title", locale)}</h2>

@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { type Locale, getLocaleFromCookie, t } from "@/lib/i18n";
+import Image from "next/image";
 import { cookies } from "next/headers";
 
 const artisansExtendedCopy: Record<
@@ -399,7 +400,7 @@ export default async function ArtisansPage() {
             </p>
           </div>
           <div className="bg-white rounded-xl p-6 border-2 border-turkmen-gold shadow-soft">
-            <img src="/images/products/product-silk-panel-1.jpg" alt="Modern Textile Technology" className="w-full h-full object-cover rounded-lg" />
+            <Image src="/images/products/product-silk-panel-1.jpg" alt="Modern Textile Technology" width={600} height={400} className="w-full h-auto object-cover rounded-lg" />
           </div>
         </section>
 
