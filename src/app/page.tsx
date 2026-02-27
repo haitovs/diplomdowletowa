@@ -2,6 +2,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { prisma } from "@/lib/prisma";
 import { getLocaleFromCookie, t } from "@/lib/i18n";
+import { localizedField } from "@/lib/localized";
 import Image from "next/image";
 import Link from "next/link";
 import { cookies } from "next/headers";
@@ -93,14 +94,14 @@ export default async function Home() {
                 <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-gray-100 mb-6 shadow-md transition-shadow group-hover:shadow-xl">
                   {product.badge && (
                     <span className="absolute top-4 left-4 z-20 bg-turkmen-gold text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-sm">
-                      {product.badge}
+                      {t(`badge.${product.badge}`, locale) !== `badge.${product.badge}` ? t(`badge.${product.badge}`, locale) : product.badge}
                     </span>
                   )}
                   <Link href={`/shop/${product.slug}`} className="block relative w-full h-full">
                     {product.images[0] ? (
                       <Image
                         src={product.images[0].path}
-                        alt={product.images[0].alt || product.name}
+                        alt={product.images[0].alt || localizedField(product, "name", locale)}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                         sizes="(max-width: 768px) 100vw, 33vw"
@@ -126,16 +127,16 @@ export default async function Home() {
 
                 <div>
                   <div className="flex justify-between items-start mb-2">
-                    <p className="text-sm font-semibold text-turkmen-gold uppercase tracking-wider">{product.category.name}</p>
+                    <p className="text-sm font-semibold text-turkmen-gold uppercase tracking-wider">{localizedField(product.category, "name", locale)}</p>
                     <p className="text-lg font-bold text-gray-900">{product.price} TMT</p>
                   </div>
                   <Link href={`/shop/${product.slug}`}>
                     <h3 className="text-2xl font-serif text-turkmen-green hover:underline decoration-turkmen-gold underline-offset-4 mb-2">
-                      {product.name}
+                      {localizedField(product, "name", locale)}
                     </h3>
                   </Link>
                   <p className="text-gray-500 line-clamp-2 text-sm leading-relaxed">
-                    {product.description}
+                    {localizedField(product, "description", locale)}
                   </p>
                 </div>
               </article>
@@ -166,7 +167,7 @@ export default async function Home() {
                     {product.images[0] ? (
                       <Image
                         src={product.images[0].path}
-                        alt={product.images[0].alt || product.name}
+                        alt={product.images[0].alt || localizedField(product, "name", locale)}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -177,16 +178,16 @@ export default async function Home() {
                   </Link>
                   {product.badge && (
                     <span className="absolute top-2 left-2 px-2 py-1 bg-white/90 backdrop-blur text-xs font-bold text-turkmen-green rounded shadow-sm">
-                      {product.badge}
+                      {t(`badge.${product.badge}`, locale) !== `badge.${product.badge}` ? t(`badge.${product.badge}`, locale) : product.badge}
                     </span>
                   )}
                 </div>
                 <div className="p-4">
                   <Link href={`/store/${product.store?.slug || 'heritage'}`} className="text-xs text-turkmen-gold font-bold uppercase mb-1 block">
-                    {product.store?.name}
+                    {product.store ? localizedField(product.store, "name", locale) : ""}
                   </Link>
                   <Link href={`/shop/${product.slug}`}>
-                    <h3 className="font-bold text-turkmen-green mb-2 truncate group-hover:text-turkmen-gold transition-colors">{product.name}</h3>
+                    <h3 className="font-bold text-turkmen-green mb-2 truncate group-hover:text-turkmen-gold transition-colors">{localizedField(product, "name", locale)}</h3>
                   </Link>
                   <div className="flex items-center justify-between mt-3">
                     <span className="font-bold text-gray-900">{product.price} TMT</span>

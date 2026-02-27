@@ -10,6 +10,8 @@ export default function NewCategoryPage() {
     "use server";
     const name = formData.get("name") as string;
     const description = formData.get("description") as string;
+    const nameEn = formData.get("nameEn") as string;
+    const nameRu = formData.get("nameRu") as string;
     const slug = name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
 
     await prisma.category.create({
@@ -17,6 +19,8 @@ export default function NewCategoryPage() {
         name,
         slug,
         description: description || null,
+        nameEn: nameEn || null,
+        nameRu: nameRu || null,
       },
     });
 
@@ -66,6 +70,21 @@ export default function NewCategoryPage() {
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none resize-none"
               placeholder="Short description of this category..."
             />
+          </div>
+
+          {/* Translations */}
+          <div className="pt-4 border-t">
+            <h3 className="text-lg font-bold text-turkmen-green mb-4">Translations (EN / RU)</h3>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="nameEn" className="block text-sm font-medium text-gray-700 mb-2">Name (EN)</label>
+                <input type="text" id="nameEn" name="nameEn" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="English name" />
+              </div>
+              <div>
+                <label htmlFor="nameRu" className="block text-sm font-medium text-gray-700 mb-2">Name (RU)</label>
+                <input type="text" id="nameRu" name="nameRu" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="Русское название" />
+              </div>
+            </div>
           </div>
 
           <div className="flex gap-4">

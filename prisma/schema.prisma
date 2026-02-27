@@ -32,9 +32,13 @@ enum Role {
 model Store {
   id          String    @id @default(cuid())
   name        String
+  nameEn      String?
+  nameRu      String?
   slug        String    @unique
   origin      String    // City or region
   specialty   String
+  specialtyEn String?
+  specialtyRu String?
   description String?
   logo        String?   // Local image path
   isActive    Boolean   @default(true)
@@ -49,6 +53,8 @@ model Store {
 model Category {
   id          String    @id @default(cuid())
   name        String    @unique
+  nameEn      String?
+  nameRu      String?
   slug        String    @unique
   description String?
   createdAt   DateTime  @default(now())
@@ -57,16 +63,24 @@ model Category {
 
 // Products (textiles, carpets, etc.)
 model Product {
-  id          String         @id @default(cuid())
-  name        String
-  slug        String         @unique
-  description String
-  price       Float
-  unit        String         @default("piece") // piece, m², panel
-  fiber       String         // Material composition
-  technique   String         // Weaving technique
-  dimensions  String?        // Optional size description
-  badge       String?        // Featured, New, Bestseller, etc.
+  id             String         @id @default(cuid())
+  name           String
+  nameEn         String?
+  nameRu         String?
+  slug           String         @unique
+  description    String
+  descriptionEn  String?
+  descriptionRu  String?
+  price          Float
+  unit           String         @default("piece") // piece, m², panel
+  fiber          String         // Material composition
+  fiberEn        String?
+  fiberRu        String?
+  technique      String         // Weaving technique
+  techniqueEn    String?
+  techniqueRu    String?
+  dimensions     String?        // Optional size description
+  badge          String?        // Featured, New, Bestseller, etc.
   stock       Int            @default(0)
   delivery    String?        // Shipping info
   images      ProductImage[]

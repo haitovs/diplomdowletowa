@@ -25,6 +25,10 @@ export async function createStore(formData: FormData) {
   const origin = formData.get("origin") as string;
   const specialty = formData.get("specialty") as string;
   const description = formData.get("description") as string;
+  const nameEn = formData.get("nameEn") as string;
+  const nameRu = formData.get("nameRu") as string;
+  const specialtyEn = formData.get("specialtyEn") as string;
+  const specialtyRu = formData.get("specialtyRu") as string;
 
   await prisma.store.create({
     data: {
@@ -34,6 +38,10 @@ export async function createStore(formData: FormData) {
       specialty,
       description,
       createdById: session.user.id,
+      nameEn: nameEn || null,
+      nameRu: nameRu || null,
+      specialtyEn: specialtyEn || null,
+      specialtyRu: specialtyRu || null,
     },
   });
 
@@ -97,6 +105,14 @@ export async function createProduct(formData: FormData) {
   const delivery = formData.get("delivery") as string;
   const description = formData.get("description") as string;
   const isFeatured = formData.get("isFeatured") === "on";
+  const nameEn = formData.get("nameEn") as string;
+  const nameRu = formData.get("nameRu") as string;
+  const descriptionEn = formData.get("descriptionEn") as string;
+  const descriptionRu = formData.get("descriptionRu") as string;
+  const fiberEn = formData.get("fiberEn") as string;
+  const fiberRu = formData.get("fiberRu") as string;
+  const techniqueEn = formData.get("techniqueEn") as string;
+  const techniqueRu = formData.get("techniqueRu") as string;
 
   const product = await prisma.product.create({
     data: {
@@ -113,6 +129,14 @@ export async function createProduct(formData: FormData) {
       delivery,
       description,
       isFeatured,
+      nameEn: nameEn || null,
+      nameRu: nameRu || null,
+      descriptionEn: descriptionEn || null,
+      descriptionRu: descriptionRu || null,
+      fiberEn: fiberEn || null,
+      fiberRu: fiberRu || null,
+      techniqueEn: techniqueEn || null,
+      techniqueRu: techniqueRu || null,
     },
   });
 
@@ -177,12 +201,16 @@ export async function deleteProduct(id: string) {
 export async function createCategory(formData: FormData) {
   const name = formData.get("name") as string;
   const description = formData.get("description") as string;
+  const nameEn = formData.get("nameEn") as string;
+  const nameRu = formData.get("nameRu") as string;
 
   await prisma.category.create({
     data: {
       name,
       slug: slugify(name),
       description,
+      nameEn: nameEn || null,
+      nameRu: nameRu || null,
     },
   });
 

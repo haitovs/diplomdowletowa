@@ -72,6 +72,31 @@ export default function NewStorePage() {
             />
           </div>
 
+          {/* Translations */}
+          <div className="pt-4 border-t">
+            <h3 className="text-lg font-bold text-turkmen-green mb-4">Translations (EN / RU)</h3>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="nameEn" className="block text-sm font-medium text-gray-700 mb-2">Name (EN)</label>
+                <input type="text" id="nameEn" name="nameEn" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="English name" />
+              </div>
+              <div>
+                <label htmlFor="nameRu" className="block text-sm font-medium text-gray-700 mb-2">Name (RU)</label>
+                <input type="text" id="nameRu" name="nameRu" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="Русское название" />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4 mt-4">
+              <div>
+                <label htmlFor="specialtyEn" className="block text-sm font-medium text-gray-700 mb-2">Specialty (EN)</label>
+                <input type="text" id="specialtyEn" name="specialtyEn" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="English specialty" />
+              </div>
+              <div>
+                <label htmlFor="specialtyRu" className="block text-sm font-medium text-gray-700 mb-2">Specialty (RU)</label>
+                <input type="text" id="specialtyRu" name="specialtyRu" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="Специальность на русском" />
+              </div>
+            </div>
+          </div>
+
           <div className="flex gap-4">
             <SubmitButton label="Create Store" pendingLabel="Creating..." />
             <Link

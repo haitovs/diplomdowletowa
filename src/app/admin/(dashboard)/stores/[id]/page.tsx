@@ -39,6 +39,10 @@ export default async function EditStorePage({
     const specialty = formData.get("specialty") as string;
     const description = formData.get("description") as string;
     const isActive = formData.get("isActive") === "on";
+    const nameEn = formData.get("nameEn") as string;
+    const nameRu = formData.get("nameRu") as string;
+    const specialtyEn = formData.get("specialtyEn") as string;
+    const specialtyRu = formData.get("specialtyRu") as string;
 
     await prisma.store.update({
       where: { id },
@@ -48,6 +52,10 @@ export default async function EditStorePage({
         specialty,
         description: description || null,
         isActive,
+        nameEn: nameEn || null,
+        nameRu: nameRu || null,
+        specialtyEn: specialtyEn || null,
+        specialtyRu: specialtyRu || null,
       },
     });
 
@@ -140,6 +148,31 @@ export default async function EditStorePage({
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none resize-none"
                   placeholder="Detailed description of the store..."
                 />
+              </div>
+
+              {/* Translations */}
+              <div className="pt-4 border-t">
+                <h3 className="text-lg font-bold text-turkmen-green mb-4">Translations (EN / RU)</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="nameEn" className="block text-sm font-medium text-gray-700 mb-2">Name (EN)</label>
+                    <input type="text" id="nameEn" name="nameEn" defaultValue={store.nameEn || ""} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="English name" />
+                  </div>
+                  <div>
+                    <label htmlFor="nameRu" className="block text-sm font-medium text-gray-700 mb-2">Name (RU)</label>
+                    <input type="text" id="nameRu" name="nameRu" defaultValue={store.nameRu || ""} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="Русское название" />
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4 mt-4">
+                  <div>
+                    <label htmlFor="specialtyEn" className="block text-sm font-medium text-gray-700 mb-2">Specialty (EN)</label>
+                    <input type="text" id="specialtyEn" name="specialtyEn" defaultValue={store.specialtyEn || ""} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="English specialty" />
+                  </div>
+                  <div>
+                    <label htmlFor="specialtyRu" className="block text-sm font-medium text-gray-700 mb-2">Specialty (RU)</label>
+                    <input type="text" id="specialtyRu" name="specialtyRu" defaultValue={store.specialtyRu || ""} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="Специальность на русском" />
+                  </div>
+                </div>
               </div>
 
               <div className="flex items-center gap-3">

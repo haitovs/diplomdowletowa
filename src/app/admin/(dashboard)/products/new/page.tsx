@@ -197,6 +197,43 @@ export default async function NewProductPage() {
               />
             </div>
 
+            {/* Translations */}
+            <div className="col-span-2 pt-4 border-t">
+              <h3 className="text-lg font-bold text-turkmen-green mb-4">Translations (EN / RU)</h3>
+            </div>
+            <div>
+              <label htmlFor="nameEn" className="block text-sm font-medium text-gray-700 mb-2">Name (EN)</label>
+              <input type="text" id="nameEn" name="nameEn" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="English name" />
+            </div>
+            <div>
+              <label htmlFor="nameRu" className="block text-sm font-medium text-gray-700 mb-2">Name (RU)</label>
+              <input type="text" id="nameRu" name="nameRu" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="Русское название" />
+            </div>
+            <div>
+              <label htmlFor="descriptionEn" className="block text-sm font-medium text-gray-700 mb-2">Description (EN)</label>
+              <textarea id="descriptionEn" name="descriptionEn" rows={3} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none resize-none" placeholder="English description" />
+            </div>
+            <div>
+              <label htmlFor="descriptionRu" className="block text-sm font-medium text-gray-700 mb-2">Description (RU)</label>
+              <textarea id="descriptionRu" name="descriptionRu" rows={3} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none resize-none" placeholder="Описание на русском" />
+            </div>
+            <div>
+              <label htmlFor="fiberEn" className="block text-sm font-medium text-gray-700 mb-2">Fiber (EN)</label>
+              <input type="text" id="fiberEn" name="fiberEn" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="e.g., Cotton" />
+            </div>
+            <div>
+              <label htmlFor="fiberRu" className="block text-sm font-medium text-gray-700 mb-2">Fiber (RU)</label>
+              <input type="text" id="fiberRu" name="fiberRu" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="напр., Хлопок" />
+            </div>
+            <div>
+              <label htmlFor="techniqueEn" className="block text-sm font-medium text-gray-700 mb-2">Technique (EN)</label>
+              <input type="text" id="techniqueEn" name="techniqueEn" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="e.g., Hand-knotted" />
+            </div>
+            <div>
+              <label htmlFor="techniqueRu" className="block text-sm font-medium text-gray-700 mb-2">Technique (RU)</label>
+              <input type="text" id="techniqueRu" name="techniqueRu" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="напр., Ручное ткачество" />
+            </div>
+
             <div className="col-span-2">
               <label className="flex items-center gap-3">
                 <input type="checkbox" name="isFeatured" className="w-5 h-5 rounded" />

@@ -2,6 +2,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { prisma } from "@/lib/prisma";
 import { getLocaleFromCookie, t } from "@/lib/i18n";
+import { localizedField } from "@/lib/localized";
 import Image from "next/image";
 import Link from "next/link";
 import { cookies } from "next/headers";
@@ -49,8 +50,8 @@ export default async function ShopPage({
       skip: (currentPage - 1) * PRODUCTS_PER_PAGE,
       take: PRODUCTS_PER_PAGE,
       include: {
-        store: { select: { name: true, slug: true } },
-        category: { select: { name: true, slug: true } },
+        store: { select: { name: true, nameEn: true, nameRu: true, slug: true } },
+        category: { select: { name: true, nameEn: true, nameRu: true, slug: true } },
         images: { where: { isPrimary: true }, take: 1 },
       },
     }),
@@ -94,7 +95,7 @@ export default async function ShopPage({
               <select name="category" defaultValue={category || ""} className="input-field py-2">
                 <option value="">{t("shop.all_categories", locale)}</option>
                 {categories.map((cat) => (
-                  <option key={cat.id} value={cat.slug}>{cat.name}</option>
+                  <option key={cat.id} value={cat.slug}>{localizedField(cat, "name", locale)}</option>
                 ))}
               </select>
             </label>
@@ -104,7 +105,7 @@ export default async function ShopPage({
               <select name="store" defaultValue={store || ""} className="input-field py-2">
                 <option value="">{t("shop.all_stores", locale)}</option>
                 {stores.map((s) => (
-                  <option key={s.id} value={s.slug}>{s.name}</option>
+                  <option key={s.id} value={s.slug}>{localizedField(s, "name", locale)}</option>
                 ))}
               </select>
             </label>
@@ -144,7 +145,7 @@ export default async function ShopPage({
                 {product.images[0] ? (
                   <Image
                     src={product.images[0].path}
-                    alt={product.images[0].alt || product.name}
+                    alt={product.images[0].alt || localizedField(product, "name", locale)}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -160,19 +161,19 @@ export default async function ShopPage({
                         ['eksport', 'export', 'ýokary hil', 'premium'].includes(product.badge.toLowerCase()) ? 'bg-blue-500 text-white' :
                           'pill-accent'
                     }`}>
-                    {product.badge}
+                    {t(`badge.${product.badge}`, locale) !== `badge.${product.badge}` ? t(`badge.${product.badge}`, locale) : product.badge}
                   </span>
                 )}
               </div>
               <div className="p-4 flex flex-col flex-1">
-                <p className="text-sm text-gray-500 mb-1">{product.store.name}</p>
-                <h3 className="font-bold text-lg text-turkmen-green mb-1">{product.name}</h3>
-                <p className="text-sm text-gray-600 mb-3">{product.fiber}</p>
+                <p className="text-sm text-gray-500 mb-1">{localizedField(product.store, "name", locale)}</p>
+                <h3 className="font-bold text-lg text-turkmen-green mb-1">{localizedField(product, "name", locale)}</h3>
+                <p className="text-sm text-gray-600 mb-3">{localizedField(product, "fiber", locale)}</p>
                 <div className="mt-auto space-y-2">
                   <div className="flex items-center justify-between">
                     <div>
                       <span className="text-2xl font-bold text-turkmen-green">{Number(product.price).toFixed(0)} TMT</span>
-                      <span className="text-sm text-gray-500 ml-1">/{product.unit}</span>
+                      <span className="text-sm text-gray-500 ml-1">/{t(`unit.${product.unit}`, locale) !== `unit.${product.unit}` ? t(`unit.${product.unit}`, locale) : product.unit}</span>
                     </div>
                   </div>
                   <div className="flex gap-2">

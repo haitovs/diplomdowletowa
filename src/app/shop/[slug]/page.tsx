@@ -2,6 +2,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { prisma } from "@/lib/prisma";
 import { getLocaleFromCookie, t } from "@/lib/i18n";
+import { localizedField } from "@/lib/localized";
 import Image from "next/image";
 import Link from "next/link";
 import { cookies } from "next/headers";
@@ -67,9 +68,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           <span>/</span>
           <Link href="/shop" className="hover:text-turkmen-green">{t("product.shop", locale)}</Link>
           <span>/</span>
-          <Link href={`/shop?category=${product.category.slug}`} className="hover:text-turkmen-green">{product.category.name}</Link>
+          <Link href={`/shop?category=${product.category.slug}`} className="hover:text-turkmen-green">{localizedField(product.category, "name", locale)}</Link>
           <span>/</span>
-          <span className="text-turkmen-green font-medium">{product.name}</span>
+          <span className="text-turkmen-green font-medium">{localizedField(product, "name", locale)}</span>
         </div>
       </div>
 
@@ -86,14 +87,14 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                   ['eksport', 'export', 'ýokary hil', 'premium'].includes(product.badge.toLowerCase()) ? 'bg-blue-500 text-white' :
                   'pill-accent'
                 }`}>
-                  {product.badge}
+                  {t(`badge.${product.badge}`, locale) !== `badge.${product.badge}` ? t(`badge.${product.badge}`, locale) : product.badge}
                 </span>
               )}
 
               {mainImage ? (
                 <Image
                   src={mainImage}
-                  alt={product.name}
+                  alt={localizedField(product, "name", locale)}
                   fill
                   className="object-cover transition duration-700 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -109,7 +110,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               <div className="flex gap-4 overflow-x-auto pb-2">
                 {product.images.map((img) => (
                   <div key={img.id} className="w-24 h-24 flex-shrink-0 bg-white rounded-lg border border-turkmen-gold/20 overflow-hidden cursor-pointer hover:border-turkmen-gold transition relative">
-                    <Image src={img.path} alt={img.alt || product.name} fill className="object-cover" sizes="96px" />
+                    <Image src={img.path} alt={img.alt || localizedField(product, "name", locale)} fill className="object-cover" sizes="96px" />
                   </div>
                 ))}
               </div>
@@ -120,14 +121,14 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           <div>
             <div className="mb-2">
               <Link href={`/store/${product.store.slug}`} className="text-sm font-bold tracking-wide text-turkmen-gold uppercase hover:underline">
-                {product.store.name}
+                {localizedField(product.store, "name", locale)}
               </Link>
             </div>
-            <h1 className="text-4xl font-bold text-turkmen-green mb-4 leading-tight">{product.name}</h1>
+            <h1 className="text-4xl font-bold text-turkmen-green mb-4 leading-tight">{localizedField(product, "name", locale)}</h1>
 
             <div className="flex items-baseline gap-2 mb-6">
               <span className="text-3xl font-bold text-gray-900">{product.price.toFixed(0)} TMT</span>
-              <span className="text-gray-500">/ {product.unit}</span>
+              <span className="text-gray-500">/ {t(`unit.${product.unit}`, locale) !== `unit.${product.unit}` ? t(`unit.${product.unit}`, locale) : product.unit}</span>
             </div>
 
             <div className="flex gap-4 mb-8">
@@ -150,7 +151,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             </div>
 
             <div className="prose prose-stone max-w-none mb-8 text-gray-600">
-              <p>{product.description}</p>
+              <p>{localizedField(product, "description", locale)}</p>
             </div>
 
             <div className="bg-white rounded-xl border border-turkmen-gold/20 overflow-hidden">
@@ -158,15 +159,15 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 <tbody>
                   <tr className="border-b border-gray-100">
                     <td className="py-3 px-4 font-semibold text-gray-500 bg-gray-50 w-1/3">{t("product.type", locale)}</td>
-                    <td className="py-3 px-4 text-gray-800">{product.category.name}</td>
+                    <td className="py-3 px-4 text-gray-800">{localizedField(product.category, "name", locale)}</td>
                   </tr>
                   <tr className="border-b border-gray-100">
                     <td className="py-3 px-4 font-semibold text-gray-500 bg-gray-50">{t("product.fiber", locale)}</td>
-                    <td className="py-3 px-4 text-gray-800">{product.fiber}</td>
+                    <td className="py-3 px-4 text-gray-800">{localizedField(product, "fiber", locale)}</td>
                   </tr>
                   <tr className="border-b border-gray-100">
                     <td className="py-3 px-4 font-semibold text-gray-500 bg-gray-50">{t("product.technique", locale)}</td>
-                    <td className="py-3 px-4 text-gray-800">{product.technique}</td>
+                    <td className="py-3 px-4 text-gray-800">{localizedField(product, "technique", locale)}</td>
                   </tr>
                   {product.dimensions && (
                     <tr className="border-b border-gray-100">
@@ -217,11 +218,11 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                     </div>
                   </Link>
                   <div className="p-4 flex flex-col flex-1">
-                    <p className="text-sm text-gray-500 mb-1">{related.store.name}</p>
+                    <p className="text-sm text-gray-500 mb-1">{localizedField(related.store, "name", locale)}</p>
                     <Link href={`/shop/${related.slug}`} className="block">
-                      <h3 className="font-bold text-lg text-turkmen-green mb-1 group-hover:text-turkmen-gold transition">{related.name}</h3>
+                      <h3 className="font-bold text-lg text-turkmen-green mb-1 group-hover:text-turkmen-gold transition">{localizedField(related, "name", locale)}</h3>
                     </Link>
-                    <p className="text-sm text-gray-600 mb-3 line-clamp-1">{related.fiber}</p>
+                    <p className="text-sm text-gray-600 mb-3 line-clamp-1">{localizedField(related, "fiber", locale)}</p>
                     <div className="mt-auto flex items-center justify-between">
                       <span className="text-2xl font-bold text-turkmen-green">{Number(related.price).toFixed(0)} TMT</span>
                       <Link href={`/shop/${related.slug}`} className="text-turkmen-gold hover:underline text-sm font-semibold">

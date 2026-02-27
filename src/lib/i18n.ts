@@ -1217,6 +1217,80 @@ const translations: TranslationDict = {
     ru: "Вход Администратора",
   },
 
+  // ─── Units ─────────────────────────────
+  "unit.piece": {
+    en: "piece",
+    tk: "bölek",
+    ru: "шт.",
+  },
+  "unit.m²": {
+    en: "m²",
+    tk: "m²",
+    ru: "м²",
+  },
+  "unit.panel": {
+    en: "panel",
+    tk: "panel",
+    ru: "панель",
+  },
+  "unit.metr": {
+    en: "meter",
+    tk: "metr",
+    ru: "метр",
+  },
+  "unit.bukja": {
+    en: "bundle",
+    tk: "bukja",
+    ru: "связка",
+  },
+
+  // ─── Badges ───────────────────────────────
+  "badge.Täze": {
+    en: "New",
+    tk: "Täze",
+    ru: "Новинка",
+  },
+  "badge.Iň köp satylýan": {
+    en: "Bestseller",
+    tk: "Iň köp satylýan",
+    ru: "Бестселлер",
+  },
+  "badge.Klassik": {
+    en: "Classic",
+    tk: "Klassik",
+    ru: "Классика",
+  },
+  "badge.Miras": {
+    en: "Heritage",
+    tk: "Miras",
+    ru: "Наследие",
+  },
+  "badge.Ýokary hil": {
+    en: "Premium",
+    tk: "Ýokary hil",
+    ru: "Премиум",
+  },
+  "badge.Eksport": {
+    en: "Export",
+    tk: "Eksport",
+    ru: "Экспорт",
+  },
+  "badge.Meşhur": {
+    en: "Popular",
+    tk: "Meşhur",
+    ru: "Популярный",
+  },
+  "badge.Sport": {
+    en: "Sport",
+    tk: "Sport",
+    ru: "Спорт",
+  },
+  "badge.Rahat": {
+    en: "Comfort",
+    tk: "Rahat",
+    ru: "Комфорт",
+  },
+
   // ─── Common ─────────────────────────────
   "common.language": {
     en: "Language",

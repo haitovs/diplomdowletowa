@@ -1,8 +1,10 @@
 import { EmptyState } from "@/components/admin/EmptyState";
 import { ProductIcon } from "@/components/admin/icons";
 import { ProductTableRow } from "@/components/admin/ProductTableRow";
+import { SubmitButton } from "@/components/admin/SubmitButton";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import { translateAllProducts } from "./translate-action";
 
 export default async function ProductsPage() {
   const products = await prisma.product.findMany({
@@ -21,12 +23,20 @@ export default async function ProductsPage() {
           <h1 className="text-3xl font-bold text-turkmen-green">Products</h1>
           <p className="text-gray-600">Manage textiles across all stores</p>
         </div>
-        <Link
-          href="/admin/products/new"
-          className="btn btn-primary"
-        >
-          + Add Product
-        </Link>
+        <div className="flex gap-3">
+          <form action={async () => {
+            "use server";
+            await translateAllProducts();
+          }}>
+            <SubmitButton label="Translate All" pendingLabel="Translating..." />
+          </form>
+          <Link
+            href="/admin/products/new"
+            className="btn btn-primary"
+          >
+            + Add Product
+          </Link>
+        </div>
       </div>
 
       <p className="text-xs text-gray-400 mb-3">Drag &amp; drop an image onto any row to set it as the product thumbnail</p>

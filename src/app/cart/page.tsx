@@ -2,6 +2,7 @@ import { checkout, getCart, removeFromCart, updateCartItem } from "@/app/shop/ac
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { getLocaleFromCookie, t } from "@/lib/i18n";
+import { localizedField } from "@/lib/localized";
 import Image from "next/image";
 import Link from "next/link";
 import { cookies } from "next/headers";
@@ -58,7 +59,7 @@ export default async function CartPage() {
                         {primaryImage ? (
                           <Image
                             src={primaryImage.path}
-                            alt={primaryImage.alt ?? item.product.name}
+                            alt={primaryImage.alt ?? localizedField(item.product, "name", locale)}
                             fill
                             className="object-cover"
                             sizes="128px"
@@ -74,10 +75,10 @@ export default async function CartPage() {
                       <div className="flex-1 flex flex-col justify-between">
                         <div>
                           <h3 className="font-bold text-lg text-turkmen-green mb-1">
-                            {item.product.name}
+                            {localizedField(item.product, "name", locale)}
                           </h3>
-                          <p className="text-sm text-gray-500 mb-2">{item.product.store.name}</p>
-                          <p className="text-xs text-gray-600">{item.product.fiber}</p>
+                          <p className="text-sm text-gray-500 mb-2">{localizedField(item.product.store, "name", locale)}</p>
+                          <p className="text-xs text-gray-600">{localizedField(item.product, "fiber", locale)}</p>
                         </div>
 
                         <div className="flex items-center justify-between mt-3">

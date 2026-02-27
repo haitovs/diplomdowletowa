@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { getLocaleFromCookie, t } from "@/lib/i18n";
+import { localizedField } from "@/lib/localized";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { clearCompare, getCompare, removeFromCompare } from "./actions";
@@ -66,9 +67,9 @@ export default async function ComparePage() {
                         <span className="text-6xl opacity-30">🧶</span>
                       </div>
                       <div className="p-4">
-                        <p className="text-sm text-gray-500 mb-1">{product.store.name}</p>
-                        <h3 className="font-bold text-lg text-turkmen-green mb-2">{product.name}</h3>
-                        <p className="text-sm text-gray-600 mb-3">{product.fiber}</p>
+                        <p className="text-sm text-gray-500 mb-1">{localizedField(product.store, "name", locale)}</p>
+                        <h3 className="font-bold text-lg text-turkmen-green mb-2">{localizedField(product, "name", locale)}</h3>
+                        <p className="text-sm text-gray-600 mb-3">{localizedField(product, "fiber", locale)}</p>
                         <div className="flex items-center justify-between">
                           <span className="text-2xl font-bold text-turkmen-green">{Number(product.price).toFixed(0)} TMT</span>
                           <form action={async () => {
@@ -103,10 +104,10 @@ export default async function ComparePage() {
                       const isBest = Number(product.price) === bestPrice;
                       return (
                         <tr key={product.id} className={`border-t ${isBest ? 'bg-turkmen-green/10 border-turkmen-green/30' : ''}`}>
-                          <td className="px-4 py-3">{product.name}</td>
+                          <td className="px-4 py-3">{localizedField(product, "name", locale)}</td>
                           <td className="px-4 py-3 font-bold text-turkmen-green">{Number(product.price).toFixed(0)} TMT</td>
-                          <td className="px-4 py-3 text-gray-600">{product.fiber}</td>
-                          <td className="px-4 py-3 text-gray-600">{product.technique}</td>
+                          <td className="px-4 py-3 text-gray-600">{localizedField(product, "fiber", locale)}</td>
+                          <td className="px-4 py-3 text-gray-600">{localizedField(product, "technique", locale)}</td>
                         </tr>
                       );
                     })}

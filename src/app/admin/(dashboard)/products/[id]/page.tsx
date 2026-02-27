@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { translateProduct } from "../translate-action";
 
 const badgeOptions = [
   "Täze",
@@ -65,6 +66,14 @@ export default async function EditProductPage({
     const badge = formData.get("badge") as string;
     const isActive = formData.get("isActive") === "on";
     const isFeatured = formData.get("isFeatured") === "on";
+    const nameEn = formData.get("nameEn") as string;
+    const nameRu = formData.get("nameRu") as string;
+    const descriptionEn = formData.get("descriptionEn") as string;
+    const descriptionRu = formData.get("descriptionRu") as string;
+    const fiberEn = formData.get("fiberEn") as string;
+    const fiberRu = formData.get("fiberRu") as string;
+    const techniqueEn = formData.get("techniqueEn") as string;
+    const techniqueRu = formData.get("techniqueRu") as string;
 
     await prisma.product.update({
       where: { id },
@@ -82,6 +91,14 @@ export default async function EditProductPage({
         badge: badge || null,
         isActive,
         isFeatured,
+        nameEn: nameEn || null,
+        nameRu: nameRu || null,
+        descriptionEn: descriptionEn || null,
+        descriptionRu: descriptionRu || null,
+        fiberEn: fiberEn || null,
+        fiberRu: fiberRu || null,
+        techniqueEn: techniqueEn || null,
+        techniqueRu: techniqueRu || null,
       },
     });
 
@@ -94,6 +111,13 @@ export default async function EditProductPage({
     await prisma.product.delete({ where: { id } });
     revalidatePath("/admin/products");
     redirect("/admin/products");
+  }
+
+  async function autoTranslate() {
+    "use server";
+    await translateProduct(id);
+    revalidatePath(`/admin/products/${id}`);
+    redirect(`/admin/products/${id}`);
   }
 
   return (
@@ -245,6 +269,51 @@ export default async function EditProductPage({
                 />
               </div>
 
+              {/* Translations */}
+              <div className="pt-4 border-t">
+                <h3 className="text-lg font-bold text-turkmen-green mb-4">Translations (EN / RU)</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="nameEn" className="block text-sm font-medium text-gray-700 mb-2">Name (EN)</label>
+                    <input type="text" id="nameEn" name="nameEn" defaultValue={product.nameEn || ""} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="English name" />
+                  </div>
+                  <div>
+                    <label htmlFor="nameRu" className="block text-sm font-medium text-gray-700 mb-2">Name (RU)</label>
+                    <input type="text" id="nameRu" name="nameRu" defaultValue={product.nameRu || ""} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="Русское название" />
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4 mt-4">
+                  <div>
+                    <label htmlFor="descriptionEn" className="block text-sm font-medium text-gray-700 mb-2">Description (EN)</label>
+                    <textarea id="descriptionEn" name="descriptionEn" rows={3} defaultValue={product.descriptionEn || ""} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none resize-none" placeholder="English description" />
+                  </div>
+                  <div>
+                    <label htmlFor="descriptionRu" className="block text-sm font-medium text-gray-700 mb-2">Description (RU)</label>
+                    <textarea id="descriptionRu" name="descriptionRu" rows={3} defaultValue={product.descriptionRu || ""} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none resize-none" placeholder="Описание на русском" />
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4 mt-4">
+                  <div>
+                    <label htmlFor="fiberEn" className="block text-sm font-medium text-gray-700 mb-2">Fiber (EN)</label>
+                    <input type="text" id="fiberEn" name="fiberEn" defaultValue={product.fiberEn || ""} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="e.g., Cotton" />
+                  </div>
+                  <div>
+                    <label htmlFor="fiberRu" className="block text-sm font-medium text-gray-700 mb-2">Fiber (RU)</label>
+                    <input type="text" id="fiberRu" name="fiberRu" defaultValue={product.fiberRu || ""} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="напр., Хлопок" />
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4 mt-4">
+                  <div>
+                    <label htmlFor="techniqueEn" className="block text-sm font-medium text-gray-700 mb-2">Technique (EN)</label>
+                    <input type="text" id="techniqueEn" name="techniqueEn" defaultValue={product.techniqueEn || ""} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="e.g., Hand-knotted" />
+                  </div>
+                  <div>
+                    <label htmlFor="techniqueRu" className="block text-sm font-medium text-gray-700 mb-2">Technique (RU)</label>
+                    <input type="text" id="techniqueRu" name="techniqueRu" defaultValue={product.techniqueRu || ""} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none" placeholder="напр., Ручное ткачество" />
+                  </div>
+                </div>
+              </div>
+
               {/* Category & Store */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -377,6 +446,17 @@ export default async function EditProductPage({
                 </dd>
               </div>
             </dl>
+          </div>
+
+          {/* Auto-translate */}
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+            <h3 className="font-bold text-blue-900 mb-2">Auto-Translate</h3>
+            <p className="text-sm text-blue-700 mb-4">
+              Fill EN/RU translations from the built-in textile dictionary.
+            </p>
+            <form action={autoTranslate}>
+              <SubmitButton label="Auto-Translate" pendingLabel="Translating..." />
+            </form>
           </div>
 
           {/* Delete Danger Zone */}
