@@ -1,8 +1,23 @@
+import { DeleteButton } from "@/components/admin/DeleteButton";
 import { ImageUpload } from "@/components/admin/ImageUpload";
+import { ArrowLeftIcon } from "@/components/admin/icons";
+import { SubmitButton } from "@/components/admin/SubmitButton";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+
+const badgeOptions = [
+  "Täze",
+  "Iň köp satylýan",
+  "Klassik",
+  "Miras",
+  "Ýokary hil",
+  "Eksport",
+  "Meşhur",
+  "Sport",
+  "Rahat",
+];
 
 export default async function EditProductPage({
   params,
@@ -10,7 +25,7 @@ export default async function EditProductPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  
+
   const [product, stores, categories] = await Promise.all([
     prisma.product.findUnique({
       where: { id },
@@ -86,9 +101,10 @@ export default async function EditProductPage({
       <div className="mb-8">
         <Link
           href="/admin/products"
-          className="text-turkmen-green hover:text-turkmen-gold mb-4 inline-block transition"
+          className="inline-flex items-center gap-1.5 text-turkmen-green hover:text-turkmen-gold mb-4 transition"
         >
-          ← Back to Products
+          <ArrowLeftIcon className="w-4 h-4" />
+          Back to Products
         </Link>
         <h1 className="text-3xl font-bold text-turkmen-green">Edit Product: {product.name}</h1>
         <p className="text-gray-600">Manage product details and inventory</p>
@@ -132,7 +148,7 @@ export default async function EditProductPage({
               <div className="grid grid-cols-3 gap-4">
                 <div>
                   <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-2">
-                    Price ($) *
+                    Price (TMT) *
                   </label>
                   <input
                     type="number"
@@ -276,10 +292,9 @@ export default async function EditProductPage({
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none"
                 >
                   <option value="">None</option>
-                  <option value="New">New</option>
-                  <option value="Bestseller">Bestseller</option>
-                  <option value="Limited">Limited Edition</option>
-                  <option value="Gallery">Gallery</option>
+                  {badgeOptions.map((b) => (
+                    <option key={b} value={b}>{b}</option>
+                  ))}
                 </select>
               </div>
 
@@ -313,9 +328,7 @@ export default async function EditProductPage({
               </div>
 
               <div className="flex gap-4 pt-4 border-t">
-                <button type="submit" className="btn btn-primary">
-                  Update Product
-                </button>
+                <SubmitButton label="Update Product" pendingLabel="Updating..." />
                 <Link href="/admin/products" className="btn btn-ghost">
                   Cancel
                 </Link>
@@ -371,14 +384,11 @@ export default async function EditProductPage({
             <p className="text-sm text-red-700 mb-4">
               Deleting this product is permanent and cannot be undone.
             </p>
-            <form action={deleteProduct}>
-              <button
-                type="submit"
-                className="w-full bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition font-medium"
-              >
-                Delete Product
-              </button>
-            </form>
+            <DeleteButton
+              action={deleteProduct}
+              entityName="Product"
+              description="This will permanently delete the product and all its images. This cannot be undone."
+            />
           </div>
         </div>
       </div>

@@ -1,14 +1,25 @@
+import { EmptyState } from "@/components/admin/EmptyState";
+import {
+  CategoryIcon,
+  OrderIcon,
+  PlusIcon,
+  ProductIcon,
+  RevenueIcon,
+  StoreIcon,
+} from "@/components/admin/icons";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 
 export default async function AdminDashboard() {
-  // Fetch stats
-  const [storeCount, productCount, orderCount, categoryCount] = await Promise.all([
+  const [storeCount, productCount, orderCount, categoryCount, revenueAgg] = await Promise.all([
     prisma.store.count(),
     prisma.product.count(),
     prisma.order.count(),
     prisma.category.count(),
+    prisma.order.aggregate({ _sum: { total: true } }),
   ]);
+
+  const revenue = Number(revenueAgg._sum.total ?? 0);
 
   const recentOrders = await prisma.order.findMany({
     take: 5,
@@ -17,10 +28,11 @@ export default async function AdminDashboard() {
   });
 
   const stats = [
-    { label: "Stores", value: storeCount, icon: "🏪", href: "/admin/stores" },
-    { label: "Products", value: productCount, icon: "🧶", href: "/admin/products" },
-    { label: "Categories", value: categoryCount, icon: "📁", href: "/admin/categories" },
-    { label: "Orders", value: orderCount, icon: "📦", href: "/admin/orders" },
+    { label: "Stores", value: storeCount, icon: StoreIcon, href: "/admin/stores", color: "bg-emerald-100 text-emerald-600" },
+    { label: "Products", value: productCount, icon: ProductIcon, href: "/admin/products", color: "bg-blue-100 text-blue-600" },
+    { label: "Categories", value: categoryCount, icon: CategoryIcon, href: "/admin/categories", color: "bg-amber-100 text-amber-600" },
+    { label: "Orders", value: orderCount, icon: OrderIcon, href: "/admin/orders", color: "bg-purple-100 text-purple-600" },
+    { label: "Revenue", value: `${revenue.toFixed(0)} TMT`, icon: RevenueIcon, href: "/admin/orders", color: "bg-turkmen-gold/20 text-turkmen-green" },
   ];
 
   return (
@@ -31,22 +43,27 @@ export default async function AdminDashboard() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {stats.map((stat) => (
-          <Link
-            key={stat.label}
-            href={stat.href}
-            className="bg-white p-6 rounded-xl border-l-4 border-turkmen-gold shadow-soft hover:shadow-lg transition-all duration-300 group"
-          >
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-500 text-sm uppercase tracking-wider">{stat.label}</p>
-                <p className="text-3xl font-bold text-turkmen-green mt-2">{stat.value}</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+        {stats.map((stat) => {
+          const Icon = stat.icon;
+          return (
+            <Link
+              key={stat.label}
+              href={stat.href}
+              className="bg-white p-6 rounded-xl border-l-4 border-turkmen-gold shadow-soft hover:shadow-lg transition-all duration-300 group"
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-gray-500 text-sm uppercase tracking-wider">{stat.label}</p>
+                  <p className="text-2xl font-bold text-turkmen-green mt-2">{stat.value}</p>
+                </div>
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${stat.color} group-hover:scale-110 transition-transform`}>
+                  <Icon className="w-6 h-6" />
+                </div>
               </div>
-              <span className="text-5xl opacity-20 group-hover:opacity-30 transition-opacity">{stat.icon}</span>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          );
+        })}
       </div>
 
       {/* Quick Actions */}
@@ -58,21 +75,21 @@ export default async function AdminDashboard() {
               href="/admin/stores/new"
               className="btn btn-secondary w-full text-left flex items-center gap-2"
             >
-              <span>➕</span>
+              <PlusIcon className="w-4 h-4" />
               <span>Add New Store</span>
             </Link>
             <Link
               href="/admin/products/new"
               className="btn btn-secondary w-full text-left flex items-center gap-2"
             >
-              <span>➕</span>
+              <PlusIcon className="w-4 h-4" />
               <span>Add New Product</span>
             </Link>
             <Link
               href="/admin/categories/new"
               className="btn btn-secondary w-full text-left flex items-center gap-2"
             >
-              <span>➕</span>
+              <PlusIcon className="w-4 h-4" />
               <span>Add New Category</span>
             </Link>
           </div>
@@ -81,7 +98,11 @@ export default async function AdminDashboard() {
         <div className="bg-white p-6 rounded-xl shadow-soft border-t-4 border-turkmen-green">
           <h2 className="text-xl font-bold text-turkmen-green mb-4">Recent Orders</h2>
           {recentOrders.length === 0 ? (
-            <p className="text-gray-500">No orders yet</p>
+            <EmptyState
+              icon={<OrderIcon className="w-8 h-8" />}
+              title="No orders yet"
+              description="Orders will appear here once customers start shopping."
+            />
           ) : (
             <ul className="space-y-3">
               {recentOrders.map((order) => (
@@ -91,7 +112,7 @@ export default async function AdminDashboard() {
                     <p className="text-sm text-gray-500">{order.customerName}</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-medium text-turkmen-green">${Number(order.total).toFixed(2)}</p>
+                    <p className="font-medium text-turkmen-green">{Number(order.total).toFixed(2)} TMT</p>
                     <p className={`text-xs px-2 py-1 rounded ${
                       order.status === "DELIVERED" ? "bg-green-100 text-green-600" :
                       order.status === "PENDING" ? "bg-yellow-100 text-yellow-600" :

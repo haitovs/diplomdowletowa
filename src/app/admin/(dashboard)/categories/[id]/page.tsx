@@ -1,3 +1,6 @@
+import { DeleteButton } from "@/components/admin/DeleteButton";
+import { ArrowLeftIcon } from "@/components/admin/icons";
+import { SubmitButton } from "@/components/admin/SubmitButton";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
@@ -60,9 +63,10 @@ export default async function EditCategoryPage({
       <div className="mb-8">
         <Link
           href="/admin/categories"
-          className="text-turkmen-green hover:text-turkmen-gold mb-4 inline-block transition"
+          className="inline-flex items-center gap-1.5 text-turkmen-green hover:text-turkmen-gold mb-4 transition"
         >
-          ← Back to Categories
+          <ArrowLeftIcon className="w-4 h-4" />
+          Back to Categories
         </Link>
         <h1 className="text-3xl font-bold text-turkmen-green">Edit Category: {category.name}</h1>
         <p className="text-gray-600">Manage category details</p>
@@ -104,9 +108,7 @@ export default async function EditCategoryPage({
               </div>
 
               <div className="flex gap-4 pt-4 border-t">
-                <button type="submit" className="btn btn-primary">
-                  Update Category
-                </button>
+                <SubmitButton label="Update Category" pendingLabel="Updating..." />
                 <Link href="/admin/categories" className="btn btn-ghost">
                   Cancel
                 </Link>
@@ -143,14 +145,11 @@ export default async function EditCategoryPage({
             <p className="text-sm text-red-700 mb-4">
               Deleting this category will affect {category._count.products} products. This action cannot be undone.
             </p>
-            <form action={deleteCategory}>
-              <button
-                type="submit"
-                className="w-full bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition font-medium"
-              >
-                Delete Category
-              </button>
-            </form>
+            <DeleteButton
+              action={deleteCategory}
+              entityName="Category"
+              description={`This will permanently delete the category. ${category._count.products} products will be affected.`}
+            />
           </div>
         </div>
       </div>

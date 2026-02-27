@@ -1,3 +1,5 @@
+import { EmptyState } from "@/components/admin/EmptyState";
+import { OrderIcon } from "@/components/admin/icons";
 import { prisma } from "@/lib/prisma";
 
 export default async function OrdersPage() {
@@ -24,7 +26,7 @@ export default async function OrdersPage() {
 
       <div className="bg-white rounded-xl shadow-sm overflow-hidden">
         <table className="w-full">
-          <thead className="bg-gray-50">
+          <thead className="bg-turkmen-green/5">
             <tr>
               <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Order</th>
               <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Customer</th>
@@ -43,7 +45,7 @@ export default async function OrdersPage() {
                   <p className="text-sm text-gray-500">{order.customerEmail}</p>
                 </td>
                 <td className="px-6 py-4">{order.items.length} items</td>
-                <td className="px-6 py-4 font-medium">${Number(order.total).toFixed(2)}</td>
+                <td className="px-6 py-4 font-medium">{Number(order.total).toFixed(2)} TMT</td>
                 <td className="px-6 py-4">
                   <span className={`px-3 py-1 rounded-full text-sm ${statusColors[order.status]}`}>
                     {order.status}
@@ -58,9 +60,11 @@ export default async function OrdersPage() {
         </table>
 
         {orders.length === 0 && (
-          <div className="text-center py-12 text-gray-500">
-            <p>No orders yet. Orders will appear here once customers start shopping.</p>
-          </div>
+          <EmptyState
+            icon={<OrderIcon className="w-8 h-8" />}
+            title="No orders yet"
+            description="Orders will appear here once customers start shopping."
+          />
         )}
       </div>
     </div>

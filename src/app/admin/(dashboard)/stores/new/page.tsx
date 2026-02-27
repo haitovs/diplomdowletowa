@@ -1,12 +1,15 @@
 import { createStore } from "@/app/admin/actions";
+import { ArrowLeftIcon } from "@/components/admin/icons";
+import { SubmitButton } from "@/components/admin/SubmitButton";
 import Link from "next/link";
 
 export default function NewStorePage() {
   return (
     <div>
       <div className="mb-8">
-        <Link href="/admin/stores" className="text-turkmen-green hover:text-turkmen-gold mb-4 inline-block transition">
-          ← Back to Stores
+        <Link href="/admin/stores" className="inline-flex items-center gap-1.5 text-turkmen-green hover:text-turkmen-gold mb-4 transition">
+          <ArrowLeftIcon className="w-4 h-4" />
+          Back to Stores
         </Link>
         <h1 className="text-3xl font-bold text-turkmen-green">Add New Store</h1>
         <p className="text-gray-600">Create a new partner company</p>
@@ -70,12 +73,7 @@ export default function NewStorePage() {
           </div>
 
           <div className="flex gap-4">
-            <button
-              type="submit"
-              className="btn btn-primary"
-            >
-              Create Store
-            </button>
+            <SubmitButton label="Create Store" pendingLabel="Creating..." />
             <Link
               href="/admin/stores"
               className="btn btn-ghost"

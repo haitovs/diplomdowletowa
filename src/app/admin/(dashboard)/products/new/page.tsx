@@ -1,6 +1,20 @@
 import { createProduct } from "@/app/admin/actions";
+import { ArrowLeftIcon } from "@/components/admin/icons";
+import { SubmitButton } from "@/components/admin/SubmitButton";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+
+const badgeOptions = [
+  "Täze",
+  "Iň köp satylýan",
+  "Klassik",
+  "Miras",
+  "Ýokary hil",
+  "Eksport",
+  "Meşhur",
+  "Sport",
+  "Rahat",
+];
 
 export default async function NewProductPage() {
   const stores = await prisma.store.findMany({ orderBy: { name: "asc" } });
@@ -9,8 +23,9 @@ export default async function NewProductPage() {
   return (
     <div>
       <div className="mb-8">
-        <Link href="/admin/products" className="text-turkmen-green hover:text-turkmen-gold mb-4 inline-block transition">
-          ← Back to Products
+        <Link href="/admin/products" className="inline-flex items-center gap-1.5 text-turkmen-green hover:text-turkmen-gold mb-4 transition">
+          <ArrowLeftIcon className="w-4 h-4" />
+          Back to Products
         </Link>
         <h1 className="text-3xl font-bold text-turkmen-green">Add New Product</h1>
         <p className="text-gray-600">Add a new textile to a store</p>
@@ -69,7 +84,7 @@ export default async function NewProductPage() {
 
             <div>
               <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-2">
-                Price (USD) *
+                Price (TMT) *
               </label>
               <input
                 type="number"
@@ -130,13 +145,16 @@ export default async function NewProductPage() {
               <label htmlFor="badge" className="block text-sm font-medium text-gray-700 mb-2">
                 Badge
               </label>
-              <input
-                type="text"
+              <select
                 id="badge"
                 name="badge"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-turkmen-green focus:border-transparent outline-none"
-                placeholder="New, Bestseller, Limited"
-              />
+              >
+                <option value="">None</option>
+                {badgeOptions.map((b) => (
+                  <option key={b} value={b}>{b}</option>
+                ))}
+              </select>
             </div>
 
             <div>
@@ -188,12 +206,7 @@ export default async function NewProductPage() {
           </div>
 
           <div className="flex gap-4 pt-4">
-            <button
-              type="submit"
-              className="btn btn-primary"
-            >
-              Create Product
-            </button>
+            <SubmitButton label="Create Product" pendingLabel="Creating..." />
             <Link
               href="/admin/products"
               className="btn btn-ghost"

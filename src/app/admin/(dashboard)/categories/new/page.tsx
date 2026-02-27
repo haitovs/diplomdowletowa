@@ -1,3 +1,5 @@
+import { ArrowLeftIcon } from "@/components/admin/icons";
+import { SubmitButton } from "@/components/admin/SubmitButton";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
@@ -27,9 +29,10 @@ export default function NewCategoryPage() {
       <div className="mb-8">
         <Link
           href="/admin/categories"
-          className="text-turkmen-green hover:text-turkmen-gold mb-4 inline-block transition"
+          className="inline-flex items-center gap-1.5 text-turkmen-green hover:text-turkmen-gold mb-4 transition"
         >
-          ← Back to Categories
+          <ArrowLeftIcon className="w-4 h-4" />
+          Back to Categories
         </Link>
         <h1 className="text-3xl font-bold text-turkmen-green">Add New Category</h1>
         <p className="text-gray-600">Create a new product category</p>
@@ -66,9 +69,7 @@ export default function NewCategoryPage() {
           </div>
 
           <div className="flex gap-4">
-            <button type="submit" className="btn btn-primary">
-              Create Category
-            </button>
+            <SubmitButton label="Create Category" pendingLabel="Creating..." />
             <Link href="/admin/categories" className="btn btn-ghost">
               Cancel
             </Link>

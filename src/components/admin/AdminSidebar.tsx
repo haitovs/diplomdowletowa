@@ -3,6 +3,15 @@
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  ArrowLeftIcon,
+  CategoryIcon,
+  DashboardIcon,
+  LogoutIcon,
+  OrderIcon,
+  ProductIcon,
+  StoreIcon,
+} from "./icons";
 
 interface AdminSidebarProps {
   user: {
@@ -13,11 +22,11 @@ interface AdminSidebarProps {
 }
 
 const navItems = [
-  { href: "/admin", label: "Dashboard", icon: "📊" },
-  { href: "/admin/stores", label: "Stores", icon: "🏪" },
-  { href: "/admin/products", label: "Products", icon: "🧶" },
-  { href: "/admin/categories", label: "Categories", icon: "📁" },
-  { href: "/admin/orders", label: "Orders", icon: "📦" },
+  { href: "/admin", label: "Dashboard", icon: DashboardIcon },
+  { href: "/admin/stores", label: "Stores", icon: StoreIcon },
+  { href: "/admin/products", label: "Products", icon: ProductIcon },
+  { href: "/admin/categories", label: "Categories", icon: CategoryIcon },
+  { href: "/admin/orders", label: "Orders", icon: OrderIcon },
 ];
 
 export default function AdminSidebar({ user }: AdminSidebarProps) {
@@ -38,9 +47,10 @@ export default function AdminSidebar({ user }: AdminSidebarProps) {
       <nav className="flex-1 p-4">
         <ul className="space-y-2">
           {navItems.map((item) => {
-            const isActive = pathname === item.href || 
+            const isActive = pathname === item.href ||
               (item.href !== "/admin" && pathname.startsWith(item.href));
-            
+            const Icon = item.icon;
+
             return (
               <li key={item.href}>
                 <Link
@@ -51,7 +61,7 @@ export default function AdminSidebar({ user }: AdminSidebarProps) {
                       : "text-white/80 hover:bg-turkmen-green/80 hover:text-white border-l-4 border-transparent"
                   }`}
                 >
-                  <span>{item.icon}</span>
+                  <Icon className="w-5 h-5" />
                   <span>{item.label}</span>
                 </Link>
               </li>
@@ -67,18 +77,20 @@ export default function AdminSidebar({ user }: AdminSidebarProps) {
         </div>
         <button
           onClick={() => signOut({ callbackUrl: "/admin/login" })}
-          className="w-full px-4 py-2 text-left text-white/80 hover:bg-turkmen-green/80 rounded-lg transition"
+          className="w-full px-4 py-2 text-left text-white/80 hover:bg-turkmen-green/80 rounded-lg transition flex items-center gap-3"
         >
-          🚪 Sign Out
+          <LogoutIcon className="w-5 h-5" />
+          Sign Out
         </button>
       </div>
 
       <div className="p-4 border-t border-turkmen-green/20">
         <Link
           href="/"
-          className="block px-4 py-2 text-white/80 hover:bg-turkmen-green/80 rounded-lg transition"
+          className="flex items-center gap-3 px-4 py-2 text-white/80 hover:bg-turkmen-green/80 rounded-lg transition"
         >
-          ← Back to Store
+          <ArrowLeftIcon className="w-5 h-5" />
+          Back to Store
         </Link>
       </div>
     </aside>

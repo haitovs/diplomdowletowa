@@ -3,6 +3,7 @@
 import { deleteProductImage, setPrimaryImage, uploadProductImage } from "@/app/admin/(dashboard)/products/actions";
 import Image from "next/image";
 import { useState } from "react";
+import { ConfirmModal } from "./ConfirmModal";
 
 interface ProductImage {
   id: string;
@@ -20,6 +21,7 @@ export function ImageUpload({ productId, existingImages = [] }: ImageUploadProps
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [images, setImages] = useState<ProductImage[]>(existingImages);
+  const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
 
   async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -34,7 +36,6 @@ export function ImageUpload({ productId, existingImages = [] }: ImageUploadProps
     const result = await uploadProductImage(productId, formData);
 
     if (result.success) {
-      // Refresh the page to show the new image
       window.location.reload();
     } else {
       setError(result.error || "Upload failed");
@@ -44,10 +45,8 @@ export function ImageUpload({ productId, existingImages = [] }: ImageUploadProps
   }
 
   async function handleDelete(imageId: string) {
-    if (!confirm("Are you sure you want to delete this image?")) return;
-
     const result = await deleteProductImage(imageId);
-    
+
     if (result.success) {
       window.location.reload();
     } else {
@@ -57,7 +56,7 @@ export function ImageUpload({ productId, existingImages = [] }: ImageUploadProps
 
   async function handleSetPrimary(imageId: string) {
     const result = await setPrimaryImage(imageId);
-    
+
     if (result.success) {
       window.location.reload();
     } else {
@@ -110,7 +109,7 @@ export function ImageUpload({ productId, existingImages = [] }: ImageUploadProps
                 height={200}
                 className="w-full h-48 object-cover"
               />
-              
+
               {img.isPrimary && (
                 <div className="absolute top-2 left-2 bg-turkmen-gold text-white text-xs px-2 py-1 rounded">
                   Primary
@@ -128,7 +127,7 @@ export function ImageUpload({ productId, existingImages = [] }: ImageUploadProps
                   </button>
                 )}
                 <button
-                  onClick={() => handleDelete(img.id)}
+                  onClick={() => setDeleteTarget(img.id)}
                   className="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700 transition"
                 >
                   Delete
@@ -145,6 +144,20 @@ export function ImageUpload({ productId, existingImages = [] }: ImageUploadProps
           <p className="text-gray-400 text-xs mt-1">Upload your first product image above</p>
         </div>
       )}
+
+      <ConfirmModal
+        open={deleteTarget !== null}
+        title="Delete image?"
+        description="This will permanently remove this image. This cannot be undone."
+        confirmLabel="Delete Image"
+        onCancel={() => setDeleteTarget(null)}
+        onConfirm={() => {
+          if (deleteTarget) {
+            handleDelete(deleteTarget);
+            setDeleteTarget(null);
+          }
+        }}
+      />
     </div>
   );
 }

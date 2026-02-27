@@ -1,3 +1,6 @@
+import { DeleteButton } from "@/components/admin/DeleteButton";
+import { ArrowLeftIcon } from "@/components/admin/icons";
+import { SubmitButton } from "@/components/admin/SubmitButton";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
@@ -64,9 +67,10 @@ export default async function EditStorePage({
       <div className="mb-8">
         <Link
           href="/admin/stores"
-          className="text-turkmen-green hover:text-turkmen-gold mb-4 inline-block transition"
+          className="inline-flex items-center gap-1.5 text-turkmen-green hover:text-turkmen-gold mb-4 transition"
         >
-          ← Back to Stores
+          <ArrowLeftIcon className="w-4 h-4" />
+          Back to Stores
         </Link>
         <h1 className="text-3xl font-bold text-turkmen-green">Edit Store: {store.name}</h1>
         <p className="text-gray-600">Manage partner company details</p>
@@ -152,9 +156,7 @@ export default async function EditStorePage({
               </div>
 
               <div className="flex gap-4 pt-4 border-t">
-                <button type="submit" className="btn btn-primary">
-                  Update Store
-                </button>
+                <SubmitButton label="Update Store" pendingLabel="Updating..." />
                 <Link href="/admin/stores" className="btn btn-ghost">
                   Cancel
                 </Link>
@@ -201,14 +203,11 @@ export default async function EditStorePage({
             <p className="text-sm text-red-700 mb-4">
               Deleting this store will also remove all {store._count.products} associated products. This action cannot be undone.
             </p>
-            <form action={deleteStore}>
-              <button
-                type="submit"
-                className="w-full bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition font-medium"
-              >
-                Delete Store
-              </button>
-            </form>
+            <DeleteButton
+              action={deleteStore}
+              entityName="Store"
+              description={`This will permanently delete the store and all ${store._count.products} associated products.`}
+            />
           </div>
         </div>
       </div>

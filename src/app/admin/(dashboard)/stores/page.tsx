@@ -1,3 +1,5 @@
+import { EmptyState } from "@/components/admin/EmptyState";
+import { EditIcon, StoreIcon } from "@/components/admin/icons";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 
@@ -27,7 +29,7 @@ export default async function StoresPage() {
 
       <div className="bg-white rounded-xl shadow-sm overflow-hidden">
         <table className="w-full">
-          <thead className="bg-gray-50">
+          <thead className="bg-turkmen-green/5">
             <tr>
               <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Store</th>
               <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Origin</th>
@@ -55,19 +57,20 @@ export default async function StoresPage() {
                 </td>
                 <td className="px-6 py-4">
                   <span className={`px-3 py-1 rounded-full text-sm ${
-                    store.isActive 
-                      ? "bg-green-100 text-green-600" 
+                    store.isActive
+                      ? "bg-green-100 text-green-600"
                       : "bg-gray-100 text-gray-600"
                   }`}>
                     {store.isActive ? "Active" : "Inactive"}
                   </span>
                 </td>
                 <td className="px-6 py-4">
-                  <div className="flex gap-2">
+                  <div className="flex gap-3">
                     <Link
                       href={`/admin/stores/${store.id}`}
-                      className="text-turkmen-gold hover:text-turkmen-green transition"
+                      className="inline-flex items-center gap-1.5 text-turkmen-gold hover:text-turkmen-green transition"
                     >
+                      <EditIcon className="w-4 h-4" />
                       Edit
                     </Link>
                     <Link
@@ -84,9 +87,13 @@ export default async function StoresPage() {
         </table>
 
         {stores.length === 0 && (
-          <div className="text-center py-12 text-gray-500">
-            <p>No stores yet. Create your first store to get started.</p>
-          </div>
+          <EmptyState
+            icon={<StoreIcon className="w-8 h-8" />}
+            title="No stores yet"
+            description="Create your first store to get started."
+            actionLabel="Add Store"
+            actionHref="/admin/stores/new"
+          />
         )}
       </div>
     </div>
