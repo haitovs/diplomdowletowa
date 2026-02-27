@@ -43,9 +43,24 @@ COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 
+# Copy prisma CLI for db push at startup
+COPY --from=builder /app/node_modules/prisma ./node_modules/prisma
+COPY --from=builder /app/node_modules/@prisma/engines ./node_modules/@prisma/engines
+
 EXPOSE 4082
 
-# Create upload directory (mount as volume for persistence: -v uploads:/app/data/uploads)
+# Create upload directory
 RUN mkdir -p /app/data/uploads/products
 
-CMD ["node", "server.js"]
+# Startup: apply schema changes to existing DB, then run the app
+COPY <<'EOF' /app/start.sh
+#!/bin/sh
+echo "Applying schema changes..."
+npx prisma db push --skip-generate 2>&1 || echo "Schema push warning (non-fatal)"
+echo "Starting server..."
+exec node server.js
+EOF
+
+RUN chmod +x /app/start.sh
+
+CMD ["/bin/sh", "/app/start.sh"]
