@@ -113,6 +113,11 @@ export default async function EditProductPage({
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Form */}
         <div className="lg:col-span-2">
+          {/* Image Upload Section — at the top for easy access */}
+          <div className="bg-white rounded-xl shadow-soft p-8 mb-6">
+            <ImageUpload productId={id} existingImages={product.images} />
+          </div>
+
           <div className="bg-white rounded-xl shadow-soft p-8">
             <form action={updateProduct} className="space-y-6">
               {/* Basic Info */}
@@ -336,10 +341,6 @@ export default async function EditProductPage({
             </form>
           </div>
 
-          {/* Image Upload Section */}
-          <div className="bg-white rounded-xl shadow-soft p-8 mt-6">
-            <ImageUpload productId={id} existingImages={product.images} />
-          </div>
         </div>
 
         {/* Sidebar */}

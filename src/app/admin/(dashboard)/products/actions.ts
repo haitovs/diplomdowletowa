@@ -16,7 +16,7 @@ const MIME_TO_EXT: Record<string, string> = {
   "image/tiff": "tiff",
 };
 
-export async function uploadProductImage(productId: string, formData: FormData) {
+export async function uploadProductImage(productId: string, formData: FormData, makePrimary = false) {
   try {
     const file = formData.get("image") as File;
     if (!file) {
@@ -47,10 +47,19 @@ export async function uploadProductImage(productId: string, formData: FormData) 
     await mkdir(uploadDir, { recursive: true });
     await writeFile(join(uploadDir, filename), buffer);
 
-    // Get current image count to determine if this should be primary
+    // Determine if this should be primary
     const existingImages = await prisma.productImage.findMany({
       where: { productId },
     });
+    const shouldBePrimary = makePrimary || existingImages.length === 0;
+
+    // If this will be primary, demote all existing images
+    if (shouldBePrimary && existingImages.length > 0) {
+      await prisma.productImage.updateMany({
+        where: { productId },
+        data: { isPrimary: false },
+      });
+    }
 
     // Save to database
     const imagePath = `/api/uploads/products/${filename}`;
@@ -59,7 +68,7 @@ export async function uploadProductImage(productId: string, formData: FormData) 
         productId,
         path: imagePath,
         alt: file.name.replace(/\.[^/.]+$/, ""), // Remove extension for alt text
-        isPrimary: existingImages.length === 0, // First image is primary
+        isPrimary: shouldBePrimary,
       },
     });
 

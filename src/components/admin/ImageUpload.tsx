@@ -1,7 +1,7 @@
 "use client";
 
 import { deleteProductImage, setPrimaryImage, uploadProductImage } from "@/app/admin/(dashboard)/products/actions";
-import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ConfirmModal } from "./ConfirmModal";
 
@@ -18,6 +18,7 @@ interface ImageUploadProps {
 }
 
 export function ImageUpload({ productId, existingImages = [] }: ImageUploadProps) {
+  const router = useRouter();
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [images, setImages] = useState<ProductImage[]>(existingImages);
@@ -33,34 +34,61 @@ export function ImageUpload({ productId, existingImages = [] }: ImageUploadProps
     const formData = new FormData();
     formData.append("image", file);
 
-    const result = await uploadProductImage(productId, formData);
+    try {
+      const result = await uploadProductImage(productId, formData);
 
-    if (result.success) {
-      window.location.reload();
-    } else {
-      setError(result.error || "Upload failed");
+      if (result.success && result.path) {
+        setImages((prev) => [
+          ...prev,
+          {
+            id: Date.now().toString(),
+            path: result.path!,
+            alt: file.name.replace(/\.[^/.]+$/, ""),
+            isPrimary: prev.length === 0,
+          },
+        ]);
+        router.refresh();
+      } else {
+        setError(result.error || "Upload failed");
+      }
+    } catch {
+      setError("Upload failed — check your connection and try again");
     }
 
     setUploading(false);
+    // Reset input so the same file can be re-selected
+    e.target.value = "";
   }
 
   async function handleDelete(imageId: string) {
-    const result = await deleteProductImage(imageId);
+    try {
+      const result = await deleteProductImage(imageId);
 
-    if (result.success) {
-      window.location.reload();
-    } else {
-      setError(result.error || "Delete failed");
+      if (result.success) {
+        setImages((prev) => prev.filter((img) => img.id !== imageId));
+        router.refresh();
+      } else {
+        setError(result.error || "Delete failed");
+      }
+    } catch {
+      setError("Delete failed — check your connection and try again");
     }
   }
 
   async function handleSetPrimary(imageId: string) {
-    const result = await setPrimaryImage(imageId);
+    try {
+      const result = await setPrimaryImage(imageId);
 
-    if (result.success) {
-      window.location.reload();
-    } else {
-      setError(result.error || "Failed to set primary");
+      if (result.success) {
+        setImages((prev) =>
+          prev.map((img) => ({ ...img, isPrimary: img.id === imageId }))
+        );
+        router.refresh();
+      } else {
+        setError(result.error || "Failed to set primary");
+      }
+    } catch {
+      setError("Failed to set primary — check your connection and try again");
     }
   }
 
@@ -85,7 +113,7 @@ export function ImageUpload({ productId, existingImages = [] }: ImageUploadProps
             disabled={uploading}
             className="hidden"
           />
-          <span className="text-xs text-gray-500">Max 5MB, JPG/PNG/WebP</span>
+          <span className="text-xs text-gray-500">Max 5MB, JPG/PNG/WebP/GIF/SVG</span>
         </div>
         {error && (
           <p className="text-sm text-red-600 mt-2">{error}</p>
@@ -102,11 +130,10 @@ export function ImageUpload({ productId, existingImages = [] }: ImageUploadProps
                 img.isPrimary ? "border-turkmen-gold" : "border-gray-200"
               }`}
             >
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={img.path}
                 alt={img.alt || "Product image"}
-                width={200}
-                height={200}
                 className="w-full h-48 object-cover"
               />
 
