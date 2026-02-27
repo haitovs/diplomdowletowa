@@ -127,7 +127,7 @@ export default async function Home() {
                 <div>
                   <div className="flex justify-between items-start mb-2">
                     <p className="text-sm font-semibold text-turkmen-gold uppercase tracking-wider">{product.category.name}</p>
-                    <p className="text-lg font-bold text-gray-900">${product.price}</p>
+                    <p className="text-lg font-bold text-gray-900">{product.price} TMT</p>
                   </div>
                   <Link href={`/shop/${product.slug}`}>
                     <h3 className="text-2xl font-serif text-turkmen-green hover:underline decoration-turkmen-gold underline-offset-4 mb-2">
@@ -189,7 +189,7 @@ export default async function Home() {
                     <h3 className="font-bold text-turkmen-green mb-2 truncate group-hover:text-turkmen-gold transition-colors">{product.name}</h3>
                   </Link>
                   <div className="flex items-center justify-between mt-3">
-                    <span className="font-bold text-gray-900">${product.price}</span>
+                    <span className="font-bold text-gray-900">{product.price} TMT</span>
                     <form action={async () => {
                       "use server";
                       await addToCompare(product.id);

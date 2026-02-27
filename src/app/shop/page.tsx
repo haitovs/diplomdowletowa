@@ -154,10 +154,10 @@ export default async function ShopPage({
                 )}
 
                 {product.badge && (
-                  <span className={`absolute top-3 left-3 pill z-10 ${product.badge.toLowerCase() === 'new' ? 'bg-emerald-500 text-white' :
-                    product.badge.toLowerCase() === 'bestseller' ? 'bg-amber-500 text-white' :
-                      product.badge.toLowerCase() === 'limited' ? 'bg-rose-500 text-white' :
-                        product.badge.toLowerCase() === 'gallery' ? 'bg-purple-500 text-white' :
+                  <span className={`absolute top-3 left-3 pill z-10 ${['täze', 'new'].includes(product.badge.toLowerCase()) ? 'bg-emerald-500 text-white' :
+                    ['iň köp satylýan', 'bestseller', 'meşhur', 'popular'].includes(product.badge.toLowerCase()) ? 'bg-amber-500 text-white' :
+                      ['miras', 'heritage', 'klassik', 'classic'].includes(product.badge.toLowerCase()) ? 'bg-purple-500 text-white' :
+                        ['eksport', 'export', 'ýokary hil', 'premium'].includes(product.badge.toLowerCase()) ? 'bg-blue-500 text-white' :
                           'pill-accent'
                     }`}>
                     {product.badge}
@@ -171,7 +171,7 @@ export default async function ShopPage({
                 <div className="mt-auto space-y-2">
                   <div className="flex items-center justify-between">
                     <div>
-                      <span className="text-2xl font-bold text-turkmen-green">${Number(product.price).toFixed(0)}</span>
+                      <span className="text-2xl font-bold text-turkmen-green">{Number(product.price).toFixed(0)} TMT</span>
                       <span className="text-sm text-gray-500 ml-1">/{product.unit}</span>
                     </div>
                   </div>

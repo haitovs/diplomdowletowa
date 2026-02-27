@@ -80,10 +80,10 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             <div className="aspect-[4/3] bg-white rounded-xl shadow-soft border border-turkmen-gold/10 flex items-center justify-center relative overflow-hidden group">
               {product.badge && (
                  <span className={`absolute top-4 left-4 z-10 pill ${
-                  product.badge.toLowerCase() === 'new' ? 'bg-emerald-500 text-white' :
-                  product.badge.toLowerCase() === 'bestseller' ? 'bg-amber-500 text-white' :
-                  product.badge.toLowerCase() === 'limited' ? 'bg-rose-500 text-white' :
-                  product.badge.toLowerCase() === 'gallery' ? 'bg-purple-500 text-white' :
+                  ['täze', 'new'].includes(product.badge.toLowerCase()) ? 'bg-emerald-500 text-white' :
+                  ['iň köp satylýan', 'bestseller', 'meşhur', 'popular'].includes(product.badge.toLowerCase()) ? 'bg-amber-500 text-white' :
+                  ['miras', 'heritage', 'klassik', 'classic'].includes(product.badge.toLowerCase()) ? 'bg-purple-500 text-white' :
+                  ['eksport', 'export', 'ýokary hil', 'premium'].includes(product.badge.toLowerCase()) ? 'bg-blue-500 text-white' :
                   'pill-accent'
                 }`}>
                   {product.badge}
@@ -126,7 +126,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             <h1 className="text-4xl font-bold text-turkmen-green mb-4 leading-tight">{product.name}</h1>
 
             <div className="flex items-baseline gap-2 mb-6">
-              <span className="text-3xl font-bold text-gray-900">${product.price.toFixed(0)}</span>
+              <span className="text-3xl font-bold text-gray-900">{product.price.toFixed(0)} TMT</span>
               <span className="text-gray-500">/ {product.unit}</span>
             </div>
 
@@ -223,7 +223,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                     </Link>
                     <p className="text-sm text-gray-600 mb-3 line-clamp-1">{related.fiber}</p>
                     <div className="mt-auto flex items-center justify-between">
-                      <span className="text-2xl font-bold text-turkmen-green">${Number(related.price).toFixed(0)}</span>
+                      <span className="text-2xl font-bold text-turkmen-green">{Number(related.price).toFixed(0)} TMT</span>
                       <Link href={`/shop/${related.slug}`} className="text-turkmen-gold hover:underline text-sm font-semibold">
                         {t("product.view_details", locale)} →
                       </Link>

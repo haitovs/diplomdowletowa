@@ -44,7 +44,7 @@ export default function ContactPage() {
           <div className="space-y-8">
             <div className="card">
               <h2 className="text-2xl font-bold text-turkmen-green mb-4">{t("contact.showroom_title")}</h2>
-              <p className="mb-2"><strong>{t("contact.address_label")}</strong> 40 Garaşsyzlyk şaýoly, Ashgabat 744000, Turkmenistan</p>
+              <p className="mb-2"><strong>{t("contact.address_label")}</strong> 40 Garaşsyzlyk şaýoly, Aşgabat 744000, Türkmenistan</p>
               <p className="mb-2"><strong>{t("contact.open_label")}</strong> {t("contact.open_hours")}</p>
               <p className="mb-2"><strong>{t("contact.closed_label")}</strong> {t("contact.closed_days")}</p>
               <p className="mb-2"><strong>{t("contact.phone_label")}</strong> +993 (12) 45 67 89</p>

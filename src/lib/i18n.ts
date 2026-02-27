@@ -45,6 +45,11 @@ const translations: TranslationDict = {
     tk: "Habarlaşmak",
     ru: "Контакты",
   },
+  "nav.companies": {
+    en: "Companies",
+    tk: "Kärhanalar",
+    ru: "Предприятия",
+  },
   "nav.compare": {
     en: "Compare",
     tk: "Deňeşdir",
@@ -1072,6 +1077,132 @@ const translations: TranslationDict = {
     en: "A journey through the symbols, patterns and stories woven into every thread.",
     tk: "Her bir sapyga dokalan nyşanlar, nagyşlar we rowaýatlar arkaly syýahat.",
     ru: "Путешествие сквозь символы, узоры и истории, вплетённые в каждую нить.",
+  },
+
+  // ─── Store Detail Page ─────────────────
+  "store.contact_artisan": {
+    en: "Contact Manufacturer",
+    tk: "Öndüriji Bilen Habarlaşyň",
+    ru: "Связаться С Производителем",
+  },
+  "store.products_available": {
+    en: "Products Available",
+    tk: "Haryt Bar",
+    ru: "Товаров В Наличии",
+  },
+  "store.breadcrumb_home": {
+    en: "Home",
+    tk: "Baş Sahypa",
+    ru: "Главная",
+  },
+  "store.breadcrumb_shop": {
+    en: "Shop",
+    tk: "Dükan",
+    ru: "Магазин",
+  },
+  "store.breadcrumb_manufacturers": {
+    en: "Manufacturers",
+    tk: "Öndürijiler",
+    ru: "Производители",
+  },
+  "store.collection_from": {
+    en: "Collection from",
+    tk: "Kolleksiýa:",
+    ru: "Коллекция от",
+  },
+  "store.add_to_cart": {
+    en: "Add to Cart",
+    tk: "Araba Goş",
+    ru: "В Корзину",
+  },
+  "store.compare": {
+    en: "Compare",
+    tk: "Deňeşdir",
+    ru: "Сравнить",
+  },
+  "store.no_products": {
+    en: "No products currently listed",
+    tk: "Häzirki wagtda haryt ýok",
+    ru: "Товары пока не добавлены",
+  },
+  "store.check_back": {
+    en: "This manufacturer is preparing new products. Check back soon.",
+    tk: "Bu öndüriji täze harytlary taýýarlaýar. Soňrak gelip görüň.",
+    ru: "Производитель готовит новые товары. Загляните позже.",
+  },
+
+  // ─── Companies Page ───────────────────
+  "companies.hero_title": {
+    en: "Turkmen Textile Enterprises",
+    tk: "Türkmenistanyň Dokma Kärhanalary",
+    ru: "Текстильные Предприятия Туркменистана",
+  },
+  "companies.hero_desc": {
+    en: "A comprehensive directory of textile manufacturers, carpet workshops, and production facilities across all regions of Turkmenistan.",
+    tk: "Türkmenistanyň ähli sebitlerindäki dokma öndürijileriň, haly ussahanalarynyň we önümçilik kärhanalarynyň doly sanawy.",
+    ru: "Полный справочник текстильных производителей, ковровых мастерских и производственных предприятий во всех регионах Туркменистана.",
+  },
+  "companies.region": {
+    en: "Region",
+    tk: "Sebit",
+    ru: "Регион",
+  },
+  "companies.products_label": {
+    en: "Products",
+    tk: "Önümler",
+    ru: "Продукция",
+  },
+  "companies.brand_label": {
+    en: "Brand",
+    tk: "Brend",
+    ru: "Бренд",
+  },
+  "companies.capacity_label": {
+    en: "Capacity",
+    tk: "Kuwwatlylyk",
+    ru: "Мощность",
+  },
+  "companies.total_count": {
+    en: "enterprises listed",
+    tk: "kärhana sanawda",
+    ru: "предприятий в каталоге",
+  },
+  "companies.ahal": {
+    en: "Ahal Province & Ashgabat",
+    tk: "Ahal Welaýaty we Aşgabat",
+    ru: "Ахалский Велаят И Ашхабад",
+  },
+  "companies.mary": {
+    en: "Mary Province",
+    tk: "Mary Welaýaty",
+    ru: "Марыйский Велаят",
+  },
+  "companies.lebap": {
+    en: "Lebap Province",
+    tk: "Lebap Welaýaty",
+    ru: "Лебапский Велаят",
+  },
+  "companies.dashoguz": {
+    en: "Daşoguz Province",
+    tk: "Daşoguz Welaýaty",
+    ru: "Дашогузский Велаят",
+  },
+  "companies.balkan": {
+    en: "Balkan Province",
+    tk: "Balkan Welaýaty",
+    ru: "Балканский Велаят",
+  },
+  "companies.state_assoc": {
+    en: "National Associations",
+    tk: "Milli Birleşikler",
+    ru: "Национальные Объединения",
+  },
+
+  // ─── Header location ─────────────────
+  "header.location": {
+    en: "Ashgabat, Turkmenistan",
+    tk: "Aşgabat, Türkmenistan",
+    ru: "Ашхабад, Туркменистан",
   },
 
   // ─── Admin ──────────────────────────────

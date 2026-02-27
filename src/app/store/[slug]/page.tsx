@@ -1,7 +1,9 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { prisma } from "@/lib/prisma";
+import { getLocaleFromCookie, t } from "@/lib/i18n";
 import Link from "next/link";
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { addToCompare } from "../../compare/actions";
 import { addToCart } from "../../shop/actions";
@@ -19,6 +21,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export default async function StoreDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const cookieStore = await cookies();
+  const locale = getLocaleFromCookie(cookieStore.get("locale")?.value);
   const { slug } = await params;
 
   // Fetch store with products
@@ -76,10 +80,10 @@ export default async function StoreDetailPage({ params }: { params: Promise<{ sl
 
             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                <a href={`mailto:hello@heritage-textiles.tm?subject=Inquiry for ${store.name}`} className="btn btn-secondary py-2 px-6 text-sm">
-                Contact Artisan
+                {t("store.contact_artisan", locale)}
                </a>
                <div className="px-4 py-2 border border-white/20 rounded-lg text-sm bg-white/5">
-                 {store._count.products} Products Available
+                 {store._count.products} {t("store.products_available", locale)}
                </div>
             </div>
           </div>
@@ -89,11 +93,11 @@ export default async function StoreDetailPage({ params }: { params: Promise<{ sl
       {/* Breadcrumbs */}
       <div className="max-w-6xl mx-auto px-6 py-4">
         <div className="text-sm text-gray-500 flex items-center gap-2">
-          <Link href="/" className="hover:text-turkmen-green">Home</Link>
+          <Link href="/" className="hover:text-turkmen-green">{t("store.breadcrumb_home", locale)}</Link>
           <span>/</span>
-          <Link href="/shop" className="hover:text-turkmen-green">Shop</Link>
+          <Link href="/shop" className="hover:text-turkmen-green">{t("store.breadcrumb_shop", locale)}</Link>
           <span>/</span>
-          <span className="text-turkmen-green font-medium">Artisans</span>
+          <span className="text-turkmen-green font-medium">{t("store.breadcrumb_manufacturers", locale)}</span>
           <span>/</span>
           <span className="text-gray-800">{store.name}</span>
         </div>
@@ -101,7 +105,7 @@ export default async function StoreDetailPage({ params }: { params: Promise<{ sl
 
       <main className="max-w-6xl mx-auto px-6 py-8">
         <h2 className="text-2xl font-bold text-turkmen-green mb-8 pb-2 border-b border-turkmen-gold/30">
-          Collection from {store.name}
+          {t("store.collection_from", locale)} {store.name}
         </h2>
 
         {store.products.length > 0 ? (
@@ -126,7 +130,7 @@ export default async function StoreDetailPage({ params }: { params: Promise<{ sl
                   
                   <div className="mt-auto space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-2xl font-bold text-turkmen-green">${Number(product.price).toFixed(0)}</span>
+                      <span className="text-2xl font-bold text-turkmen-green">{Number(product.price).toFixed(0)} TMT</span>
                       <span className="text-sm text-gray-400">/{product.unit}</span>
                     </div>
                     <div className="flex gap-2">
@@ -134,13 +138,13 @@ export default async function StoreDetailPage({ params }: { params: Promise<{ sl
                         "use server";
                         await addToCart(product.id);
                       }} className="flex-1">
-                        <button className="btn btn-primary w-full py-2 text-sm">Add to Cart</button>
+                        <button className="btn btn-primary w-full py-2 text-sm">{t("store.add_to_cart", locale)}</button>
                       </form>
                       <form action={async () => {
                         "use server";
                         await addToCompare(product.id);
                       }}>
-                        <button className="btn btn-ghost py-2 px-3 text-sm">Compare</button>
+                        <button className="btn btn-ghost py-2 px-3 text-sm">{t("store.compare", locale)}</button>
                       </form>
                     </div>
                   </div>
@@ -151,8 +155,8 @@ export default async function StoreDetailPage({ params }: { params: Promise<{ sl
         ) : (
           <div className="text-center py-16 bg-white rounded-xl border border-dashed border-gray-300">
             <span className="text-4xl mb-4 block opacity-50">🧶</span>
-            <p className="text-xl text-gray-500 mb-2">No products currently listed</p>
-            <p className="text-gray-400">This artisan is crafting new pieces. Check back soon.</p>
+            <p className="text-xl text-gray-500 mb-2">{t("store.no_products", locale)}</p>
+            <p className="text-gray-400">{t("store.check_back", locale)}</p>
           </div>
         )}
       </main>

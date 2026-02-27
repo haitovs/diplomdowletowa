@@ -70,7 +70,7 @@ export default async function ComparePage() {
                         <h3 className="font-bold text-lg text-turkmen-green mb-2">{product.name}</h3>
                         <p className="text-sm text-gray-600 mb-3">{product.fiber}</p>
                         <div className="flex items-center justify-between">
-                          <span className="text-2xl font-bold text-turkmen-green">${Number(product.price).toFixed(0)}</span>
+                          <span className="text-2xl font-bold text-turkmen-green">{Number(product.price).toFixed(0)} TMT</span>
                           <form action={async () => {
                             "use server";
                             await removeFromCompare(item.id);
@@ -104,7 +104,7 @@ export default async function ComparePage() {
                       return (
                         <tr key={product.id} className={`border-t ${isBest ? 'bg-turkmen-green/10 border-turkmen-green/30' : ''}`}>
                           <td className="px-4 py-3">{product.name}</td>
-                          <td className="px-4 py-3 font-bold text-turkmen-green">${Number(product.price).toFixed(0)}</td>
+                          <td className="px-4 py-3 font-bold text-turkmen-green">{Number(product.price).toFixed(0)} TMT</td>
                           <td className="px-4 py-3 text-gray-600">{product.fiber}</td>
                           <td className="px-4 py-3 text-gray-600">{product.technique}</td>
                         </tr>

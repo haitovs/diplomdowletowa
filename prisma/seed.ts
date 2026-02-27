@@ -25,42 +25,42 @@ async function main() {
     prisma.category.upsert({
       where: { slug: "carpets" },
       update: {},
-      create: { name: "Carpets", slug: "carpets", description: "Hand-knotted Turkmen carpets (haly)" },
+      create: { name: "Halylar", slug: "carpets", description: "Türkmen el halylary" },
     }),
     prisma.category.upsert({
       where: { slug: "silks" },
       update: {},
-      create: { name: "Silk Textiles", slug: "silks", description: "Keteni and mulberry silk fabrics" },
+      create: { name: "Ýüpek önümleri", slug: "silks", description: "Keteni we ýüpek matalar" },
     }),
     prisma.category.upsert({
       where: { slug: "kilims" },
       update: {},
-      create: { name: "Kilims", slug: "kilims", description: "Flatweave rugs, palas, and shyrdak panels" },
+      create: { name: "Kilimler", slug: "kilims", description: "Palas we düz dokalan önümler" },
     }),
     prisma.category.upsert({
       where: { slug: "accessories" },
       update: {},
-      create: { name: "Accessories", slug: "accessories", description: "Scarves, stoles, bags, and textile accessories" },
+      create: { name: "Esbaplar", slug: "accessories", description: "Ýaglyklar, torbalar we beýleki esbaplar" },
     }),
     prisma.category.upsert({
       where: { slug: "denim" },
       update: {},
-      create: { name: "Denim Products", slug: "denim", description: "Jeans, jackets, and denim clothing" },
+      create: { name: "Jins önümleri", slug: "denim", description: "Jins balaklar, kurtka we eşikler" },
     }),
     prisma.category.upsert({
       where: { slug: "cotton" },
       update: {},
-      create: { name: "Cotton Products", slug: "cotton", description: "Cotton fabrics, yarn, and textiles" },
+      create: { name: "Pagta önümleri", slug: "cotton", description: "Pagta matalary, ýüplük we dokma önümleri" },
     }),
     prisma.category.upsert({
       where: { slug: "clothing" },
       update: {},
-      create: { name: "Clothing", slug: "clothing", description: "Traditional and modern clothing" },
+      create: { name: "Eşikler", slug: "clothing", description: "Adaty we häzirki zaman eşikleri" },
     }),
     prisma.category.upsert({
       where: { slug: "home-textiles" },
       update: {},
-      create: { name: "Home Textiles", slug: "home-textiles", description: "Towels, bedding, and table textiles" },
+      create: { name: "Öý tekstili", slug: "home-textiles", description: "Polotensalar, ýorgan-düşek we saçak önümleri" },
     }),
   ]);
   console.log("✅ Created", categories.length, "categories");
@@ -68,92 +68,92 @@ async function main() {
   const [carpetCat, silkCat, kilimCat, accessoriesCat, denimCat, cottonCat, clothingCat, homeCat] = categories;
 
   // ═══════════════════════════════════════════
-  // STORES (12 real Turkmen companies)
+  // STORES (12 real Turkmen companies with real data)
   // ═══════════════════════════════════════════
   const storesData = [
     {
       name: "Türkmenhaly",
       slug: "turkmenhaly",
-      origin: "Ashgabat",
-      specialty: "Handmade Turkmen carpets, palas, and souvenirs",
-      description: "State association for handmade Turkmen carpets, founded in 1924. Coordinates carpet production across all five provinces with workshops in every region of Turkmenistan.",
-    },
-    {
-      name: "Türkmenbaşy Dokma Toplumy",
-      slug: "turkmenbashy-dokma",
-      origin: "Ashgabat",
-      specialty: "Cotton fabrics, jacquard textiles, and finished clothing",
-      description: "One of the largest textile complexes in Turkmenistan, producing cotton fabrics, jacquard textiles, and finished garments for domestic and export markets.",
-    },
-    {
-      name: "Türkmenbaşy Jins Toplumy",
-      slug: "turkmenbashy-jins",
-      origin: "Ashgabat",
-      specialty: "Denim clothing — jeans, jackets, skirts, and shorts",
-      description: "Turkmenistan's leading denim manufacturer, producing a full range of jeans, jackets, and denim accessories from domestically grown cotton.",
+      origin: "Aşgabat",
+      specialty: "El halylary, palas we sowgatlyk önümler",
+      description: "1924-nji ýylda döredilen döwlet birleşigi. Ähli 5 welaýatda 8 kärhanasy we 100-den gowrak ussahanasy bolup, 5000-den gowrak halyçyny birleşdirýär. ÝUNESKO tarapyndan ykrar edilen türkmen haly sungatyny goraýar.",
     },
     {
       name: "Aşgabat Dokma Toplumy",
       slug: "ashgabat-dokma",
-      origin: "Ashgabat",
-      specialty: "Cotton fabrics and finished textile products",
-      description: "Major textile complex in the capital producing cotton fabrics, knitted goods, and ready-to-wear clothing.",
+      origin: "Aşgabat",
+      specialty: "Pagta ýüplük, mata, polotensa we öý tekstili",
+      description: "2007-nji ýylda gurlan, 37 gektarlyk meýdanda ýerleşýän iri dokma toplumy. Ýylda 13,100 tonna ýüplük we 22,5 million inedördül metr mata öndürýär. «Goza» brendini çykarýar. 2800-den gowrak işgäri bar.",
     },
     {
-      name: "Ruhabat Dokma Toplumy",
-      slug: "ruhabat-dokma",
-      origin: "Ashgabat",
-      specialty: "Cotton yarn, dyed and undyed fabrics",
-      description: "Textile complex specializing in cotton yarn production and fabric dyeing, supplying raw materials to other Turkmen garment manufacturers.",
+      name: "Türkmenbaşy Dokma Toplumy",
+      slug: "turkmenbashy-dokma",
+      origin: "Aşgabat",
+      specialty: "Pagta ýüplük, matalar we taýýar eşikler",
+      description: "21,5 gektarlyk meýdanda ýerleşýän iri dokma toplumy. Ýylda 9000 tonna ýüplük, 17,000 inedördül metr mata we 1,875 million eşik öndürýär. «Nusaý» brendini çykarýar. ABŞ, Ispaniýa, Türkiýe, Russiýa we beýleki ýurtlara eksport edýär.",
     },
     {
-      name: "Babadaýhan Dokma Toplumy",
-      slug: "babadayhan-dokma",
-      origin: "Babadaýhan, Ahal",
-      specialty: "Cotton textiles and yarn",
-      description: "Regional textile complex in the Ahal province processing locally grown cotton into yarn and fabrics.",
+      name: "Türkmenbaşy Jins Toplumy",
+      slug: "turkmenbashy-jins",
+      origin: "Aşgabat",
+      specialty: "Jins matalar, balaklar, köýnekler we kurtkalar",
+      description: "1996-njy ýylda döredilen Türkmenistanyň öňdebaryjy jins öndürijisi. Aýda 130,000-den gowrak önüm, ýylda 1,56 million haryt öndürýär. «Bedew Jeans» brendini çykarýar. LC Waikiki, Colins we Tvoe bilen hyzmatdaşlyk edýär.",
+    },
+    {
+      name: "Gökdepe Dokma Toplumy",
+      slug: "gokdepe-dokma",
+      origin: "Gökdepe, Ahal",
+      specialty: "Pagta ýüplük, trikotaž matalar we taýýar eşikler",
+      description: "1995-nji ýylda döredilen, Ahal welaýatyndaky iri dokma toplumy. Ýylda 4900 tonna ýüplük, 4700 tonna trikotaž mata we 2700 sany eşik öndürýär. «Gala» brendini çykarýar.",
     },
     {
       name: "Kaka Dokma Toplumy",
       slug: "kaka-dokma",
       origin: "Kaka, Ahal",
-      specialty: "Cotton textiles",
-      description: "Textile complex in Kaka district producing cotton yarn and fabrics from Ahal province cotton.",
+      specialty: "Pagta ýüplük, matalar we taýýar eşikler",
+      description: "Şweýsariýa tehnologiýasy bilen enjamlaşdyrylan dokma toplumy. Ýylda 3650 tonna ýüplük, 12 million inedördül metr mata we 1,2 million eşik öndürýär. «Jeýtun» brendini çykarýar. ISO 9001, OEKO-TEX sertifikatly.",
     },
     {
-      name: "Daşoguz Pagta Egirme Fabrigi \"Serdar\"",
-      slug: "dashoguz-serdar",
-      origin: "Daşoguz",
-      specialty: "Cotton yarn production",
-      description: "Cotton spinning factory in Daşoguz province, producing various grades of cotton yarn for domestic textile mills and export.",
-    },
-    {
-      name: "Halaç Pagta Egirme Fabrigi",
-      slug: "halach-fabrik",
-      origin: "Halaç, Lebap",
-      specialty: "Cotton yarn and export products",
-      description: "Cotton spinning facility in Lebap province, known for producing export-quality yarn from fine Turkmen cotton.",
+      name: "Babadaýhan Dokma Toplumy",
+      slug: "babadayhan-dokma",
+      origin: "Babadaýhan, Ahal",
+      specialty: "Eşikler we ýorgan-düşek toplumlary",
+      description: "Ahal welaýatyndaky dokma toplumy. Klassik we sport görnüşli eşikleri, ýorgan-düşek toplumlaryny öndürýär. «Mäne» brendini çykarýar. Halkara standartlaryna laýyk ekologiýa taýdan arassa önümler.",
     },
     {
       name: "Balkandokma",
       slug: "balkandokma",
       origin: "Gyzylarbat, Balkan",
-      specialty: "Cotton yarn (Italian technology)",
-      description: "Modern yarn production facility in Balkan province, equipped with Italian spinning technology for premium cotton yarn production.",
+      specialty: "Pagta ýüplük (Italiýa tehnologiýasy)",
+      description: "20,000 inedördül metrlik meýdanda ýerleşýän häzirki zaman ýüplük öndüriji. Italiýanyň «Savio» we «Marzoli» enjamlary bilen enjamlaşdyrylan. 2024-nji ýylda 4210 tonna ýüplük öndürdi (135 million manat).",
+    },
+    {
+      name: "Daşoguz «Serdar» Pagta Egirme Fabrigi",
+      slug: "dashoguz-serdar",
+      origin: "Daşoguz",
+      specialty: "Pagta ýüplük önümçiligi",
+      description: "Ýylda 16,600 tonnadan gowrak pagta süýümini gaýtadan işleýän, 14,500 tonna ýüplük öndürýän fabrik. «Ring» brendini çykarýar. ISO 9001, ISO 14001 sertifikatly. Russiýa, Türkiýe, BAE we Gazagystana eksport edýär.",
+    },
+    {
+      name: "Halaç Pagta Egirme Fabrigi",
+      slug: "halach-fabrik",
+      origin: "Halaç, Lebap",
+      specialty: "Pagta ýüplük we eksport önümleri",
+      description: "1993-nji ýylda gurluşygyna başlanan, 2005-nji ýylda doly güýjüne çykan pagta egirme fabrigi. 5 görnüşli ýüplük öndürýär. Russiýa, Türkiýe we Polşa eksport edýär.",
     },
     {
       name: "Türkmen Jorap Dokma",
       slug: "turkmen-jorap",
-      origin: "Ashgabat",
-      specialty: "Socks, hosiery, and knitwear",
-      description: "Hosiery manufacturer producing socks and knitwear with both modern designs and traditional Turkmen patterns.",
+      origin: "Abadan, Ahal",
+      specialty: "Joraplar, taýtlar we trikotaž önümler",
+      description: "Italiýanyň we Türkiýäniň trikotaž enjamlary bilen enjamlaşdyrylan jorap we trikotaž öndürijisi. Erkekler, zenanlar we çagalar üçin jorap öndürýär. Çig mal: pagta, zygyr, likra.",
     },
     {
-      name: "Mary Keteni Ussahanasy",
-      slug: "mary-keteni",
-      origin: "Mary",
-      specialty: "Traditional keteni silk production",
-      description: "Workshop preserving the traditional art of keteni silk weaving in the Mary province, producing luminous silk fabrics for bridal wear and national celebrations.",
+      name: "Baýramaly Dokma Toplumy",
+      slug: "bayramaly-dokma",
+      origin: "Baýramaly, Mary",
+      specialty: "Pagta ýüplük, matalar we eşikler",
+      description: "2002-nji ýylda döredilen Mary welaýatyndaky iri dokma toplumy. Pagta ýüplük, çig we boýalan pagta matalaryny, taýýar pagta önümlerini we eşikleri öndürýär. «Merw» brendini çykarýar.",
     },
   ];
 
@@ -168,23 +168,23 @@ async function main() {
 
   // Get store references
   const turkmenhaly = await prisma.store.findUnique({ where: { slug: "turkmenhaly" } });
+  const ashDokma = await prisma.store.findUnique({ where: { slug: "ashgabat-dokma" } });
   const tbDokma = await prisma.store.findUnique({ where: { slug: "turkmenbashy-dokma" } });
   const tbJins = await prisma.store.findUnique({ where: { slug: "turkmenbashy-jins" } });
-  const ashDokma = await prisma.store.findUnique({ where: { slug: "ashgabat-dokma" } });
-  const ruhabat = await prisma.store.findUnique({ where: { slug: "ruhabat-dokma" } });
-  const babadayhan = await prisma.store.findUnique({ where: { slug: "babadayhan-dokma" } });
+  const gokdepe = await prisma.store.findUnique({ where: { slug: "gokdepe-dokma" } });
   const kaka = await prisma.store.findUnique({ where: { slug: "kaka-dokma" } });
+  const babadayhan = await prisma.store.findUnique({ where: { slug: "babadayhan-dokma" } });
+  const balkan = await prisma.store.findUnique({ where: { slug: "balkandokma" } });
   const dashoguz = await prisma.store.findUnique({ where: { slug: "dashoguz-serdar" } });
   const halach = await prisma.store.findUnique({ where: { slug: "halach-fabrik" } });
-  const balkan = await prisma.store.findUnique({ where: { slug: "balkandokma" } });
   const jorap = await prisma.store.findUnique({ where: { slug: "turkmen-jorap" } });
-  const maryKeteni = await prisma.store.findUnique({ where: { slug: "mary-keteni" } });
+  const bayramaly = await prisma.store.findUnique({ where: { slug: "bayramaly-dokma" } });
 
   // ═══════════════════════════════════════════
-  // PRODUCTS (72)
+  // PRODUCTS (36 — 3 per company, prices in TMT)
+  // 1 USD ≈ 3.5 TMT
   // ═══════════════════════════════════════════
 
-  // Image pools by product type (reusing 22 existing images)
   const IMG = {
     carpet1: "/images/products/product-tekke-desert-runner-1.jpg",
     carpet2: "/images/products/product-ruby-gallery-carpet-1.jpg",
@@ -211,101 +211,65 @@ async function main() {
   };
 
   const products = [
-    // ─── Türkmenhaly (12 products — Carpets) ─────────
-    { name: "Tekke Haly 2×3m", slug: "tekke-haly-2x3", price: 850, unit: "piece", fiber: "Hand-spun wool, natural dyes", technique: "Hand-knotted, 160k knots/m²", badge: "Classic", stock: 6, delivery: "Ships in 7 days", storeId: turkmenhaly!.id, categoryId: carpetCat.id, isFeatured: true, img: IMG.carpet1 },
-    { name: "Tekke Haly 3×4m", slug: "tekke-haly-3x4", price: 1700, unit: "piece", fiber: "Hand-spun wool, madder red dye", technique: "Hand-knotted, 200k knots/m²", badge: "Gallery", stock: 3, delivery: "Ships in 14 days", storeId: turkmenhaly!.id, categoryId: carpetCat.id, isFeatured: true, img: IMG.carpet2 },
-    { name: "Tekke Runner (Ýolly)", slug: "tekke-runner", price: 450, unit: "piece", fiber: "Hand-spun wool", technique: "Hand-knotted, 140k knots/m²", badge: "New", stock: 8, delivery: "Ships in 5 days", storeId: turkmenhaly!.id, categoryId: carpetCat.id, img: IMG.carpet6 },
-    { name: "Yomut Haly 2×3m", slug: "yomut-haly-2x3", price: 650, unit: "piece", fiber: "Highland wool, natural dyes", technique: "Hand-knotted, kepse göl pattern", badge: "Heritage", stock: 5, delivery: "Ships in 7 days", storeId: turkmenhaly!.id, categoryId: carpetCat.id, img: IMG.carpet4 },
-    { name: "Yomut Haly 3×4m", slug: "yomut-haly-3x4", price: 900, unit: "piece", fiber: "Highland wool, indigo and madder", technique: "Hand-knotted, 120k knots/m²", badge: "Classic", stock: 4, delivery: "Ships in 10 days", storeId: turkmenhaly!.id, categoryId: carpetCat.id, img: IMG.carpet3 },
-    { name: "Ersari Haly 2×3m", slug: "ersari-haly-2x3", price: 700, unit: "piece", fiber: "Dark-dyed wool", technique: "Hand-knotted, Ersari göl pattern", badge: "Heritage", stock: 4, delivery: "Ships in 7 days", storeId: turkmenhaly!.id, categoryId: carpetCat.id, img: IMG.carpet5 },
-    { name: "Salor Haly (Collector)", slug: "salor-haly", price: 2500, unit: "piece", fiber: "Fine hand-spun wool, silk highlights", technique: "Hand-knotted, 250k+ knots/m²", badge: "Gallery", stock: 2, delivery: "Made to order", storeId: turkmenhaly!.id, categoryId: carpetCat.id, isFeatured: true, img: IMG.trapping },
-    { name: "Ýüpek Haly (Silk Carpet)", slug: "yupek-haly", price: 3200, unit: "piece", fiber: "Pure mulberry silk", technique: "Hand-knotted, silk on silk", badge: "Luxury", stock: 1, delivery: "Made to order", storeId: turkmenhaly!.id, categoryId: carpetCat.id, isFeatured: true, img: IMG.carpet2 },
-    { name: "Palas (Flatweave)", slug: "palas-flatweave", price: 300, unit: "piece", fiber: "Wool, natural dyes", technique: "Flatweave, geometric pattern", badge: "Affordable", stock: 12, delivery: "Ships in 3 days", storeId: turkmenhaly!.id, categoryId: kilimCat.id, img: IMG.kilim1 },
-    { name: "Torba (Carpet Bag)", slug: "torba-bag", price: 250, unit: "piece", fiber: "Hand-spun wool", technique: "Hand-knotted, Tekke göl", badge: "Authentic", stock: 8, delivery: "Ships in 5 days", storeId: turkmenhaly!.id, categoryId: carpetCat.id, img: IMG.bag1 },
-    { name: "Çuwal (Storage Bag)", slug: "chuwal-bag", price: 350, unit: "piece", fiber: "Wool with cotton backing", technique: "Hand-knotted pile face", badge: "Heritage", stock: 5, delivery: "Ships in 5 days", storeId: turkmenhaly!.id, categoryId: carpetCat.id, img: IMG.chuval },
-    { name: "Namazlyk (Prayer Rug)", slug: "namazlyk", price: 400, unit: "piece", fiber: "Fine wool, silk border", technique: "Hand-knotted, mihrab design", badge: "Sacred", stock: 7, delivery: "Ships in 5 days", storeId: turkmenhaly!.id, categoryId: carpetCat.id, img: IMG.kilim2 },
+    // ─── Türkmenhaly (3 products) ─────────
+    { name: "Tekke Haly 2×3m", slug: "tekke-haly-2x3", price: 1680, unit: "sany", fiber: "El ýüplük, tebigy boýag", technique: "El dokalgan, 160 müň düwün/m²", badge: "Klassik", stock: 6, delivery: "7 günde iberilýär", storeId: turkmenhaly!.id, categoryId: carpetCat.id, isFeatured: true, img: IMG.carpet1 },
+    { name: "Yomut Haly 2×3m", slug: "yomut-haly-2x3", price: 1470, unit: "sany", fiber: "Dag ýüňi, tebigy boýag", technique: "El dokalgan, kepse göl nagşy", badge: "Miras", stock: 5, delivery: "7 günde iberilýär", storeId: turkmenhaly!.id, categoryId: carpetCat.id, isFeatured: true, img: IMG.carpet4 },
+    { name: "Namazlyk", slug: "namazlyk", price: 980, unit: "sany", fiber: "Ýüň, ýüpek gyra", technique: "El dokalgan, mährap nagşy", badge: "Miras", stock: 7, delivery: "5 günde iberilýär", storeId: turkmenhaly!.id, categoryId: carpetCat.id, img: IMG.kilim2 },
 
-    // ─── Türkmenbaşy Dokma Toplumy (8 products — Fabrics/Clothing) ───
-    { name: "Jacquard Fabric", slug: "jacquard-fabric", price: 25, unit: "meter", fiber: "100% Turkmen cotton", technique: "Jacquard loom weaving", badge: "Premium", stock: 200, delivery: "Ready to ship", storeId: tbDokma!.id, categoryId: cottonCat.id, img: IMG.silk2 },
-    { name: "Cotton Dress Fabric", slug: "cotton-dress-fabric", price: 12, unit: "meter", fiber: "100% cotton, plain weave", technique: "Power loom, pre-shrunk", badge: null, stock: 500, delivery: "Ready to ship", storeId: tbDokma!.id, categoryId: cottonCat.id, img: IMG.scarf1 },
-    { name: "Men's Cotton Shirt", slug: "mens-cotton-shirt", price: 35, unit: "piece", fiber: "100% Turkmen cotton", technique: "Machine-sewn, quality finish", badge: "New", stock: 100, delivery: "Ready to ship", storeId: tbDokma!.id, categoryId: clothingCat.id, img: IMG.clothing },
-    { name: "Women's Cotton Dress", slug: "womens-cotton-dress", price: 55, unit: "piece", fiber: "Cotton with jacquard pattern", technique: "Machine-sewn", badge: "Popular", stock: 80, delivery: "Ready to ship", storeId: tbDokma!.id, categoryId: clothingCat.id, img: IMG.silk1 },
-    { name: "Towel Set (4 pieces)", slug: "towel-set-4", price: 28, unit: "set", fiber: "100% cotton terry", technique: "Dobby loom, hemmed edges", badge: null, stock: 150, delivery: "Ready to ship", storeId: tbDokma!.id, categoryId: homeCat.id, img: IMG.throw },
-    { name: "Bedding Set (Double)", slug: "bedding-set-double", price: 65, unit: "set", fiber: "Cotton sateen, 200 thread count", technique: "Machine-woven sateen", badge: "Comfort", stock: 60, delivery: "Ready to ship", storeId: tbDokma!.id, categoryId: homeCat.id, img: IMG.pillow },
-    { name: "Cotton Tablecloth", slug: "cotton-tablecloth", price: 18, unit: "piece", fiber: "Cotton with decorative border", technique: "Jacquard border pattern", badge: null, stock: 120, delivery: "Ready to ship", storeId: tbDokma!.id, categoryId: homeCat.id, img: IMG.kilim2 },
-    { name: "Cotton Fabric (Plain)", slug: "cotton-fabric-plain", price: 8, unit: "meter", fiber: "100% cotton, bleached", technique: "Power loom weaving", badge: null, stock: 1000, delivery: "Ready to ship", storeId: tbDokma!.id, categoryId: cottonCat.id, img: IMG.shawl },
+    // ─── Aşgabat Dokma Toplumy / «Goza» (3 products) ───
+    { name: "Pagta ýüplük (1 kg)", slug: "adt-yupluk-1kg", price: 8, unit: "kg", fiber: "100% türkmen pagtasy", technique: "Halka egirme, Ne 30/1", badge: null, stock: 500, delivery: "Ibermäge taýýar", storeId: ashDokma!.id, categoryId: cottonCat.id, img: IMG.scarf1 },
+    { name: "Polotensa toplumy (4 sany)", slug: "adt-polotensa-4", price: 42, unit: "toplum", fiber: "100% pagta mahmal, 500 GSM", technique: "Ilmekli dokma", badge: null, stock: 150, delivery: "Ibermäge taýýar", storeId: ashDokma!.id, categoryId: homeCat.id, img: IMG.throw },
+    { name: "Düşek-ýorgan toplumy", slug: "adt-dusek-yorgan", price: 85, unit: "toplum", fiber: "Pagta satin, 200 sap sany", technique: "Maşyn dokalan satin", badge: "Rahat", stock: 60, delivery: "Ibermäge taýýar", storeId: ashDokma!.id, categoryId: homeCat.id, img: IMG.pillow },
 
-    // ─── Türkmenbaşy Jins Toplumy (8 products — Denim) ───
-    { name: "Men's Classic Jeans", slug: "mens-jeans", price: 40, unit: "piece", fiber: "Cotton denim, 12 oz", technique: "Selvedge denim, riveted", badge: "Bestseller", stock: 200, delivery: "Ready to ship", storeId: tbJins!.id, categoryId: denimCat.id, img: IMG.clothing },
-    { name: "Women's Slim Jeans", slug: "womens-jeans", price: 38, unit: "piece", fiber: "Cotton denim with elastane", technique: "Stretch denim, fitted cut", badge: "Popular", stock: 180, delivery: "Ready to ship", storeId: tbJins!.id, categoryId: denimCat.id, img: IMG.scarf1 },
-    { name: "Denim Jacket", slug: "denim-jacket", price: 55, unit: "piece", fiber: "Heavy cotton denim, 14 oz", technique: "Classic trucker cut", badge: "New", stock: 90, delivery: "Ready to ship", storeId: tbJins!.id, categoryId: denimCat.id, img: IMG.bag1 },
-    { name: "Kids Jeans", slug: "kids-jeans", price: 22, unit: "piece", fiber: "Soft cotton denim", technique: "Reinforced knees", badge: null, stock: 150, delivery: "Ready to ship", storeId: tbJins!.id, categoryId: denimCat.id, img: IMG.scarf3 },
-    { name: "Denim Shorts", slug: "denim-shorts", price: 25, unit: "piece", fiber: "Cotton denim, 10 oz", technique: "Pre-washed, cuffed hem", badge: null, stock: 120, delivery: "Ready to ship", storeId: tbJins!.id, categoryId: denimCat.id, img: IMG.kilim1 },
-    { name: "Denim Shirt", slug: "denim-shirt", price: 32, unit: "piece", fiber: "Light cotton chambray", technique: "Western-style stitching", badge: null, stock: 100, delivery: "Ready to ship", storeId: tbJins!.id, categoryId: denimCat.id, img: IMG.scarf2 },
-    { name: "Denim Skirt", slug: "denim-skirt", price: 30, unit: "piece", fiber: "Cotton denim with elastane", technique: "A-line cut", badge: "New", stock: 80, delivery: "Ready to ship", storeId: tbJins!.id, categoryId: denimCat.id, img: IMG.silk3 },
-    { name: "Denim Overalls", slug: "denim-overalls", price: 48, unit: "piece", fiber: "Heavy cotton denim", technique: "Adjustable straps, tool pockets", badge: null, stock: 50, delivery: "Ready to ship", storeId: tbJins!.id, categoryId: denimCat.id, img: IMG.bag2 },
+    // ─── Türkmenbaşy Dokma Toplumy / «Nusaý» (3 products) ───
+    { name: "Žakkard mata", slug: "nusay-jakkard", price: 25, unit: "metr", fiber: "100% türkmen pagtasy", technique: "Žakkard dokma", badge: "Ýokary hil", stock: 200, delivery: "Ibermäge taýýar", storeId: tbDokma!.id, categoryId: cottonCat.id, img: IMG.silk2 },
+    { name: "Erkek pagta köýnek", slug: "nusay-erkek-koynek", price: 50, unit: "sany", fiber: "100% türkmen pagtasy", technique: "Maşyn tikilen", badge: "Täze", stock: 100, delivery: "Ibermäge taýýar", storeId: tbDokma!.id, categoryId: clothingCat.id, img: IMG.clothing },
+    { name: "Zenan pagta köýnegi", slug: "nusay-zenan-koynek", price: 75, unit: "sany", fiber: "Žakkard nagşly pagta", technique: "Maşyn tikilen", badge: "Meşhur", stock: 80, delivery: "Ibermäge taýýar", storeId: tbDokma!.id, categoryId: clothingCat.id, img: IMG.silk1 },
 
-    // ─── Mary Keteni Ussahanasy (8 products — Silk) ───
-    { name: "Gyrmyzy Keteni (Red Bridal)", slug: "gyrmyzy-keteni", price: 280, unit: "piece", fiber: "Mulberry silk, madder-dyed crimson", technique: "Traditional satin-weave loom", badge: "Bridal", stock: 10, delivery: "Ships in 5 days", storeId: maryKeteni!.id, categoryId: silkCat.id, isFeatured: true, img: IMG.silk1 },
-    { name: "Ýaşyl Keteni (Green)", slug: "yashyl-keteni", price: 220, unit: "piece", fiber: "Mulberry silk, natural green dye", technique: "Traditional satin-weave loom", badge: "Festival", stock: 12, delivery: "Ships in 5 days", storeId: maryKeteni!.id, categoryId: silkCat.id, img: IMG.silk2 },
-    { name: "Keteni Scarf", slug: "keteni-scarf", price: 75, unit: "piece", fiber: "Pure mulberry silk", technique: "Hand-woven, fringed edges", badge: "Gift", stock: 30, delivery: "Ready to ship", storeId: maryKeteni!.id, categoryId: accessoriesCat.id, img: IMG.scarf2 },
-    { name: "Bridal Robe (Gelin Dony)", slug: "gelin-dony", price: 500, unit: "piece", fiber: "Keteni silk with gold thread", technique: "Traditional cut, hand-finished", badge: "Bridal", stock: 5, delivery: "Made to order", storeId: maryKeteni!.id, categoryId: silkCat.id, isFeatured: true, img: IMG.silk3 },
-    { name: "Silk Table Runner", slug: "silk-table-runner", price: 120, unit: "piece", fiber: "Two-ply mulberry silk", technique: "Jacquard pattern weaving", badge: "Home", stock: 20, delivery: "Ships in 3 days", storeId: maryKeteni!.id, categoryId: homeCat.id, img: IMG.kilim1 },
-    { name: "Ak Keteni (White)", slug: "ak-keteni", price: 200, unit: "piece", fiber: "Unbleached mulberry silk", technique: "Satin-weave, natural luster", badge: "Elegant", stock: 15, delivery: "Ships in 5 days", storeId: maryKeteni!.id, categoryId: silkCat.id, img: IMG.shawl },
-    { name: "Keteni Handbag", slug: "keteni-handbag", price: 90, unit: "piece", fiber: "Keteni silk with cotton lining", technique: "Hand-sewn, traditional pattern", badge: "Gift", stock: 25, delivery: "Ready to ship", storeId: maryKeteni!.id, categoryId: accessoriesCat.id, img: IMG.bag2 },
-    { name: "Keteni Pillow Cover", slug: "keteni-pillow-cover", price: 45, unit: "piece", fiber: "Keteni silk face, cotton back", technique: "Envelope closure, hand-finished", badge: null, stock: 40, delivery: "Ready to ship", storeId: maryKeteni!.id, categoryId: homeCat.id, img: IMG.pillow },
+    // ─── Türkmenbaşy Jins Toplumy / «Bedew Jeans» (3 products) ───
+    { name: "Erkek jins balak", slug: "bedew-erkek-jins", price: 75, unit: "sany", fiber: "Pagta jins, 12 oz", technique: "Selweji jins, perçinli", badge: "Iň köp satylýan", stock: 200, delivery: "Ibermäge taýýar", storeId: tbJins!.id, categoryId: denimCat.id, isFeatured: true, img: IMG.clothing },
+    { name: "Zenan jins balak", slug: "bedew-zenan-jins", price: 75, unit: "sany", fiber: "Pagta jins, 2% likra", technique: "Elastik jins, dar biçüw", badge: "Meşhur", stock: 180, delivery: "Ibermäge taýýar", storeId: tbJins!.id, categoryId: denimCat.id, img: IMG.scarf1 },
+    { name: "Jins kurtka", slug: "bedew-jins-kurtka", price: 90, unit: "sany", fiber: "Agyr pagta jins, 14 oz", technique: "Klassik traker biçüwi", badge: "Täze", stock: 90, delivery: "Ibermäge taýýar", storeId: tbJins!.id, categoryId: denimCat.id, img: IMG.bag1 },
 
-    // ─── Aşgabat Dokma Toplumy (6 products — Cotton) ───
-    { name: "Cotton Fabric (Ashgabat)", slug: "ashgabat-cotton-fabric", price: 10, unit: "meter", fiber: "100% Turkmen cotton", technique: "Power loom weaving", badge: null, stock: 800, delivery: "Ready to ship", storeId: ashDokma!.id, categoryId: cottonCat.id, img: IMG.carpet3 },
-    { name: "Men's T-Shirt", slug: "mens-tshirt", price: 15, unit: "piece", fiber: "Cotton jersey knit", technique: "Cut and sew, overlock finish", badge: null, stock: 300, delivery: "Ready to ship", storeId: ashDokma!.id, categoryId: clothingCat.id, img: IMG.scarf3 },
-    { name: "Women's Blouse", slug: "womens-blouse", price: 20, unit: "piece", fiber: "Cotton poplin", technique: "Machine-sewn, pearl buttons", badge: "New", stock: 100, delivery: "Ready to ship", storeId: ashDokma!.id, categoryId: clothingCat.id, img: IMG.silk1 },
-    { name: "Cotton Towel", slug: "cotton-towel", price: 8, unit: "piece", fiber: "100% cotton terry", technique: "Loop pile weaving", badge: null, stock: 500, delivery: "Ready to ship", storeId: ashDokma!.id, categoryId: homeCat.id, img: IMG.throw },
-    { name: "Workwear Set", slug: "workwear-set", price: 30, unit: "set", fiber: "Heavy-duty cotton twill", technique: "Reinforced seams", badge: null, stock: 80, delivery: "Ready to ship", storeId: ashDokma!.id, categoryId: clothingCat.id, img: IMG.clothing },
-    { name: "Cotton Blanket", slug: "cotton-blanket", price: 35, unit: "piece", fiber: "Cotton waffle weave", technique: "Thermal weave pattern", badge: "Comfort", stock: 60, delivery: "Ready to ship", storeId: ashDokma!.id, categoryId: homeCat.id, img: IMG.kilim2 },
+    // ─── Gökdepe Dokma Toplumy / «Gala» (3 products) ───
+    { name: "Erkek sport kostýumy", slug: "gala-sport-kostyum", price: 120, unit: "sany", fiber: "Pagta trikotaž", technique: "Trikotaž dokma we tikmek", badge: "Sport", stock: 100, delivery: "Ibermäge taýýar", storeId: gokdepe!.id, categoryId: clothingCat.id, img: IMG.scarf3 },
+    { name: "Çaga ýyly içki eşik", slug: "gala-caga-esik", price: 45, unit: "sany", fiber: "Ýumşak pagta trikotaž", technique: "Trikotaž dokma", badge: null, stock: 200, delivery: "Ibermäge taýýar", storeId: gokdepe!.id, categoryId: clothingCat.id, img: IMG.carpet6 },
+    { name: "Ýelek", slug: "gala-yelek", price: 85, unit: "sany", fiber: "Pagta trikotaž, sintepon", technique: "Maşyn tikilen", badge: "Täze", stock: 80, delivery: "Ibermäge taýýar", storeId: gokdepe!.id, categoryId: clothingCat.id, img: IMG.bag2 },
 
-    // ─── Ruhabat Dokma Toplumy (5 products — Yarn & Fabrics) ───
-    { name: "Cotton Yarn (1 kg)", slug: "ruhabat-yarn-1kg", price: 12, unit: "kg", fiber: "100% Turkmen cotton, ring-spun", technique: "Ring spinning, Ne 30/1", badge: null, stock: 500, delivery: "Ready to ship", storeId: ruhabat!.id, categoryId: cottonCat.id, img: IMG.scarf1 },
-    { name: "Dyed Cotton Fabric", slug: "ruhabat-dyed-fabric", price: 14, unit: "meter", fiber: "Cotton, reactive-dyed", technique: "Dyed and finished", badge: null, stock: 600, delivery: "Ready to ship", storeId: ruhabat!.id, categoryId: cottonCat.id, img: IMG.silk2 },
-    { name: "Undyed Cotton Fabric", slug: "ruhabat-undyed-fabric", price: 9, unit: "meter", fiber: "100% cotton, greige", technique: "Power loom, unfinished", badge: null, stock: 800, delivery: "Ready to ship", storeId: ruhabat!.id, categoryId: cottonCat.id, img: IMG.shawl },
-    { name: "Heavy Cotton Canvas", slug: "ruhabat-canvas", price: 16, unit: "meter", fiber: "Cotton canvas, 10 oz", technique: "Tight plain weave", badge: null, stock: 300, delivery: "Ready to ship", storeId: ruhabat!.id, categoryId: cottonCat.id, img: IMG.bag1 },
-    { name: "Yarn Bundle (5 kg)", slug: "ruhabat-yarn-5kg", price: 50, unit: "bundle", fiber: "100% Turkmen cotton yarn", technique: "Ring-spun, various counts", badge: "Value", stock: 200, delivery: "Ready to ship", storeId: ruhabat!.id, categoryId: cottonCat.id, img: IMG.scarf3 },
+    // ─── Kaka Dokma Toplumy / «Jeýtun» (3 products) ───
+    { name: "Erkek köýnek", slug: "jeytun-erkek-koynek", price: 55, unit: "sany", fiber: "100% pagta", technique: "Maşyn tikilen, ISO 9001", badge: null, stock: 150, delivery: "Ibermäge taýýar", storeId: kaka!.id, categoryId: clothingCat.id, img: IMG.kilim1 },
+    { name: "Pagta mata (Kaka)", slug: "jeytun-pagta-mata", price: 10, unit: "metr", fiber: "100% Ahal pagtasy", technique: "Güýçli dokma stanogy", badge: null, stock: 500, delivery: "Ibermäge taýýar", storeId: kaka!.id, categoryId: cottonCat.id, img: IMG.silk3 },
+    { name: "Pagta ýüplük (Kaka)", slug: "jeytun-yupluk", price: 9, unit: "kg", fiber: "100% pagta, halka egrilen", technique: "Halka egirme, Ne 20/1", badge: null, stock: 400, delivery: "Ibermäge taýýar", storeId: kaka!.id, categoryId: cottonCat.id, img: IMG.scarf2 },
 
-    // ─── Babadaýhan Dokma Toplumy (4 products) ───
-    { name: "Cotton Textile (Babadaýhan)", slug: "babadayhan-fabric", price: 11, unit: "meter", fiber: "Ahal province cotton", technique: "Power loom weaving", badge: null, stock: 400, delivery: "Ready to ship", storeId: babadayhan!.id, categoryId: cottonCat.id, img: IMG.carpet4 },
-    { name: "Cotton Yarn (Babadaýhan)", slug: "babadayhan-yarn", price: 10, unit: "kg", fiber: "100% cotton, combed", technique: "Open-end spinning", badge: null, stock: 600, delivery: "Ready to ship", storeId: babadayhan!.id, categoryId: cottonCat.id, img: IMG.scarf2 },
-    { name: "Hand Towel Set", slug: "babadayhan-towel-set", price: 15, unit: "set", fiber: "Cotton terry, 3 pieces", technique: "Loop pile weaving", badge: null, stock: 200, delivery: "Ready to ship", storeId: babadayhan!.id, categoryId: homeCat.id, img: IMG.pillow },
-    { name: "Bath Towel (Large)", slug: "babadayhan-bath-towel", price: 12, unit: "piece", fiber: "100% cotton terry, 500 GSM", technique: "Double-loop pile", badge: null, stock: 300, delivery: "Ready to ship", storeId: babadayhan!.id, categoryId: homeCat.id, img: IMG.throw },
+    // ─── Babadaýhan Dokma Toplumy / «Mäne» (3 products) ───
+    { name: "Klassik kostýum", slug: "mane-klassik-kostyum", price: 180, unit: "sany", fiber: "Pagta galyň mata", technique: "Maşyn tikilen", badge: "Klassik", stock: 50, delivery: "5 günde iberilýär", storeId: babadayhan!.id, categoryId: clothingCat.id, img: IMG.carpet3 },
+    { name: "Düşek-ýorgan toplumy (Mäne)", slug: "mane-dusek", price: 70, unit: "toplum", fiber: "Pagta satin", technique: "Maşyn dokalan", badge: "Rahat", stock: 100, delivery: "Ibermäge taýýar", storeId: babadayhan!.id, categoryId: homeCat.id, img: IMG.pillow },
+    { name: "Sport eşik toplumy", slug: "mane-sport-esik", price: 95, unit: "toplum", fiber: "Pagta trikotaž", technique: "Trikotaž dokma", badge: "Sport", stock: 80, delivery: "Ibermäge taýýar", storeId: babadayhan!.id, categoryId: clothingCat.id, img: IMG.carpet5 },
 
-    // ─── Kaka Dokma Toplumy (4 products) ───
-    { name: "Cotton Fabric (Kaka)", slug: "kaka-fabric", price: 10, unit: "meter", fiber: "100% Ahal cotton", technique: "Power loom weaving", badge: null, stock: 500, delivery: "Ready to ship", storeId: kaka!.id, categoryId: cottonCat.id, img: IMG.kilim1 },
-    { name: "Bedding Fabric", slug: "kaka-bedding-fabric", price: 14, unit: "meter", fiber: "Cotton percale", technique: "Tight weave, 180 TC", badge: null, stock: 300, delivery: "Ready to ship", storeId: kaka!.id, categoryId: cottonCat.id, img: IMG.silk3 },
-    { name: "Cotton Yarn (Kaka)", slug: "kaka-yarn", price: 11, unit: "kg", fiber: "100% cotton, ring-spun", technique: "Ring spinning, Ne 20/1", badge: null, stock: 400, delivery: "Ready to ship", storeId: kaka!.id, categoryId: cottonCat.id, img: IMG.scarf1 },
-    { name: "Children's Clothing Fabric", slug: "kaka-childrens-fabric", price: 9, unit: "meter", fiber: "Soft cotton, pre-shrunk", technique: "Brushed cotton finish", badge: null, stock: 250, delivery: "Ready to ship", storeId: kaka!.id, categoryId: cottonCat.id, img: IMG.carpet6 },
+    // ─── Balkandokma (3 products) ───
+    { name: "Ýokary hilli ýüplük", slug: "balkan-yokary-yupluk", price: 12, unit: "kg", fiber: "100% Balkan pagtasy", technique: "Italiýa «Savio» egirme", badge: "Ýokary hil", stock: 400, delivery: "Ibermäge taýýar", storeId: balkan!.id, categoryId: cottonCat.id, img: IMG.carpet2 },
+    { name: "Inçe ýüplük", slug: "balkan-ince-yupluk", price: 15, unit: "kg", fiber: "Daralan pagta, ýokary inçelik", technique: "Italiýa «Marzoli» egirme, Ne 50/1", badge: "Ýokary hil", stock: 300, delivery: "Ibermäge taýýar", storeId: balkan!.id, categoryId: cottonCat.id, img: IMG.silk2 },
+    { name: "Eksport ýüplük", slug: "balkan-eksport-yupluk", price: 14, unit: "kg", fiber: "Eksport derejeli daralan pagta", technique: "Italiýa tehnologiýasy, sertifikatly", badge: "Eksport", stock: 250, delivery: "3 günde iberilýär", storeId: balkan!.id, categoryId: cottonCat.id, img: IMG.chuval },
 
-    // ─── Daşoguz "Serdar" (4 products — Yarn) ───
-    { name: "Thick Cotton Yarn (Serdar)", slug: "serdar-thick-yarn", price: 13, unit: "kg", fiber: "100% Daşoguz cotton", technique: "Open-end spinning, Ne 12/1", badge: null, stock: 600, delivery: "Ready to ship", storeId: dashoguz!.id, categoryId: cottonCat.id, img: IMG.trapping },
-    { name: "Fine Cotton Yarn (Serdar)", slug: "serdar-fine-yarn", price: 15, unit: "kg", fiber: "100% combed cotton", technique: "Ring spinning, Ne 40/1", badge: "Premium", stock: 400, delivery: "Ready to ship", storeId: dashoguz!.id, categoryId: cottonCat.id, img: IMG.scarf2 },
-    { name: "Export Yarn (Serdar)", slug: "serdar-export-yarn", price: 18, unit: "kg", fiber: "Export-grade combed cotton", technique: "Compact spinning", badge: "Export", stock: 300, delivery: "Ships in 3 days", storeId: dashoguz!.id, categoryId: cottonCat.id, img: IMG.carpet5 },
-    { name: "Dyed Yarn (Serdar)", slug: "serdar-dyed-yarn", price: 16, unit: "kg", fiber: "Reactive-dyed cotton yarn", technique: "Ring-spun, vat-dyed", badge: null, stock: 350, delivery: "Ready to ship", storeId: dashoguz!.id, categoryId: cottonCat.id, img: IMG.silk1 },
+    // ─── Daşoguz «Serdar» / «Ring» (3 products) ───
+    { name: "Galyň ýüplük (Ring)", slug: "ring-galyn-yupluk", price: 7.5, unit: "kg", fiber: "100% Daşoguz pagtasy", technique: "Açyk uçly egirme, Ne 12/1", badge: null, stock: 600, delivery: "Ibermäge taýýar", storeId: dashoguz!.id, categoryId: cottonCat.id, img: IMG.trapping },
+    { name: "Inçe ýüplük (Ring)", slug: "ring-ince-yupluk", price: 12, unit: "kg", fiber: "100% daralan pagta", technique: "Halka egirme, Ne 40/1", badge: "Ýokary hil", stock: 400, delivery: "Ibermäge taýýar", storeId: dashoguz!.id, categoryId: cottonCat.id, img: IMG.scarf2 },
+    { name: "Eksport ýüplük (Serdar)", slug: "ring-eksport-yupluk", price: 14, unit: "kg", fiber: "Eksport derejeli pagta", technique: "Kompakt egirme", badge: "Eksport", stock: 300, delivery: "3 günde iberilýär", storeId: dashoguz!.id, categoryId: cottonCat.id, img: IMG.carpet5 },
 
-    // ─── Halaç Pagta Egirme Fabrigi (4 products — Yarn) ───
-    { name: "Cotton Yarn (Halaç)", slug: "halach-yarn", price: 12, unit: "kg", fiber: "100% Lebap cotton", technique: "Ring spinning", badge: null, stock: 500, delivery: "Ready to ship", storeId: halach!.id, categoryId: cottonCat.id, img: IMG.carpet1 },
-    { name: "Export Cotton Yarn (Halaç)", slug: "halach-export-yarn", price: 17, unit: "kg", fiber: "Fine combed cotton", technique: "Compact spinning, export grade", badge: "Export", stock: 300, delivery: "Ships in 3 days", storeId: halach!.id, categoryId: cottonCat.id, img: IMG.bag2 },
-    { name: "Thick Yarn (Halaç)", slug: "halach-thick-yarn", price: 14, unit: "kg", fiber: "100% cotton, carded", technique: "Open-end spinning, Ne 10/1", badge: null, stock: 400, delivery: "Ready to ship", storeId: halach!.id, categoryId: cottonCat.id, img: IMG.kilim2 },
-    { name: "Weaving Yarn (Halaç)", slug: "halach-weaving-yarn", price: 13, unit: "kg", fiber: "100% cotton, plied", technique: "Twisted, 2-ply yarn", badge: null, stock: 350, delivery: "Ready to ship", storeId: halach!.id, categoryId: cottonCat.id, img: IMG.scarf3 },
+    // ─── Halaç Pagta Egirme Fabrigi (3 products) ───
+    { name: "Pagta ýüplük (Halaç)", slug: "halach-pagta-yupluk", price: 8.5, unit: "kg", fiber: "100% Lebap pagtasy", technique: "Halka egirme", badge: null, stock: 500, delivery: "Ibermäge taýýar", storeId: halach!.id, categoryId: cottonCat.id, img: IMG.carpet1 },
+    { name: "Eksport ýüplük (Halaç)", slug: "halach-eksport-yupluk", price: 13, unit: "kg", fiber: "Inçe daralan pagta", technique: "Kompakt egirme, eksport hili", badge: "Eksport", stock: 300, delivery: "3 günde iberilýär", storeId: halach!.id, categoryId: cottonCat.id, img: IMG.bag2 },
+    { name: "Galyň ýüplük (Halaç)", slug: "halach-galyn-yupluk", price: 7, unit: "kg", fiber: "100% pagta, kard edilen", technique: "Açyk uçly egirme, Ne 10/1", badge: null, stock: 400, delivery: "Ibermäge taýýar", storeId: halach!.id, categoryId: cottonCat.id, img: IMG.kilim2 },
 
-    // ─── Balkandokma (4 products — Italian tech yarn) ───
-    { name: "Premium Yarn (Balkandokma)", slug: "balkan-premium-yarn", price: 20, unit: "kg", fiber: "100% Balkan cotton", technique: "Italian spinning technology", badge: "Premium", stock: 400, delivery: "Ready to ship", storeId: balkan!.id, categoryId: cottonCat.id, img: IMG.carpet2 },
-    { name: "Fine Yarn (Balkandokma)", slug: "balkan-fine-yarn", price: 22, unit: "kg", fiber: "Combed cotton, extra fine", technique: "Italian compact spinning, Ne 50/1", badge: "Premium", stock: 300, delivery: "Ready to ship", storeId: balkan!.id, categoryId: cottonCat.id, img: IMG.silk2 },
-    { name: "Export Yarn (Balkandokma)", slug: "balkan-export-yarn", price: 25, unit: "kg", fiber: "Premium export-grade cotton", technique: "Italian tech, quality certified", badge: "Export", stock: 250, delivery: "Ships in 3 days", storeId: balkan!.id, categoryId: cottonCat.id, img: IMG.chuval },
-    { name: "Specialty Yarn (Balkandokma)", slug: "balkan-specialty-yarn", price: 28, unit: "kg", fiber: "Mercerized cotton blend", technique: "Italian finishing technology", badge: "Specialty", stock: 150, delivery: "Ships in 5 days", storeId: balkan!.id, categoryId: cottonCat.id, img: IMG.scarf1 },
+    // ─── Türkmen Jorap Dokma (3 products) ───
+    { name: "Erkek joraplary (5 jübüt)", slug: "jorap-erkek-5", price: 14, unit: "bukja", fiber: "80% pagta, 16% poliamid, 4% elastan", technique: "Italiýa «Lonati» enjamy", badge: null, stock: 300, delivery: "Ibermäge taýýar", storeId: jorap!.id, categoryId: clothingCat.id, img: IMG.kilim1 },
+    { name: "Zenan joraplary (5 jübüt)", slug: "jorap-zenan-5", price: 14, unit: "bukja", fiber: "80% pagta, 16% poliamid, 4% elastan", technique: "Italiýa «Lonati» enjamy", badge: null, stock: 300, delivery: "Ibermäge taýýar", storeId: jorap!.id, categoryId: clothingCat.id, img: IMG.scarf2 },
+    { name: "Çaga joraplary (5 jübüt)", slug: "jorap-caga-5", price: 10, unit: "bukja", fiber: "Ýumşak pagta garyndysy", technique: "Tikişsiz barnak dokma", badge: null, stock: 400, delivery: "Ibermäge taýýar", storeId: jorap!.id, categoryId: clothingCat.id, img: IMG.carpet6 },
 
-    // ─── Türkmen Jorap Dokma (5 products — Hosiery) ───
-    { name: "Men's Socks (5-Pack)", slug: "mens-socks-5", price: 12, unit: "pack", fiber: "Cotton blend, reinforced heel", technique: "Circular knitting", badge: null, stock: 300, delivery: "Ready to ship", storeId: jorap!.id, categoryId: clothingCat.id, img: IMG.kilim1 },
-    { name: "Women's Socks (5-Pack)", slug: "womens-socks-5", price: 12, unit: "pack", fiber: "Cotton blend, assorted colors", technique: "Circular knitting", badge: null, stock: 300, delivery: "Ready to ship", storeId: jorap!.id, categoryId: clothingCat.id, img: IMG.scarf2 },
-    { name: "Kids Socks (5-Pack)", slug: "kids-socks-5", price: 8, unit: "pack", fiber: "Soft cotton blend", technique: "Seamless toe knitting", badge: null, stock: 400, delivery: "Ready to ship", storeId: jorap!.id, categoryId: clothingCat.id, img: IMG.carpet6 },
-    { name: "Sport Socks (3-Pack)", slug: "sport-socks-3", price: 15, unit: "pack", fiber: "Cotton-polyester blend, cushioned", technique: "Terry loop knitting", badge: "Sport", stock: 200, delivery: "Ready to ship", storeId: jorap!.id, categoryId: clothingCat.id, img: IMG.bag1 },
-    { name: "National Pattern Socks", slug: "national-pattern-socks", price: 18, unit: "pair", fiber: "Merino wool blend", technique: "Jacquard knitting, Turkmen motifs", badge: "Gift", stock: 100, delivery: "Ready to ship", storeId: jorap!.id, categoryId: accessoriesCat.id, img: IMG.scarf3 },
+    // ─── Baýramaly Dokma Toplumy / «Merw» (3 products) ───
+    { name: "Pagta ýüplük (Merw)", slug: "merw-pagta-yupluk", price: 8, unit: "kg", fiber: "100% Mary pagtasy", technique: "Halka egirme", badge: null, stock: 500, delivery: "Ibermäge taýýar", storeId: bayramaly!.id, categoryId: cottonCat.id, img: IMG.shawl },
+    { name: "Boýalan pagta mata", slug: "merw-boyalan-mata", price: 16, unit: "metr", fiber: "Pagta, reaktiw boýag", technique: "Boýalan we gutarnykly işlenen", badge: null, stock: 600, delivery: "Ibermäge taýýar", storeId: bayramaly!.id, categoryId: cottonCat.id, img: IMG.silk3 },
+    { name: "Erkek köýnek (Merw)", slug: "merw-erkek-koynek", price: 48, unit: "sany", fiber: "100% pagta", technique: "Maşyn tikilen", badge: "Täze", stock: 120, delivery: "Ibermäge taýýar", storeId: bayramaly!.id, categoryId: clothingCat.id, img: IMG.scarf3 },
   ];
 
   for (const product of products) {

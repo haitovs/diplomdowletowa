@@ -22,6 +22,7 @@ export default function Header({ cartCount }: HeaderProps) {
     { name: t("nav.collections"), href: "/collections" },
     { name: t("nav.artisans"), href: "/artisans" },
     { name: t("nav.heritage"), href: "/heritage" },
+    { name: t("nav.companies"), href: "/companies" },
     { name: t("nav.contact"), href: "/contact" },
   ];
 
@@ -33,7 +34,7 @@ export default function Header({ cartCount }: HeaderProps) {
           {t("header.top_banner")}
         </span>
         <span className="mx-4 hidden md:inline">&bull;</span>
-        <span className="hidden md:inline">{t("hero.since")} &middot; Ashgabat, Turkmenistan</span>
+        <span className="hidden md:inline">{t("hero.since")} &middot; {t("header.location")}</span>
       </div>
 
       {/* Main Navigation */}

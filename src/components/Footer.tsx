@@ -33,7 +33,7 @@ export default function Footer() {
           <h4 className="text-lg font-bold mb-4 text-turkmen-gold">{t("footer.visit_heading")}</h4>
           <p className="opacity-90 text-sm">
             40 Garaşsyzlyk şaýoly<br />
-            Ashgabat 744000, Turkmenistan
+            Aşgabat 744000, Türkmenistan
           </p>
           <p className="opacity-90 mt-3 text-sm">
             {t("footer.open_schedule")}<br />
