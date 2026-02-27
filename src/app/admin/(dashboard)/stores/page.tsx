@@ -50,7 +50,7 @@ export default async function StoresPage() {
                 </td>
                 <td className="px-6 py-4 text-gray-600">{store.origin}</td>
                 <td className="px-6 py-4 text-gray-600 max-w-xs truncate">{store.specialty}</td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 whitespace-nowrap">
                   <span className="bg-turkmen-green/10 text-turkmen-green px-3 py-1 rounded-full text-sm border border-turkmen-green/20">
                     {store._count.products} products
                   </span>

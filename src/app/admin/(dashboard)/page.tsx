@@ -73,21 +73,21 @@ export default async function AdminDashboard() {
           <div className="space-y-3">
             <Link
               href="/admin/stores/new"
-              className="btn btn-secondary w-full text-left flex items-center gap-2"
+              className="btn btn-outline w-full text-left flex items-center gap-2"
             >
               <PlusIcon className="w-4 h-4" />
               <span>Add New Store</span>
             </Link>
             <Link
               href="/admin/products/new"
-              className="btn btn-secondary w-full text-left flex items-center gap-2"
+              className="btn btn-outline w-full text-left flex items-center gap-2"
             >
               <PlusIcon className="w-4 h-4" />
               <span>Add New Product</span>
             </Link>
             <Link
               href="/admin/categories/new"
-              className="btn btn-secondary w-full text-left flex items-center gap-2"
+              className="btn btn-outline w-full text-left flex items-center gap-2"
             >
               <PlusIcon className="w-4 h-4" />
               <span>Add New Category</span>

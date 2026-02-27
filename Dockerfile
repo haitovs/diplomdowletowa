@@ -45,4 +45,7 @@ COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 
 EXPOSE 4082
 
+# Create upload directory (mount as volume for persistence: -v uploads:/app/data/uploads)
+RUN mkdir -p /app/data/uploads/products
+
 CMD ["node", "server.js"]

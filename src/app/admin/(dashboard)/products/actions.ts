@@ -1,9 +1,20 @@
 "use server";
 
-import { writeFile } from "fs/promises";
+import { mkdir, writeFile } from "fs/promises";
 import { join } from "path";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+
+const MIME_TO_EXT: Record<string, string> = {
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/gif": "gif",
+  "image/webp": "webp",
+  "image/svg+xml": "svg",
+  "image/avif": "avif",
+  "image/bmp": "bmp",
+  "image/tiff": "tiff",
+};
 
 export async function uploadProductImage(productId: string, formData: FormData) {
   try {
@@ -13,8 +24,9 @@ export async function uploadProductImage(productId: string, formData: FormData) 
     }
 
     // Validate file type
-    if (!file.type.startsWith("image/")) {
-      return { success: false, error: "File must be an image" };
+    const extension = MIME_TO_EXT[file.type];
+    if (!extension) {
+      return { success: false, error: "File must be an image (JPEG, PNG, GIF, WebP, SVG, AVIF, BMP, or TIFF)" };
     }
 
     // Validate file size (max 5MB)
@@ -29,12 +41,11 @@ export async function uploadProductImage(productId: string, formData: FormData) 
     // Generate unique filename
     const timestamp = Date.now();
     const randomString = Math.random().toString(36).substring(2, 8);
-    const extension = file.name.split(".").pop();
     const filename = `${timestamp}-${randomString}.${extension}`;
-    
-    const uploadPath = join(process.cwd(), "public/uploads/products", filename);
-    
-    await writeFile(uploadPath, buffer);
+
+    const uploadDir = join(process.cwd(), "data/uploads/products");
+    await mkdir(uploadDir, { recursive: true });
+    await writeFile(join(uploadDir, filename), buffer);
 
     // Get current image count to determine if this should be primary
     const existingImages = await prisma.productImage.findMany({
@@ -42,7 +53,7 @@ export async function uploadProductImage(productId: string, formData: FormData) 
     });
 
     // Save to database
-    const imagePath = `/uploads/products/${filename}`;
+    const imagePath = `/api/uploads/products/${filename}`;
     await prisma.productImage.create({
       data: {
         productId,
