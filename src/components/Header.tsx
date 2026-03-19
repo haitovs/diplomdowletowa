@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -43,7 +44,9 @@ export default function Header({ cartCount }: HeaderProps) {
 
           {/* Logo */}
           <Link href="/" className="text-xl font-semibold tracking-wide flex items-center gap-2 flex-shrink-0 hover:text-turkmen-gold transition">
-            <span className="text-turkmen-gold text-2xl">◆</span>
+            <span className="relative w-9 h-9 flex-shrink-0 rounded-full bg-white flex items-center justify-center shadow-sm">
+              <Image src="/assets/logo.png" alt="Logo" width={28} height={28} className="object-contain" />
+            </span>
             Heritage Textiles
           </Link>
 
