@@ -30,8 +30,8 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=4082
 ENV DATABASE_URL="file:/app/prisma/dev.db"
-ENV NEXTAUTH_SECRET="dowletowa-demo-secret-not-for-production"
-ENV NEXTAUTH_URL="http://localhost:4082"
+ENV NEXTAUTH_SECRET="dowletowa-textiles-secret-key-2025"
+ENV NEXTAUTH_URL="https://bahar.raxa2.store"
 
 # Copy standalone output
 COPY --from=builder /app/.next/standalone ./
@@ -43,24 +43,9 @@ COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 
-# Copy prisma CLI for db push at startup
-COPY --from=builder /app/node_modules/prisma ./node_modules/prisma
-COPY --from=builder /app/node_modules/@prisma/engines ./node_modules/@prisma/engines
-
 EXPOSE 4082
 
 # Create upload directory
 RUN mkdir -p /app/data/uploads/products
 
-# Startup: apply schema changes to existing DB, then run the app
-COPY <<'EOF' /app/start.sh
-#!/bin/sh
-echo "Applying schema changes..."
-npx prisma db push --skip-generate 2>&1 || echo "Schema push warning (non-fatal)"
-echo "Starting server..."
-exec node server.js
-EOF
-
-RUN chmod +x /app/start.sh
-
-CMD ["/bin/sh", "/app/start.sh"]
+CMD ["node", "server.js"]
